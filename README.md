@@ -1,1 +1,2 @@
-# inp_editor
+# inp editor
+CalculiX/Abaqus Inp Files Editor
