@@ -1,0 +1,45 @@
+object FrmPopupNotifier: TFrmPopupNotifier
+  Left = 500
+  Height = 195
+  Top = 223
+  Width = 360
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Importing'
+  ClientHeight = 195
+  ClientWidth = 360
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '1.8.4.0'
+  object lbInfo: TListBox
+    Left = 4
+    Height = 154
+    Top = 4
+    Width = 352
+    Align = alClient
+    BorderSpacing.Around = 4
+    ItemHeight = 0
+    TabOrder = 0
+  end
+  object pnBottom: TButtonPanel
+    Left = 6
+    Height = 25
+    Top = 164
+    Width = 348
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.Caption = 'Stop'
+    CloseButton.DefaultCaption = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 1
+    ShowButtons = [pbClose]
+    ShowGlyphs = []
+    ShowBevel = False
+  end
+end

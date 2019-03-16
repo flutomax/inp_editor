@@ -1,0 +1,70 @@
+object FrmViewGroup: TFrmViewGroup
+  Left = 367
+  Height = 284
+  Top = 127
+  Width = 392
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'View Groups'
+  ClientHeight = 284
+  ClientWidth = 392
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poOwnerFormCenter
+  ShowHint = True
+  LCLVersion = '1.8.4.0'
+  object pnBottom: TButtonPanel
+    Left = 6
+    Height = 25
+    Top = 253
+    Width = 380
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.Caption = 'Close'
+    CloseButton.DefaultCaption = False
+    CancelButton.Name = 'CancelButton'
+    CancelButton.DefaultCaption = True
+    TabOrder = 0
+    ShowButtons = [pbClose]
+    ShowGlyphs = []
+    ShowBevel = False
+  end
+  object lvStat: TListView
+    Left = 0
+    Height = 247
+    Top = 0
+    Width = 392
+    Align = alClient
+    Columns = <    
+      item
+        Caption = '#'
+        Width = 32
+      end    
+      item
+        Caption = 'Name'
+        Width = 100
+      end    
+      item
+        Caption = 'Nodes'
+        Width = 70
+      end    
+      item
+        Caption = 'Elements'
+        Width = 76
+      end    
+      item
+        Caption = 'Faces'
+        Width = 91
+      end>
+    ColumnClick = False
+    MultiSelect = True
+    ReadOnly = True
+    RowSelect = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 1
+    ViewStyle = vsReport
+  end
+end

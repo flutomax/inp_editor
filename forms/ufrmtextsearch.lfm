@@ -1,0 +1,123 @@
+object FrmTextSearch: TFrmTextSearch
+  Left = 360
+  Height = 223
+  Top = 169
+  Width = 338
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Search Text'
+  ClientHeight = 223
+  ClientWidth = 338
+  OnCloseQuery = FormCloseQuery
+  Position = poOwnerFormCenter
+  LCLVersion = '1.8.4.0'
+  object btOK: TButton
+    Left = 173
+    Height = 25
+    Top = 184
+    Width = 75
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btCancel: TButton
+    Left = 254
+    Height = 25
+    Top = 184
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object gbSearchOptions: TGroupBox
+    Left = 8
+    Height = 110
+    Top = 61
+    Width = 177
+    Caption = 'Options:'
+    ClientHeight = 90
+    ClientWidth = 173
+    TabOrder = 2
+    object ckCaseSensitive: TCheckBox
+      Left = 6
+      Height = 19
+      Top = 7
+      Width = 93
+      Caption = 'Case sensitive'
+      TabOrder = 0
+    end
+    object ckWholeWord: TCheckBox
+      Left = 6
+      Height = 19
+      Top = 27
+      Width = 110
+      Caption = 'Whole word only'
+      TabOrder = 1
+    end
+    object ckSearchFromCursor: TCheckBox
+      Left = 6
+      Height = 19
+      Top = 47
+      Width = 120
+      Caption = 'Search from cursor'
+      OnClick = ckSearchFromCursorClick
+      TabOrder = 2
+    end
+    object ckSearchSelectedOnly: TCheckBox
+      Left = 6
+      Height = 19
+      Top = 67
+      Width = 112
+      Caption = 'Selected text only'
+      TabOrder = 3
+    end
+  end
+  object gbSearchText: TGroupBox
+    Left = 8
+    Height = 52
+    Top = 8
+    Width = 321
+    Caption = 'Text to find:'
+    ClientHeight = 32
+    ClientWidth = 317
+    TabOrder = 3
+    object edSearchText: TComboBox
+      Left = 6
+      Height = 23
+      Top = 0
+      Width = 305
+      ItemHeight = 15
+      TabOrder = 0
+    end
+  end
+  object rgDirection: TGroupBox
+    Left = 192
+    Height = 73
+    Top = 61
+    Width = 137
+    Caption = 'Direction:'
+    ClientHeight = 53
+    ClientWidth = 133
+    TabOrder = 4
+    object rgDirection1: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 7
+      Width = 63
+      Caption = 'Forward'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object rgDirection2: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 27
+      Width = 71
+      Caption = 'Backward'
+      TabOrder = 1
+    end
+  end
+end

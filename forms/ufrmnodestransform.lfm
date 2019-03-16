@@ -1,0 +1,554 @@
+object FrmNodesTransform: TFrmNodesTransform
+  Left = 374
+  Height = 359
+  Top = 155
+  Width = 389
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Nodes Transformations'
+  ClientHeight = 359
+  ClientWidth = 389
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poOwnerFormCenter
+  ShowHint = True
+  LCLVersion = '1.8.4.0'
+  object gbInfo: TGroupBox
+    Left = 9
+    Height = 80
+    Top = 8
+    Width = 372
+    Caption = 'Info:'
+    ClientHeight = 60
+    ClientWidth = 368
+    TabOrder = 0
+    object mmInfo: TMemo
+      Left = 8
+      Height = 49
+      Top = 0
+      Width = 352
+      BorderStyle = bsNone
+      Color = clForm
+      Lines.Strings = (
+        'Calculating. Please wait...'
+      )
+      ReadOnly = True
+      TabOrder = 0
+      TabStop = False
+    end
+  end
+  object pnBottom: TButtonPanel
+    Left = 8
+    Height = 25
+    Top = 326
+    Width = 373
+    BorderSpacing.Around = 8
+    OKButton.Name = 'OKButton'
+    OKButton.DefaultCaption = True
+    OKButton.OnClick = OKButtonClick
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.Caption = 'Cancel'
+    CancelButton.DefaultCaption = False
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel]
+    ShowGlyphs = []
+    ShowBevel = False
+  end
+  object gbAffineTransform: TGroupBox
+    Left = 9
+    Height = 222
+    Top = 88
+    Width = 372
+    Caption = 'Transformations:'
+    ClientHeight = 202
+    ClientWidth = 368
+    TabOrder = 2
+    object lbOpNum: TListBox
+      Left = 8
+      Height = 161
+      Top = 3
+      Width = 88
+      BorderStyle = bsNone
+      Items.Strings = (
+        'Operation 1'
+        'Operation 2'
+        'Operation 3'
+        'Operation 4'
+        'Operation 5'
+        'Operation 6'
+        'Operation 7'
+        'Operation 8'
+      )
+      ItemHeight = 20
+      OnClick = lbOpNumClick
+      OnDrawItem = lbOpNumDrawItem
+      ParentColor = True
+      ScrollWidth = 75
+      Style = lbOwnerDrawFixed
+      TabOrder = 0
+    end
+    object BtnClearAll: TButton
+      Left = 8
+      Height = 23
+      Top = 170
+      Width = 88
+      Caption = 'Clear All'
+      OnClick = BtnClearAllClick
+      TabOrder = 1
+    end
+    object gbOperation: TGroupBox
+      Left = 104
+      Height = 201
+      Top = -8
+      Width = 256
+      ClientHeight = 181
+      ClientWidth = 252
+      TabOrder = 2
+      object LblType: TLabel
+        Left = 32
+        Height = 23
+        Top = 8
+        Width = 40
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'Type:'
+        FocusControl = cbType
+        Layout = tlCenter
+        ParentColor = False
+      end
+      object cbType: TComboBox
+        Left = 80
+        Height = 23
+        Top = 8
+        Width = 144
+        ItemHeight = 15
+        Items.Strings = (
+          'None'
+          'Translate'
+          'Scale'
+          'Rotate about X'
+          'Rotate about Y'
+          'Rotate about Z'
+        )
+        OnChange = cbTypeChange
+        Style = csDropDownList
+        TabOrder = 0
+      end
+      object pcType: TNotebook
+        Left = 8
+        Height = 142
+        Top = 40
+        Width = 237
+        PageIndex = 0
+        TabOrder = 1
+        TabStop = True
+        object pgNone: TPage
+          object LblNoOperation1: TLabel
+            Left = 8
+            Height = 126
+            Top = 8
+            Width = 221
+            Align = alClient
+            AutoSize = False
+            BorderSpacing.Around = 8
+            Caption = 'No type is specified for this operation.'#13#10'Select operation type from the combo box above'
+            ParentColor = False
+            WordWrap = True
+          end
+        end
+        object pgTranslate: TPage
+          object lbDx: TLabel
+            Left = 32
+            Height = 23
+            Top = 16
+            Width = 32
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Dx:'
+            FocusControl = edDx
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edDx: TEdit
+            Left = 72
+            Height = 29
+            Top = 16
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edDxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 0
+            Text = '0'
+          end
+          object lbDy: TLabel
+            Left = 32
+            Height = 23
+            Top = 48
+            Width = 33
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Dy:'
+            FocusControl = edDy
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edDy: TEdit
+            Left = 72
+            Height = 29
+            Top = 48
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edDxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 1
+            Text = '0'
+          end
+          object lbDz: TLabel
+            Left = 32
+            Height = 23
+            Top = 80
+            Width = 33
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Dz:'
+            FocusControl = edDz
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edDz: TEdit
+            Left = 72
+            Height = 29
+            Top = 80
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edDxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 2
+            Text = '0'
+          end
+        end
+        object pgScale: TPage
+          object lbSx: TLabel
+            Left = 32
+            Height = 23
+            Top = 16
+            Width = 32
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Sx:'
+            FocusControl = edSx
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edSx: TEdit
+            Left = 72
+            Height = 29
+            Top = 16
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edSxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 0
+            Text = '0'
+          end
+          object lbSy: TLabel
+            Left = 32
+            Height = 23
+            Top = 48
+            Width = 33
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Sy:'
+            FocusControl = edSy
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edSy: TEdit
+            Left = 72
+            Height = 29
+            Top = 48
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edSxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 1
+            Text = '0'
+          end
+          object lbSz: TLabel
+            Left = 32
+            Height = 23
+            Top = 80
+            Width = 33
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Sz:'
+            FocusControl = edSz
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edSz: TEdit
+            Left = 72
+            Height = 29
+            Top = 80
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edSxChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 2
+            Text = '0'
+          end
+        end
+        object pgRotateX: TPage
+          object lbAlphaInfo2: TLabel
+            Left = 8
+            Height = 17
+            Top = 120
+            Width = 221
+            Align = alBottom
+            BorderSpacing.Around = 8
+            Caption = 'Alpha values ​​are measured in degrees'
+            Layout = tlBottom
+            ParentColor = False
+          end
+          object lbRxAlpha: TLabel
+            Left = 8
+            Height = 23
+            Top = 16
+            Width = 56
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Alpha:'
+            FocusControl = edRxAlpha
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRxAlpha: TEdit
+            Left = 72
+            Height = 29
+            Top = 16
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRxAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 0
+            Text = '0'
+          end
+          object lbRxCy: TLabel
+            Left = 8
+            Height = 23
+            Top = 48
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center y:'
+            FocusControl = edRxCy
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRxCy: TEdit
+            Left = 72
+            Height = 29
+            Top = 48
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRxAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 1
+            Text = '0'
+          end
+          object lbRxCz: TLabel
+            Left = 8
+            Height = 23
+            Top = 80
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center z:'
+            FocusControl = edRxCz
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRxCz: TEdit
+            Left = 72
+            Height = 29
+            Top = 80
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRxAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 2
+            Text = '0'
+          end
+        end
+        object pgRotateY: TPage
+          object lbRyAlpha: TLabel
+            Left = 8
+            Height = 23
+            Top = 16
+            Width = 56
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Alpha:'
+            FocusControl = edRyAlpha
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRyAlpha: TEdit
+            Left = 72
+            Height = 29
+            Top = 16
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRyAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 0
+            Text = '0'
+          end
+          object lbRyCx: TLabel
+            Left = 8
+            Height = 23
+            Top = 48
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center x:'
+            FocusControl = edRyCx
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRyCx: TEdit
+            Left = 72
+            Height = 29
+            Top = 48
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRyAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 1
+            Text = '0'
+          end
+          object lbRyCz: TLabel
+            Left = 8
+            Height = 23
+            Top = 80
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center z:'
+            FocusControl = edRyCz
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRyCz: TEdit
+            Left = 72
+            Height = 29
+            Top = 80
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRyAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 2
+            Text = '0'
+          end
+          object lbAlphaInfo1: TLabel
+            Left = 8
+            Height = 17
+            Top = 117
+            Width = 221
+            Align = alBottom
+            BorderSpacing.Around = 8
+            Caption = 'Alpha values ​​are measured in degrees'
+            Layout = tlBottom
+            ParentColor = False
+          end
+        end
+        object pgRotateZ: TPage
+          object lbRzAlpha: TLabel
+            Left = 8
+            Height = 23
+            Top = 16
+            Width = 56
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Alpha:'
+            FocusControl = edRzAlpha
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRzAlpha: TEdit
+            Left = 72
+            Height = 29
+            Top = 16
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRzAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 0
+            Text = '0'
+          end
+          object lbRzCx: TLabel
+            Left = 8
+            Height = 23
+            Top = 48
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center x:'
+            FocusControl = edRzCx
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRzCx: TEdit
+            Left = 72
+            Height = 29
+            Top = 48
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRzAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 1
+            Text = '0'
+          end
+          object lbRzCy: TLabel
+            Left = 8
+            Height = 23
+            Top = 80
+            Width = 57
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Center y:'
+            FocusControl = edRzCy
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object edRzCy: TEdit
+            Left = 72
+            Height = 29
+            Top = 80
+            Width = 144
+            Alignment = taRightJustify
+            OnChange = edRzAlphaChange
+            OnKeyPress = edDxKeyPress
+            TabOrder = 2
+            Text = '0'
+          end
+          object lbAlphaInfo: TLabel
+            Left = 8
+            Height = 17
+            Top = 120
+            Width = 221
+            Align = alBottom
+            BorderSpacing.Around = 8
+            Caption = 'Alpha values ​​are measured in degrees'
+            Layout = tlBottom
+            ParentColor = False
+          end
+        end
+      end
+    end
+  end
+end

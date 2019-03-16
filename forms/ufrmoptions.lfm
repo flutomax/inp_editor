@@ -1,0 +1,1842 @@
+object FrmOptions: TFrmOptions
+  Left = 454
+  Height = 444
+  Top = 256
+  Width = 637
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Options'
+  ClientHeight = 444
+  ClientWidth = 637
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  ShowHint = True
+  LCLVersion = '1.8.4.0'
+  object pcMain: TPageControl
+    Left = 0
+    Height = 403
+    Top = 0
+    Width = 637
+    ActivePage = tsGeneral
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object tsGeneral: TTabSheet
+      Caption = 'General Settings'
+      ClientHeight = 375
+      ClientWidth = 629
+      object ckShowHints: TCheckBox
+        Left = 8
+        Height = 19
+        Hint = 'Show application hints'
+        Top = 8
+        Width = 144
+        Caption = 'Show Application Hints'
+        TabOrder = 0
+      end
+      object ckStoreFormPlacement: TCheckBox
+        Left = 8
+        Height = 19
+        Hint = 'Store size and position of main window'
+        Top = 28
+        Width = 153
+        Caption = 'Store Window Placement'
+        TabOrder = 1
+      end
+      object ckUniqueInstance: TCheckBox
+        Left = 8
+        Height = 19
+        Hint = 'Allow only a instance by program'
+        Top = 48
+        Width = 154
+        Caption = 'One Instance Of Program'
+        TabOrder = 2
+      end
+      object gbPaths: TGroupBox
+        Left = 8
+        Height = 156
+        Top = 160
+        Width = 617
+        Caption = 'Path To:'
+        ClientHeight = 136
+        ClientWidth = 613
+        TabOrder = 4
+        object lbPathTemplates: TLabel
+          Left = 8
+          Height = 22
+          Top = 8
+          Width = 80
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Templates:'
+          FocusControl = edPathTemplates
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object lbPathCCX: TLabel
+          Left = 8
+          Height = 22
+          Top = 40
+          Width = 80
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'CCX:'
+          FocusControl = edPathCCX
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object lbPathCGX: TLabel
+          Left = 8
+          Height = 22
+          Top = 72
+          Width = 80
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'CGX:'
+          FocusControl = edPathCGX
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object lbPathTerminal: TLabel
+          Left = 8
+          Height = 22
+          Top = 100
+          Width = 80
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Terminal:'
+          FocusControl = edPathTerminal
+          Layout = tlCenter
+          ParentColor = False
+        end
+        object btBrowseTemplatesPath: TSpeedButton
+          Left = 576
+          Height = 23
+          Top = 8
+          Width = 24
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000C87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFF1F1
+            F1FFEFEFEFFFEEEEEEFFEDEDEDFFEBEBEBFFEAEAEAFFE9E9E9FFE7E7E7FFE6E6
+            E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF3F3
+            F3FFF1F1F1FFF0F0F0FFEFEFEFFFEDEDEDFFECECECFFEBEBEBFFE9E9E9FFE8E8
+            E8FFE7E7E7FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF4F4
+            F4FFF3F3F3FF378DDAFF378DDAFF378DDAFF378DDAFF378DDAFF378DDAFF378D
+            DAFF378DDAFF378DDAFF378DDAFFE6E6E6FFE6E6E6FFC87137FFC87137FFF6F6
+            F6FFF5F5F5FF378DDAFF00CCFFFF378DDAFF00CCFFFF00CCFFFF00CCFFFF00CC
+            FFFF00CCFFFF00CCFFFF378DDAFFE6E6E6FFE6E6E6FFC87137FFC87137FFF8F8
+            F8FFF6F6F6FF378DDAFF15D0FFFF378DDAFF35D7FFFF35D7FFFF35D7FFFF35D7
+            FFFF35D7FFFF35D7FFFF378DDAFFE8E8E8FFE7E7E7FFC87137FFC87137FFFAFA
+            FAFFF8F8F8FF378DDAFF40D9FFFF378DDAFFA0ECFFFFA0ECFFFFA0ECFFFFA0EC
+            FFFFA0ECFFFFA0ECFFFF378DDAFFEAEAEAFFE8E8E8FFC87137FFC87137FFFBFB
+            FBFFFAFAFAFF378DDAFF6BE1FFFF378DDAFF378DDAFF378DDAFF378DDAFF378D
+            DAFF378DDAFF378DDAFF378DDAFFEBEBEBFFEAEAEAFFC87137FFC87137FFFDFD
+            FDFFFCFCFCFF378DDAFF95E9FFFF95E9FFFF95E9FFFF95E9FFFF95E9FFFF95E9
+            FFFF95E9FFFF95E9FFFF378DDAFFEDEDEDFFECECECFFC87137FFC87137FFFFFF
+            FFFFFDFDFDFF378DDAFFC0F2FFFFC0F2FFFF7BBBE9FF378DDAFF378DDAFF378D
+            DAFF378DDAFF378DDAFF378DDAFFEFEFEFFFEEEEEEFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFF378DDAFF378DDAFF378DDAFF3F91DBFFE7EFF7FFF7F7F7FFF6F6
+            F6FFF5F5F5FFF3F3F3FFF2F2F2FFF1F1F1FFEFEFEFFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFEFEFEFFFDFDFDFFFCFCFCFFFAFAFAFFF9F9F9FFF8F8
+            F8FFF6F6F6FFF5F5F5FFF4F4F4FFF2F2F2FFF1F1F1FFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFFCFCFCFFFBFBFBFFF9F9
+            F9FFF8F8F8FFF7F7F7FFF5F5F5FFF4F4F4FFF3F3F3FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF0000
+            FFFFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF
+          }
+          OnClick = btBrowseTemplatesPathClick
+        end
+        object edPathTemplates: TComboBox
+          Left = 96
+          Height = 23
+          Top = 8
+          Width = 476
+          ItemHeight = 15
+          TabOrder = 0
+        end
+        object edPathCCX: TComboBox
+          Left = 96
+          Height = 23
+          Top = 40
+          Width = 476
+          ItemHeight = 15
+          TabOrder = 1
+        end
+        object btBrowsePathCCX: TSpeedButton
+          Left = 576
+          Height = 23
+          Top = 40
+          Width = 24
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000C87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFF1F1
+            F1FFEFEFEFFFEEEEEEFFEDEDEDFFEBEBEBFFEAEAEAFFE9E9E9FFE7E7E7FFE6E6
+            E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF3F3
+            F3FFF1F1F1FFF0F0F0FFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCD89
+            59FFCD8959FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF4F4
+            F4FFF3F3F3FFF2F2F2FFCD8959FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6
+            D5FFFFF6D5FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF6F6
+            F6FFF5F5F5FFF3F3F3FFCD8959FFFFF7DBFF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF6D5FFCD8959FFE7E7E7FFE6E6E6FFE6E6E6FFC87137FFC87137FFF8F8
+            F8FFF6F6F6FFF5F5F5FFCD8959FFFFF9E1FFFFF8DFFFFFF8DEFFFFF8DDFFFFF7
+            DCFFFFF7DBFFCD8959FFE9E9E9FFE8E8E8FFE7E7E7FFC87137FFC87137FFFAFA
+            FAFFF8F8F8FFF7F7F7FFCD8959FFFFFAE6FF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF8E0FFCD8959FFEBEBEBFFEAEAEAFFE8E8E8FFC87137FFC87137FFFBFB
+            FBFFFAFAFAFFF9F9F9FFCD8959FFFFFBECFFFFFBEBFFFFFAEAFFFFFAE8FFFFFA
+            E7FFFFFAE6FFCD8959FFEDEDEDFFEBEBEBFFEAEAEAFFC87137FFC87137FFFDFD
+            FDFFFCFCFCFFFAFAFAFFCD8959FFFFFCF2FF918A6FFF918A6FFF918A6FFFFFFB
+            EDFFFFFBECFFCD8959FFEEEEEEFFEDEDEDFFECECECFFC87137FFC87137FFFFFF
+            FFFFFDFDFDFFFCFCFCFFCD8959FFFFFDF8FFFFFDF6FFFFFDF5FFFFFDF4FFFFFC
+            F3FFF2DFCBFFCF8E5FFFF0F0F0FFEFEFEFFFEEEEEEFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFEFEFEFFCD8959FFFFFFFDFFFFFEFCFFFFFEFBFFFFFEFAFFF3E2
+            D3FFD19266FFE9D7CBFFF2F2F2FFF1F1F1FFEFEFEFFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCF8E
+            60FFEBDACEFFF5F5F5FFF4F4F4FFF2F2F2FFF1F1F1FFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFFCFCFCFFFBFBFBFFF9F9
+            F9FFF8F8F8FFF7F7F7FFF5F5F5FFF4F4F4FFF3F3F3FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF0000
+            FFFFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF
+          }
+          OnClick = btBrowsePathCCXClick
+        end
+        object edPathCGX: TComboBox
+          Left = 96
+          Height = 23
+          Top = 71
+          Width = 476
+          ItemHeight = 15
+          TabOrder = 2
+        end
+        object btBrowseCGXPath: TSpeedButton
+          Tag = 1
+          Left = 576
+          Height = 23
+          Top = 71
+          Width = 24
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000C87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFF1F1
+            F1FFEFEFEFFFEEEEEEFFEDEDEDFFEBEBEBFFEAEAEAFFE9E9E9FFE7E7E7FFE6E6
+            E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF3F3
+            F3FFF1F1F1FFF0F0F0FFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCD89
+            59FFCD8959FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF4F4
+            F4FFF3F3F3FFF2F2F2FFCD8959FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6
+            D5FFFFF6D5FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF6F6
+            F6FFF5F5F5FFF3F3F3FFCD8959FFFFF7DBFF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF6D5FFCD8959FFE7E7E7FFE6E6E6FFE6E6E6FFC87137FFC87137FFF8F8
+            F8FFF6F6F6FFF5F5F5FFCD8959FFFFF9E1FFFFF8DFFFFFF8DEFFFFF8DDFFFFF7
+            DCFFFFF7DBFFCD8959FFE9E9E9FFE8E8E8FFE7E7E7FFC87137FFC87137FFFAFA
+            FAFFF8F8F8FFF7F7F7FFCD8959FFFFFAE6FF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF8E0FFCD8959FFEBEBEBFFEAEAEAFFE8E8E8FFC87137FFC87137FFFBFB
+            FBFFFAFAFAFFF9F9F9FFCD8959FFFFFBECFFFFFBEBFFFFFAEAFFFFFAE8FFFFFA
+            E7FFFFFAE6FFCD8959FFEDEDEDFFEBEBEBFFEAEAEAFFC87137FFC87137FFFDFD
+            FDFFFCFCFCFFFAFAFAFFCD8959FFFFFCF2FF918A6FFF918A6FFF918A6FFFFFFB
+            EDFFFFFBECFFCD8959FFEEEEEEFFEDEDEDFFECECECFFC87137FFC87137FFFFFF
+            FFFFFDFDFDFFFCFCFCFFCD8959FFFFFDF8FFFFFDF6FFFFFDF5FFFFFDF4FFFFFC
+            F3FFF2DFCBFFCF8E5FFFF0F0F0FFEFEFEFFFEEEEEEFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFEFEFEFFCD8959FFFFFFFDFFFFFEFCFFFFFEFBFFFFFEFAFFF3E2
+            D3FFD19266FFE9D7CBFFF2F2F2FFF1F1F1FFEFEFEFFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCF8E
+            60FFEBDACEFFF5F5F5FFF4F4F4FFF2F2F2FFF1F1F1FFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFFCFCFCFFFBFBFBFFF9F9
+            F9FFF8F8F8FFF7F7F7FFF5F5F5FFF4F4F4FFF3F3F3FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF0000
+            FFFFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF
+          }
+          OnClick = btBrowsePathCCXClick
+        end
+        object edPathTerminal: TComboBox
+          Left = 96
+          Height = 23
+          Top = 100
+          Width = 476
+          ItemHeight = 15
+          TabOrder = 3
+        end
+        object btBrowseTerminalPath: TSpeedButton
+          Tag = 2
+          Left = 576
+          Height = 23
+          Top = 100
+          Width = 24
+          Glyph.Data = {
+            36040000424D3604000000000000360000002800000010000000100000000100
+            2000000000000004000064000000640000000000000000000000C87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFF1F1
+            F1FFEFEFEFFFEEEEEEFFEDEDEDFFEBEBEBFFEAEAEAFFE9E9E9FFE7E7E7FFE6E6
+            E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF3F3
+            F3FFF1F1F1FFF0F0F0FFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCD89
+            59FFCD8959FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF4F4
+            F4FFF3F3F3FFF2F2F2FFCD8959FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6D5FFFFF6
+            D5FFFFF6D5FFCD8959FFE6E6E6FFE6E6E6FFE6E6E6FFC87137FFC87137FFF6F6
+            F6FFF5F5F5FFF3F3F3FFCD8959FFFFF7DBFF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF6D5FFCD8959FFE7E7E7FFE6E6E6FFE6E6E6FFC87137FFC87137FFF8F8
+            F8FFF6F6F6FFF5F5F5FFCD8959FFFFF9E1FFFFF8DFFFFFF8DEFFFFF8DDFFFFF7
+            DCFFFFF7DBFFCD8959FFE9E9E9FFE8E8E8FFE7E7E7FFC87137FFC87137FFFAFA
+            FAFFF8F8F8FFF7F7F7FFCD8959FFFFFAE6FF918A6FFF918A6FFF918A6FFF918A
+            6FFFFFF8E0FFCD8959FFEBEBEBFFEAEAEAFFE8E8E8FFC87137FFC87137FFFBFB
+            FBFFFAFAFAFFF9F9F9FFCD8959FFFFFBECFFFFFBEBFFFFFAEAFFFFFAE8FFFFFA
+            E7FFFFFAE6FFCD8959FFEDEDEDFFEBEBEBFFEAEAEAFFC87137FFC87137FFFDFD
+            FDFFFCFCFCFFFAFAFAFFCD8959FFFFFCF2FF918A6FFF918A6FFF918A6FFFFFFB
+            EDFFFFFBECFFCD8959FFEEEEEEFFEDEDEDFFECECECFFC87137FFC87137FFFFFF
+            FFFFFDFDFDFFFCFCFCFFCD8959FFFFFDF8FFFFFDF6FFFFFDF5FFFFFDF4FFFFFC
+            F3FFF2DFCBFFCF8E5FFFF0F0F0FFEFEFEFFFEEEEEEFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFEFEFEFFCD8959FFFFFFFDFFFFFEFCFFFFFEFBFFFFFEFAFFF3E2
+            D3FFD19266FFE9D7CBFFF2F2F2FFF1F1F1FFEFEFEFFFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFCD8959FFCD8959FFCD8959FFCD8959FFCD8959FFCF8E
+            60FFEBDACEFFF5F5F5FFF4F4F4FFF2F2F2FFF1F1F1FFC87137FFC87137FFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDFFFCFCFCFFFBFBFBFFF9F9
+            F9FFF8F8F8FFF7F7F7FFF5F5F5FFF4F4F4FFF3F3F3FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF0000
+            FFFFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FFC871
+            37FFC87137FFC87137FFC87137FFC87137FFC87137FFC87137FF
+          }
+          OnClick = btBrowsePathCCXClick
+        end
+      end
+      object ckFileAssociation: TCheckBox
+        Left = 8
+        Height = 19
+        Hint = 'Associate .inp files with this program (Supported in Windows only)'
+        Top = 68
+        Width = 282
+        Caption = 'Associate .inp Files With Program (Windows only)'
+        TabOrder = 3
+      end
+      object btReset: TButton
+        Left = 8
+        Height = 25
+        Hint = 'Reset all options to default settings'
+        Top = 328
+        Width = 124
+        Caption = 'Reset To Default'
+        OnClick = btResetClick
+        TabOrder = 6
+      end
+      object gbRecentFiles: TGroupBox
+        Left = 8
+        Height = 65
+        Top = 96
+        Width = 617
+        Caption = 'Recent Files (MRU):'
+        ClientHeight = 45
+        ClientWidth = 613
+        TabOrder = 5
+        object lbMaxMHU: TLabel
+          Left = 9
+          Height = 17
+          Top = 12
+          Width = 192
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Maximum Number Of List:'
+          FocusControl = edMaxMHU
+          ParentColor = False
+        end
+        object edMaxMHU: TSpinEdit
+          Left = 208
+          Height = 23
+          Top = 8
+          Width = 80
+          Alignment = taRightJustify
+          MinValue = 4
+          TabOrder = 0
+          Value = 10
+        end
+        object btClearMRU: TButton
+          Left = 384
+          Height = 25
+          Top = 8
+          Width = 112
+          Caption = 'Clear MRU...'
+          OnClick = btClearMRUClick
+          TabOrder = 1
+        end
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Display Settings'
+      ClientHeight = 375
+      ClientWidth = 629
+      object gbFont: TGroupBox
+        Left = 8
+        Height = 106
+        Top = 8
+        Width = 264
+        Caption = 'Font:'
+        ClientHeight = 86
+        ClientWidth = 260
+        TabOrder = 0
+        object pnFont: TPanel
+          Left = 8
+          Height = 44
+          Top = 32
+          Width = 246
+          BevelInner = bvLowered
+          Caption = 'pnFont'
+          TabOrder = 0
+        end
+        object btFont: TButton
+          Left = 8
+          Height = 25
+          Top = 0
+          Width = 75
+          Caption = 'Font...'
+          OnClick = btFontClick
+          TabOrder = 1
+        end
+      end
+      object gbSelection: TGroupBox
+        Left = 8
+        Height = 80
+        Top = 115
+        Width = 264
+        Caption = 'Selection:'
+        ClientHeight = 60
+        ClientWidth = 260
+        TabOrder = 1
+        object lbSelectedColorBackground: TLabel
+          Left = 24
+          Height = 15
+          Top = 31
+          Width = 168
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Background Color:'
+          ParentColor = False
+        end
+        object clbSelectedColorBackground: TColorButton
+          Left = 197
+          Height = 25
+          Top = 28
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = clHighlight
+        end
+        object clbSelectedColorForeground: TColorButton
+          Left = 197
+          Height = 25
+          Top = 0
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = clHighlightText
+        end
+        object lbSelectedColorForeground: TLabel
+          Left = 24
+          Height = 15
+          Top = 5
+          Width = 168
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Foreground Color:'
+          ParentColor = False
+        end
+      end
+      object gbGutter: TGroupBox
+        Left = 280
+        Height = 353
+        Top = 8
+        Width = 344
+        Caption = 'Gutter:'
+        ClientHeight = 333
+        ClientWidth = 340
+        TabOrder = 3
+        object ckShowGutter: TCheckBox
+          Left = 16
+          Height = 19
+          Top = 8
+          Width = 85
+          Caption = 'Show Gutter'
+          OnClick = ckShowGutterClick
+          TabOrder = 0
+        end
+        object ckGutterOptions: TCheckGroup
+          Left = 8
+          Height = 152
+          Hint = 'Gutter options'
+          Top = 56
+          Width = 324
+          AutoFill = True
+          Caption = 'Options:'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 1
+          ClientHeight = 132
+          ClientWidth = 320
+          Items.Strings = (
+            'Auto Size'
+            'Show Line Numbers'
+            'Leading Zeros'
+            'Zero Start'
+            'Show Changes'
+            'Show Code Folding'
+          )
+          TabOrder = 2
+          Data = {
+            06000000020202020202
+          }
+        end
+        object gbGutterColors: TGroupBox
+          Left = 8
+          Height = 116
+          Top = 210
+          Width = 324
+          Caption = 'Colors:'
+          ClientHeight = 96
+          ClientWidth = 320
+          TabOrder = 3
+          object lbGutterColor: TLabel
+            Left = 64
+            Height = 15
+            Top = 13
+            Width = 180
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Background Color:'
+            ParentColor = False
+          end
+          object clbGutterColor: TColorButton
+            Left = 250
+            Height = 25
+            Top = 8
+            Width = 51
+            BorderWidth = 2
+            ButtonColorSize = 16
+            ButtonColor = clBtnFace
+          end
+          object lbModifiedColor: TLabel
+            Left = 64
+            Height = 15
+            Top = 41
+            Width = 180
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Modified Color:'
+            ParentColor = False
+          end
+          object clbModifiedColor: TColorButton
+            Left = 250
+            Height = 25
+            Hint = 'Gutter color'
+            Top = 36
+            Width = 51
+            BorderWidth = 2
+            ButtonColorSize = 16
+            ButtonColor = 59900
+          end
+          object lbSavedColor: TLabel
+            Left = 64
+            Height = 15
+            Top = 69
+            Width = 180
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Saved Color:'
+            ParentColor = False
+          end
+          object clbSavedColor: TColorButton
+            Left = 250
+            Height = 25
+            Hint = 'Gutter color'
+            Top = 64
+            Width = 51
+            BorderWidth = 2
+            ButtonColorSize = 16
+            ButtonColor = clGreen
+          end
+        end
+        object edShowOnlyLineNumbersMultiplesOf: TSpinEdit
+          Left = 272
+          Height = 23
+          Top = 30
+          Width = 58
+          Alignment = taRightJustify
+          MinValue = 1
+          TabOrder = 1
+          Value = 1
+        end
+        object lbShowOnlyLineNumbersMultiplesOf: TLabel
+          Left = 8
+          Height = 15
+          Top = 36
+          Width = 258
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Show Only Line Numbers Multiples Of:'
+          FocusControl = edShowOnlyLineNumbersMultiplesOf
+          ParentColor = False
+        end
+      end
+      object gbRightEdge: TGroupBox
+        Left = 8
+        Height = 57
+        Top = 304
+        Width = 264
+        Caption = 'Right Edge:'
+        ClientHeight = 37
+        ClientWidth = 260
+        TabOrder = 2
+        object edRightEdge: TSpinEdit
+          Left = 76
+          Height = 23
+          Top = 0
+          Width = 50
+          Alignment = taRightJustify
+          TabOrder = 0
+        end
+        object lbRightEdgeColor: TLabel
+          Left = 144
+          Height = 15
+          Top = 5
+          Width = 48
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Color:'
+          ParentColor = False
+        end
+        object clbRightEdgeColor: TColorButton
+          Left = 197
+          Height = 25
+          Top = 0
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = clSilver
+        end
+        object lbRightEdge: TLabel
+          Left = 4
+          Height = 15
+          Top = 5
+          Width = 65
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Position:'
+          ParentColor = False
+        end
+      end
+      object gbActiveLine: TGroupBox
+        Left = 8
+        Height = 53
+        Top = 196
+        Width = 264
+        Caption = 'Highlight Active Line:'
+        ClientHeight = 33
+        ClientWidth = 260
+        TabOrder = 4
+        object lbHighlightActiveLineBackground: TLabel
+          Left = 69
+          Height = 15
+          Top = 5
+          Width = 123
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Background Color:'
+          ParentColor = False
+        end
+        object clbHighlightActiveLineBackground: TColorButton
+          Left = 197
+          Height = 25
+          Top = 0
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = 16771304
+        end
+        object ckHighlightActiveLine: TCheckBox
+          Left = 10
+          Height = 19
+          Top = 3
+          Width = 46
+          AutoSize = False
+          Caption = 'On'
+          OnClick = ckHighlightActiveLineClick
+          TabOrder = 0
+        end
+      end
+      object gbHighlightMatches: TGroupBox
+        Left = 8
+        Height = 53
+        Top = 250
+        Width = 264
+        Caption = 'Highlight Matches:'
+        ClientHeight = 33
+        ClientWidth = 260
+        TabOrder = 5
+        object ckHighlightMatches: TCheckBox
+          Left = 10
+          Height = 19
+          Top = 3
+          Width = 46
+          AutoSize = False
+          Caption = 'On'
+          OnClick = ckHighlightMatchesClick
+          TabOrder = 0
+        end
+        object lbHighlightMatchesBackground: TLabel
+          Left = 69
+          Height = 15
+          Top = 5
+          Width = 123
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Background Color:'
+          ParentColor = False
+        end
+        object clbHighlightMatchesBackground: TColorButton
+          Left = 197
+          Height = 25
+          Top = 0
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = 10223515
+        end
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Editor Options'
+      ClientHeight = 368
+      ClientWidth = 633
+      object ckEditOptionsGroupUndo: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'When undoing/redoing actions, handle all continous changes of the same kind in one call instead undoing/redoing each command separately'
+        Top = 36
+        Width = 105
+        Caption = 'Group undo'
+        TabOrder = 0
+      end
+      object ckEditOptionsAutoIndent: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Allows to indent the caret, when new line is created with <Enter>, with the same amount of leading white space as the preceding line'
+        Top = 56
+        Width = 105
+        Caption = 'Auto indent'
+        TabOrder = 1
+      end
+      object ckEditOptionsDragDropEditing: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Allows to drag-and-drop text blocks within the editor'
+        Top = 76
+        Width = 172
+        Caption = 'Drag and drop editing'
+        TabOrder = 2
+      end
+      object ckEditOptionsAltSetsColumnMode: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Holding down the Alt Key will put the selection mode into columnar format'
+        Top = 96
+        Width = 171
+        Caption = 'Alt sets column mode'
+        TabOrder = 3
+      end
+      object ckEditOptionsKeepCaretX: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'When moving through lines the X position will always stay the same'
+        Top = 116
+        Width = 175
+        Caption = 'Maintain caret column'
+        TabOrder = 4
+      end
+      object ckEditOptionsSmartTabs: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'When tabbing, the cursor will go to the next non-white space character of the previous line'
+        Top = 16
+        Width = 100
+        Caption = 'Smart tabs'
+        TabOrder = 5
+      end
+      object ckEditOptionsSmartTabDelete: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Similar to Smart Tabs, but when you delete characters'
+        Top = 36
+        Width = 139
+        Caption = 'Smart tab delete'
+        TabOrder = 6
+      end
+      object ckEditOptionsRightMouseMovesCursor: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'When clicking with the right mouse for a popup menu, move the cursor to that location'
+        Top = 136
+        Width = 202
+        Caption = 'Right mouse moves cursor'
+        TabOrder = 7
+      end
+      object ckEditOptionsEnhanceHomeKey: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Enhances home key positioning, similar to visual studio'
+        Top = 156
+        Width = 148
+        Caption = 'Enhance home key'
+        TabOrder = 8
+      end
+      object ckEditOptionsHideShowScrollbars: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'If enabled, then the scrollbars will only show when necessary.'
+        Top = 196
+        Width = 161
+        Caption = 'Auto hide scrollbars'
+        TabOrder = 10
+      end
+      object ckEditOptionsHalfPageScroll: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'When scrolling with page-up and page-down commands, only scroll a half page at a time'
+        Top = 236
+        Width = 130
+        Caption = 'Half page scroll'
+        TabOrder = 12
+      end
+      object ckEditOptionsScrollByOneLess: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Forces scrolling to be one less'
+        Top = 256
+        Width = 140
+        Caption = 'Scroll by one less'
+        TabOrder = 13
+      end
+      object ckEditOptionsScrollPastEOF: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Allows the cursor to go past the end of file marker'
+        Top = 276
+        Width = 167
+        Caption = 'Scroll past end of file'
+        TabOrder = 14
+      end
+      object ckEditOptionsScrollPastEOL: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Allows the cursor to go past the last character into the white space at the end of a line'
+        Top = 296
+        Width = 170
+        Caption = 'Scroll past end of line'
+        TabOrder = 15
+      end
+      object ckEditOptionsShowScrollHint: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Shows a hint of the visible line numbers when scrolling vertically'
+        Top = 316
+        Width = 131
+        Caption = 'Show scroll hint'
+        TabOrder = 16
+      end
+      object ckEditOptionsTabsToSpaces: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Converts a tab character to the number of spaces in Tab Width'
+        Top = 76
+        Width = 124
+        Caption = 'Tabs to spaces'
+        TabOrder = 18
+      end
+      object ckEditOptionsTrimTrailingSpaces: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Spaces at the end of lines will be trimmed and not saved'
+        Top = 96
+        Width = 156
+        Caption = 'Trim trailing spaces'
+        TabOrder = 19
+      end
+      object ckEditOptions2CaretSkipsSelection: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Allows <Left> and <Right> keys to move caret to selected block edges, without deselecting the block'
+        Top = 116
+        Width = 165
+        Caption = 'Caret skips selection'
+        TabOrder = 20
+      end
+      object ckEditOptions2CaretSkipTab: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Disables caret positioning inside tab-characters internal area'
+        Top = 136
+        Width = 120
+        Caption = 'Caret skip tab'
+        TabOrder = 21
+      end
+      object ckEditOptions2AlwaysVisibleCaret: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Keeps caret on currently visible control area, when scrolling control'
+        Top = 156
+        Width = 157
+        Caption = 'Always visible caret'
+        TabOrder = 22
+      end
+      object ckEditOptions2EnhanceEndKey: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Toggles behaviour of <End> key on line with trailing spaces. If turned on, key will jump to last non-spacing char, if it''s nearer to caret position.'
+        Top = 176
+        Width = 135
+        Caption = 'Enhance end key'
+        TabOrder = 9
+      end
+      object ckEditOptions2FoldedCopyPaste: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Remember folding states of blocks, on Copy/Paste operations '
+        Top = 176
+        Width = 154
+        Caption = 'Folded Copy/Paste'
+        TabOrder = 23
+      end
+      object ckEditOptions2PersistentBlock: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Keeps selection, even if caret moves away or text is edited'
+        Top = 196
+        Width = 135
+        Caption = 'Persistent block'
+        TabOrder = 24
+      end
+      object ckEditOptions2OverwriteBlock: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Allows to overwrite currently selected block, when pasting or typing new text'
+        Top = 216
+        Width = 133
+        Caption = 'Overwrite block'
+        TabOrder = 25
+      end
+      object ckEditOptions2AutoHideCursor: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Hide mouse cursor, when new text is typed'
+        Top = 236
+        Width = 134
+        Caption = 'Autohide cursor'
+        TabOrder = 26
+      end
+      object ckEditOptions2ColorSelectionTillEol: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Colorize selection background only till EOL of each line, not till edge of control'
+        Top = 256
+        Width = 172
+        Caption = 'Color selection till eol'
+        TabOrder = 27
+      end
+      object ckEditMouseOptionsAltSetsColumnMode: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Allows to activate "column" selection mode, if <Alt> key is pressed and text is being selected with mouse'
+        Top = 276
+        Width = 140
+        Caption = 'Alt column mode'
+        TabOrder = 28
+      end
+      object ckEditMouseOptionsDoubleClickSelectsLine: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Selects entire line with double-click, otherwise double-click selects only current word'
+        Top = 296
+        Width = 187
+        Caption = 'Double click selects line '
+        TabOrder = 29
+      end
+      object ckEditMouseOptionsCtrlWheelZoom: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Allows to zoom editor by <Ctrl+MouseWheel> commands'
+        Top = 316
+        Width = 177
+        Caption = 'Zoom editor by mouse'
+        TabOrder = 30
+      end
+      object ckCompletionOnAsterick: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Execute completion on press <*> key '
+        Top = 16
+        Width = 189
+        Caption = 'Execute completion on *'
+        TabOrder = 31
+      end
+      object gbCaret: TGroupBox
+        Left = 8
+        Height = 114
+        Top = 181
+        Width = 206
+        Caption = 'Caret:'
+        ClientHeight = 94
+        ClientWidth = 202
+        TabOrder = 32
+        object lbInsertCaret: TLabel
+          Left = 15
+          Height = 15
+          Top = 20
+          Width = 61
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Insert:'
+          FocusControl = cbInsertCaret
+          ParentColor = False
+        end
+        object lbOverwriteCaret: TLabel
+          Left = 6
+          Height = 15
+          Top = 48
+          Width = 70
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Overwrite:'
+          FocusControl = cbOverwriteCaret
+          ParentColor = False
+        end
+        object cbOverwriteCaret: TComboBox
+          Left = 81
+          Height = 23
+          Top = 46
+          Width = 109
+          ItemHeight = 15
+          Style = csDropDownList
+          TabOrder = 0
+        end
+        object cbInsertCaret: TComboBox
+          Left = 81
+          Height = 23
+          Top = 16
+          Width = 109
+          ItemHeight = 15
+          Style = csDropDownList
+          TabOrder = 1
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 8
+        Height = 171
+        Top = 8
+        Width = 206
+        Caption = 'Settings:'
+        ClientHeight = 151
+        ClientWidth = 202
+        TabOrder = 33
+        object lbUndoLimit: TLabel
+          Left = 8
+          Height = 15
+          Top = 20
+          Width = 89
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Undo Limit:'
+          FocusControl = edUndoLimit
+          ParentColor = False
+        end
+        object lbTabWidth: TLabel
+          Left = 15
+          Height = 15
+          Top = 50
+          Width = 82
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Tab Width:'
+          FocusControl = edTabWidth
+          ParentColor = False
+        end
+        object lbExtraLineSpacing: TLabel
+          Left = 14
+          Height = 15
+          Top = 80
+          Width = 83
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Extra Lines:'
+          FocusControl = edExtraLineSpacing
+          ParentColor = False
+        end
+        object edUndoLimit: TSpinEdit
+          Left = 103
+          Height = 27
+          Top = 16
+          Width = 87
+          Alignment = taRightJustify
+          MaxValue = 100000
+          TabOrder = 0
+        end
+        object edTabWidth: TSpinEdit
+          Left = 103
+          Height = 27
+          Top = 46
+          Width = 87
+          Alignment = taRightJustify
+          MaxValue = 20
+          TabOrder = 1
+        end
+        object edExtraLineSpacing: TSpinEdit
+          Left = 103
+          Height = 27
+          Top = 76
+          Width = 87
+          Alignment = taRightJustify
+          MaxValue = 20
+          MinValue = -20
+          TabOrder = 2
+        end
+        object lbExtraCharSpacing: TLabel
+          Left = 14
+          Height = 15
+          Top = 110
+          Width = 83
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Extra Chars:'
+          FocusControl = edExtraCharSpacing
+          ParentColor = False
+        end
+        object edExtraCharSpacing: TSpinEdit
+          Left = 103
+          Height = 27
+          Top = 106
+          Width = 87
+          Alignment = taRightJustify
+          MaxValue = 20
+          MinValue = -20
+          TabOrder = 3
+        end
+      end
+      object ckHideSelection: TCheckBox
+        Left = 224
+        Height = 24
+        Hint = 'Determines whether the visual indication of the selected text remains when focus shifts to another control'
+        Top = 216
+        Width = 122
+        Caption = 'Hide Selection'
+        TabOrder = 11
+      end
+      object ckWantTabs: TCheckBox
+        Left = 432
+        Height = 24
+        Hint = 'Allows to insert tab characters within the editor'
+        Top = 56
+        Width = 95
+        Caption = 'Want tabs'
+        TabOrder = 17
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Syntax Highligthing'
+      ClientHeight = 368
+      ClientWidth = 633
+      OnShow = TabSheet2Show
+      inline Editor: TSynEdit
+        Left = 8
+        Height = 184
+        Top = 172
+        Width = 608
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Pitch = fpFixed
+        Font.Quality = fqNonAntialiased
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 3
+        OnMouseDown = EditorMouseDown
+        Gutter.Width = 57
+        Gutter.MouseActions = <>
+        RightGutter.Width = 0
+        RightGutter.MouseActions = <>
+        Keystrokes = <        
+          item
+            Command = ecUp
+            ShortCut = 38
+          end        
+          item
+            Command = ecSelUp
+            ShortCut = 8230
+          end        
+          item
+            Command = ecScrollUp
+            ShortCut = 16422
+          end        
+          item
+            Command = ecDown
+            ShortCut = 40
+          end        
+          item
+            Command = ecSelDown
+            ShortCut = 8232
+          end        
+          item
+            Command = ecScrollDown
+            ShortCut = 16424
+          end        
+          item
+            Command = ecLeft
+            ShortCut = 37
+          end        
+          item
+            Command = ecSelLeft
+            ShortCut = 8229
+          end        
+          item
+            Command = ecWordLeft
+            ShortCut = 16421
+          end        
+          item
+            Command = ecSelWordLeft
+            ShortCut = 24613
+          end        
+          item
+            Command = ecRight
+            ShortCut = 39
+          end        
+          item
+            Command = ecSelRight
+            ShortCut = 8231
+          end        
+          item
+            Command = ecWordRight
+            ShortCut = 16423
+          end        
+          item
+            Command = ecSelWordRight
+            ShortCut = 24615
+          end        
+          item
+            Command = ecPageDown
+            ShortCut = 34
+          end        
+          item
+            Command = ecSelPageDown
+            ShortCut = 8226
+          end        
+          item
+            Command = ecPageBottom
+            ShortCut = 16418
+          end        
+          item
+            Command = ecSelPageBottom
+            ShortCut = 24610
+          end        
+          item
+            Command = ecPageUp
+            ShortCut = 33
+          end        
+          item
+            Command = ecSelPageUp
+            ShortCut = 8225
+          end        
+          item
+            Command = ecPageTop
+            ShortCut = 16417
+          end        
+          item
+            Command = ecSelPageTop
+            ShortCut = 24609
+          end        
+          item
+            Command = ecLineStart
+            ShortCut = 36
+          end        
+          item
+            Command = ecSelLineStart
+            ShortCut = 8228
+          end        
+          item
+            Command = ecEditorTop
+            ShortCut = 16420
+          end        
+          item
+            Command = ecSelEditorTop
+            ShortCut = 24612
+          end        
+          item
+            Command = ecLineEnd
+            ShortCut = 35
+          end        
+          item
+            Command = ecSelLineEnd
+            ShortCut = 8227
+          end        
+          item
+            Command = ecEditorBottom
+            ShortCut = 16419
+          end        
+          item
+            Command = ecSelEditorBottom
+            ShortCut = 24611
+          end        
+          item
+            Command = ecToggleMode
+            ShortCut = 45
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16429
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 8237
+          end        
+          item
+            Command = ecDeleteChar
+            ShortCut = 46
+          end        
+          item
+            Command = ecCut
+            ShortCut = 8238
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8
+          end        
+          item
+            Command = ecDeleteLastChar
+            ShortCut = 8200
+          end        
+          item
+            Command = ecDeleteLastWord
+            ShortCut = 16392
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 32776
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 40968
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 13
+          end        
+          item
+            Command = ecSelectAll
+            ShortCut = 16449
+          end        
+          item
+            Command = ecCopy
+            ShortCut = 16451
+          end        
+          item
+            Command = ecBlockIndent
+            ShortCut = 24649
+          end        
+          item
+            Command = ecLineBreak
+            ShortCut = 16461
+          end        
+          item
+            Command = ecInsertLine
+            ShortCut = 16462
+          end        
+          item
+            Command = ecDeleteWord
+            ShortCut = 16468
+          end        
+          item
+            Command = ecBlockUnindent
+            ShortCut = 24661
+          end        
+          item
+            Command = ecPaste
+            ShortCut = 16470
+          end        
+          item
+            Command = ecCut
+            ShortCut = 16472
+          end        
+          item
+            Command = ecDeleteLine
+            ShortCut = 16473
+          end        
+          item
+            Command = ecDeleteEOL
+            ShortCut = 24665
+          end        
+          item
+            Command = ecUndo
+            ShortCut = 16474
+          end        
+          item
+            Command = ecRedo
+            ShortCut = 24666
+          end        
+          item
+            Command = ecGotoMarker0
+            ShortCut = 16432
+          end        
+          item
+            Command = ecGotoMarker1
+            ShortCut = 16433
+          end        
+          item
+            Command = ecGotoMarker2
+            ShortCut = 16434
+          end        
+          item
+            Command = ecGotoMarker3
+            ShortCut = 16435
+          end        
+          item
+            Command = ecGotoMarker4
+            ShortCut = 16436
+          end        
+          item
+            Command = ecGotoMarker5
+            ShortCut = 16437
+          end        
+          item
+            Command = ecGotoMarker6
+            ShortCut = 16438
+          end        
+          item
+            Command = ecGotoMarker7
+            ShortCut = 16439
+          end        
+          item
+            Command = ecGotoMarker8
+            ShortCut = 16440
+          end        
+          item
+            Command = ecGotoMarker9
+            ShortCut = 16441
+          end        
+          item
+            Command = ecSetMarker0
+            ShortCut = 24624
+          end        
+          item
+            Command = ecSetMarker1
+            ShortCut = 24625
+          end        
+          item
+            Command = ecSetMarker2
+            ShortCut = 24626
+          end        
+          item
+            Command = ecSetMarker3
+            ShortCut = 24627
+          end        
+          item
+            Command = ecSetMarker4
+            ShortCut = 24628
+          end        
+          item
+            Command = ecSetMarker5
+            ShortCut = 24629
+          end        
+          item
+            Command = ecSetMarker6
+            ShortCut = 24630
+          end        
+          item
+            Command = ecSetMarker7
+            ShortCut = 24631
+          end        
+          item
+            Command = ecSetMarker8
+            ShortCut = 24632
+          end        
+          item
+            Command = ecSetMarker9
+            ShortCut = 24633
+          end        
+          item
+            Command = EcFoldLevel1
+            ShortCut = 41009
+          end        
+          item
+            Command = EcFoldLevel2
+            ShortCut = 41010
+          end        
+          item
+            Command = EcFoldLevel3
+            ShortCut = 41011
+          end        
+          item
+            Command = EcFoldLevel4
+            ShortCut = 41012
+          end        
+          item
+            Command = EcFoldLevel5
+            ShortCut = 41013
+          end        
+          item
+            Command = EcFoldLevel6
+            ShortCut = 41014
+          end        
+          item
+            Command = EcFoldLevel7
+            ShortCut = 41015
+          end        
+          item
+            Command = EcFoldLevel8
+            ShortCut = 41016
+          end        
+          item
+            Command = EcFoldLevel9
+            ShortCut = 41017
+          end        
+          item
+            Command = EcFoldLevel0
+            ShortCut = 41008
+          end        
+          item
+            Command = EcFoldCurrent
+            ShortCut = 41005
+          end        
+          item
+            Command = EcUnFoldCurrent
+            ShortCut = 41003
+          end        
+          item
+            Command = EcToggleMarkupWord
+            ShortCut = 32845
+          end        
+          item
+            Command = ecNormalSelect
+            ShortCut = 24654
+          end        
+          item
+            Command = ecColumnSelect
+            ShortCut = 24643
+          end        
+          item
+            Command = ecLineSelect
+            ShortCut = 24652
+          end        
+          item
+            Command = ecTab
+            ShortCut = 9
+          end        
+          item
+            Command = ecShiftTab
+            ShortCut = 8201
+          end        
+          item
+            Command = ecMatchBracket
+            ShortCut = 24642
+          end        
+          item
+            Command = ecColSelUp
+            ShortCut = 40998
+          end        
+          item
+            Command = ecColSelDown
+            ShortCut = 41000
+          end        
+          item
+            Command = ecColSelLeft
+            ShortCut = 40997
+          end        
+          item
+            Command = ecColSelRight
+            ShortCut = 40999
+          end        
+          item
+            Command = ecColSelPageDown
+            ShortCut = 40994
+          end        
+          item
+            Command = ecColSelPageBottom
+            ShortCut = 57378
+          end        
+          item
+            Command = ecColSelPageUp
+            ShortCut = 40993
+          end        
+          item
+            Command = ecColSelPageTop
+            ShortCut = 57377
+          end        
+          item
+            Command = ecColSelLineStart
+            ShortCut = 40996
+          end        
+          item
+            Command = ecColSelLineEnd
+            ShortCut = 40995
+          end        
+          item
+            Command = ecColSelEditorTop
+            ShortCut = 57380
+          end        
+          item
+            Command = ecColSelEditorBottom
+            ShortCut = 57379
+          end>
+        MouseActions = <>
+        MouseTextActions = <>
+        MouseSelActions = <>
+        Lines.Strings = (
+          '** Full Time = 5 sec'
+          'Недопустимые символы'
+          '*INCLUDE, INPUT=all.dlo'
+          '*step, nlgeom, inc=1000000'
+          '*dynam'
+          '*AMPLITUDE,NAME=A1'
+          '0.,4e5'
+          '*DLOAD,AMPLITUDE=A1'
+          '*EL FILE, TIME POINTS=T100 '
+          'S,E'
+          '*END STEP'
+        )
+        Options = [eoAutoIndent, eoGroupUndo, eoNoCaret, eoNoSelection, eoScrollPastEol, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces, eoDragDropEditing]
+        MouseOptions = [emDragDropEditing]
+        VisibleSpecialChars = [vscSpace]
+        ReadOnly = True
+        ScrollBars = ssVertical
+        SelectedColor.BackPriority = 50
+        SelectedColor.ForePriority = 50
+        SelectedColor.FramePriority = 50
+        SelectedColor.BoldPriority = 50
+        SelectedColor.ItalicPriority = 50
+        SelectedColor.UnderlinePriority = 50
+        SelectedColor.StrikeOutPriority = 50
+        BracketHighlightStyle = sbhsBoth
+        BracketMatchColor.Background = clNone
+        BracketMatchColor.Foreground = clNone
+        BracketMatchColor.Style = [fsBold]
+        FoldedCodeColor.Background = clNone
+        FoldedCodeColor.Foreground = clGray
+        FoldedCodeColor.FrameColor = clGray
+        MouseLinkColor.Background = clNone
+        MouseLinkColor.Foreground = clBlue
+        LineHighlightColor.Background = clNone
+        LineHighlightColor.Foreground = clNone
+        inline SynLeftGutterPartList1: TSynGutterPartList
+          object SynGutterMarks1: TSynGutterMarks
+            Width = 24
+            MouseActions = <>
+          end
+          object SynGutterLineNumber1: TSynGutterLineNumber
+            Width = 17
+            MouseActions = <>
+            MarkupInfo.Background = clBtnFace
+            MarkupInfo.Foreground = clNone
+            DigitCount = 2
+            ShowOnlyLineNumbersMultiplesOf = 1
+            ZeroStart = False
+            LeadingZeros = False
+          end
+          object SynGutterChanges1: TSynGutterChanges
+            Width = 4
+            MouseActions = <>
+            ModifiedColor = 59900
+            SavedColor = clGreen
+          end
+          object SynGutterSeparator1: TSynGutterSeparator
+            Width = 2
+            MouseActions = <>
+            MarkupInfo.Background = clWhite
+            MarkupInfo.Foreground = clGray
+          end
+          object SynGutterCodeFolding1: TSynGutterCodeFolding
+            MouseActions = <>
+            MarkupInfo.Background = clNone
+            MarkupInfo.Foreground = clGray
+            MouseActionsExpanded = <>
+            MouseActionsCollapsed = <>
+          end
+        end
+      end
+      object gbElement: TGroupBox
+        Left = 8
+        Height = 132
+        Top = 32
+        Width = 272
+        Caption = 'Element:'
+        ClientHeight = 112
+        ClientWidth = 268
+        TabOrder = 1
+        object lbEditAttr: TListBox
+          Left = 8
+          Height = 102
+          Top = 1
+          Width = 252
+          ItemHeight = 0
+          OnClick = lbEditAttrClick
+          ScrollWidth = 250
+          TabOrder = 0
+        end
+      end
+      object gbAttr: TGroupBox
+        Left = 288
+        Height = 132
+        Top = 32
+        Width = 328
+        Caption = 'Attributes:'
+        ClientHeight = 112
+        ClientWidth = 324
+        TabOrder = 2
+        object ckHighlighterBold: TCheckBox
+          Left = 24
+          Height = 19
+          Top = 16
+          Width = 61
+          AutoSize = False
+          Caption = 'Bold'
+          Font.Style = [fsBold]
+          OnChange = HighlighterAttrChange
+          ParentFont = False
+          TabOrder = 0
+        end
+        object ckHighlighterItalic: TCheckBox
+          Left = 24
+          Height = 19
+          Top = 42
+          Width = 61
+          AutoSize = False
+          Caption = 'Italic'
+          Font.Style = [fsItalic]
+          OnChange = HighlighterAttrChange
+          ParentFont = False
+          TabOrder = 1
+        end
+        object ckHighlighterUnderline: TCheckBox
+          Left = 24
+          Height = 19
+          Top = 70
+          Width = 96
+          AutoSize = False
+          Caption = 'Underline'
+          Font.Style = [fsUnderline]
+          OnChange = HighlighterAttrChange
+          ParentFont = False
+          TabOrder = 2
+        end
+        object clBtnHighlighterForeground: TColorButton
+          Left = 240
+          Height = 25
+          Top = 8
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = clBlack
+          OnColorChanged = HighlighterAttrChange
+        end
+        object clBtnHighlighterBackground: TColorButton
+          Left = 240
+          Height = 25
+          Top = 64
+          Width = 51
+          BorderWidth = 2
+          ButtonColorSize = 16
+          ButtonColor = clBlack
+          OnColorChanged = HighlighterAttrChange
+        end
+        object lbBtnHighlighterForeground: TLabel
+          Left = 144
+          Height = 15
+          Top = 14
+          Width = 88
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Foreground:'
+          ParentColor = False
+        end
+        object lbBtnHighlighterBackground: TLabel
+          Left = 144
+          Height = 15
+          Top = 70
+          Width = 91
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Background:'
+          Color = clMenuText
+          Font.Color = clWindow
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+        end
+      end
+      object ckUseHighLighter: TCheckBox
+        Left = 8
+        Height = 19
+        Top = 8
+        Width = 176
+        AutoSize = False
+        Caption = 'Use Syntax Highligthing'
+        OnClick = ckUseHighLighterClick
+        TabOrder = 0
+      end
+    end
+  end
+  object pnBottom: TButtonPanel
+    Left = 8
+    Height = 25
+    Top = 411
+    Width = 621
+    BorderSpacing.Around = 8
+    OKButton.Name = 'OKButton'
+    OKButton.Caption = 'OK'
+    OKButton.DefaultCaption = False
+    HelpButton.Name = 'HelpButton'
+    HelpButton.DefaultCaption = True
+    CloseButton.Name = 'CloseButton'
+    CloseButton.DefaultCaption = True
+    CancelButton.Name = 'CancelButton'
+    CancelButton.Caption = 'Cancel'
+    CancelButton.DefaultCaption = False
+    TabOrder = 1
+    ShowButtons = [pbOK, pbCancel]
+    ShowGlyphs = []
+    ShowBevel = False
+  end
+  object dlgFont: TFontDialog
+    MinFontSize = 0
+    MaxFontSize = 0
+    Options = [fdNoStyleSel]
+    left = 520
+    top = 152
+  end
+  object dlgPathTemplates: TSelectDirectoryDialog
+    Title = 'Select templates directory'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 288
+    top = 40
+  end
+  object dlgOpenProgram: TOpenDialog
+    Options = [ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 384
+    top = 40
+  end
+end

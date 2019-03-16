@@ -1,0 +1,49 @@
+inherited FrmTextReplace: TFrmTextReplace
+  Left = 467
+  Height = 269
+  Top = 186
+  Caption = 'Replace Text'
+  ClientHeight = 269
+  inherited btOK: TButton
+    Left = 92
+    Top = 232
+    Default = False
+  end
+  inherited btCancel: TButton
+    Top = 232
+    Cancel = False
+  end
+  inherited gbSearchOptions: TGroupBox
+    Top = 114
+  end
+  inherited rgDirection: TGroupBox
+    Top = 114
+  end
+  object gbReplaceText: TGroupBox[5]
+    Left = 8
+    Height = 52
+    Top = 61
+    Width = 321
+    Caption = 'Text to replace:'
+    ClientHeight = 32
+    ClientWidth = 317
+    TabOrder = 5
+    object edReplaceText: TComboBox
+      Left = 6
+      Height = 23
+      Top = 0
+      Width = 305
+      ItemHeight = 15
+      TabOrder = 0
+    end
+  end
+  object btReplaceAll: TButton[6]
+    Left = 173
+    Height = 25
+    Top = 232
+    Width = 75
+    Caption = 'Replace all'
+    ModalResult = 8
+    TabOrder = 6
+  end
+end
