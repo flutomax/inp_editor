@@ -799,7 +799,7 @@ begin
       Message(Format('writemesh: writing node %d',[i]));
     fText.AddEOL;
     with fCoords[i] do
-      fText.WriteString('%d, %.14e, %.14e, %.14e',[fNodeNumbers[i],X,Y,Z]);
+      fText.WriteString('%d, %.7e, %.7e, %.7e',[fNodeNumbers[i],X,Y,Z]);
   end;
 
   // writing groups of nodes.
