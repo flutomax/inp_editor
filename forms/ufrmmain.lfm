@@ -1745,7 +1745,7 @@ object FrmMain: TFrmMain
       Category = 'File'
       Caption = 'Open...'
       Dialog.Title = 'Open File'
-      Dialog.DefaultExt = '.inc'
+      Dialog.DefaultExt = '.inp'
       Dialog.Filter = 'CCX Input Files (*.inp)|*.inp|All Files (*.*)|*.*'
       Dialog.Options = [ofAllowMultiSelect, ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail]
       Hint = 'Open file'
@@ -1781,7 +1781,7 @@ object FrmMain: TFrmMain
     object cmdFileSaveAs: TFileSaveAs
       Category = 'File'
       Caption = 'Save As...'
-      Dialog.DefaultExt = '.inc'
+      Dialog.DefaultExt = '.inp'
       Dialog.Filter = 'Input Files (*.inp)|*.inp|All Files (*.*)|*.*'
       Dialog.Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
       Hint = 'Save current file as'
