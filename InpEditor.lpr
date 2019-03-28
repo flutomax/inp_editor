@@ -26,13 +26,14 @@ uses
   cthreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, printer4lazarus, lazcontrols, lazopenglcontext, uFrmMain, uInpEditor,
-  uConsts, uFrmGotoLine, uFrmOptions, uConfig, uFrmTextSearch, uFrmTextReplace,
-  SynExportRTF, uEditorMisc, uSynEditorOptions, uHighliter, uFrmExportText,
-  uFrmAbout, uSysInfo, uAnimateBackgound, uDerivedClasses, uFrmEditorKeystrokes,
-  ufileutils, uMRUList, uencodingFunc, uFrmNodesTransform, uFrmModelViewer,
-  uCalculix, uFrmViewGroup, uInpTranslator, uFrmGroupSelector, uAddBCFunctions,
-  uDialogs, uUnicalConv, ufrmFileImport;
+  Forms, printer4lazarus, lazcontrols, lazopenglcontext, tachartlazaruspkg,
+  uFrmMain, uInpEditor, uConsts, uFrmGotoLine, uFrmOptions, uConfig,
+  uFrmTextSearch, uFrmTextReplace, SynExportRTF, uEditorMisc, uSynEditorOptions,
+  uHighliter, uFrmExportText, uFrmAbout, uSysInfo, uAnimateBackgound,
+  uDerivedClasses, uFrmEditorKeystrokes, ufileutils, uMRUList, uencodingFunc,
+  uFrmNodesTransform, uFrmModelViewer, uCalculix, uFrmViewGroup, uInpTranslator,
+  uFrmGroupSelector, uAddBCFunctions, uDialogs, uUnicalConv, ufrmFileImport,
+  uFrmMonitor, uCursors;
 
 {$R *.res}
 
