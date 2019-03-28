@@ -124,15 +124,11 @@ var
 implementation
 
 {$R *.lfm}
-{$R cursors.res}
 
-uses Math, uInpFunctions;
 
-const
-  crZoom = TCursor(250);
-  crRota = TCursor(251);
-  crPanHand = TCursor(252);
-  crPanGrab = TCursor(253);
+uses Math, uInpFunctions, uCursors;
+
+
 
 procedure ShowModelViewer(aEditor: TInpEditor);
 begin
@@ -145,18 +141,7 @@ begin
     end;
 end;
 
-function LoadCursorFromRes(Cursor: PtrInt): THandle;
-var
-  Cur: TCursorImage;
-begin
-  Cur:=TCursorImage.Create;
-  try
-    Cur.LoadFromResourceID(HInstance,Cursor);
-    result:=Cur.ReleaseHandle;
-  finally
-    Cur.Free;
-  end;
-end;
+
 
 { TFrmModelViewer }
 
@@ -184,10 +169,12 @@ begin
   fFgColor[3]:=1.0;
   fScale:=0.5;
   fGlInitialized:=false;
+  {
   Screen.Cursors[crZoom]:=LoadCursorFromRes(crZoom);
   Screen.Cursors[crRota]:=LoadCursorFromRes(crRota);
   Screen.Cursors[crPanHand]:=LoadCursorFromRes(crPanHand);
   Screen.Cursors[crPanGrab]:=LoadCursorFromRes(crPanGrab);
+  }
   fInpFile:=TInpFile.Create;
   fGlWnd:=TOpenGLControl.Create(Self);
   fGlWnd.Name:='GlWnd';
@@ -196,7 +183,7 @@ begin
   fGlWnd.PopupMenu:=pmView;
   fGlWnd.Align:=alClient;
   fGlWnd.MultiSampling:=4;
-  fGlWnd.Cursor:=crPanHand;
+  fGlWnd.Cursor:=TCursor(crPanHand);
   fGlWnd.OnPaint:=@GlWndPaint;
   fGlWnd.OnResize:=@GlWndResize;
   fGlWnd.OnMouseDown:=@GlWndMouseDown;
@@ -270,14 +257,14 @@ procedure TFrmModelViewer.GlWndMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if fTool=vtHand then
-    fGlWnd.Cursor:=crPanGrab;
+    fGlWnd.Cursor:=TCursor(crPanGrab);
 end;
 
 procedure TFrmModelViewer.GlWndMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if fTool=vtHand then
-    fGlWnd.Cursor:=crPanHand;
+    fGlWnd.Cursor:=TCursor(crPanHand);
 end;
 
 procedure TFrmModelViewer.GlWndMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -334,13 +321,16 @@ end;
 
 
 procedure TFrmModelViewer.cmdViewToolHandExecute(Sender: TObject);
+var
+  cr: TUserCursor;
 begin
   fTool:=TViewTool(TAction(Sender).Tag);
   case fTool of
-    vtHand: fGlWnd.Cursor:=crPanHand;
-    vtRota: fGlWnd.Cursor:=crRota;
-    vtZoom: fGlWnd.Cursor:=crZoom;
+    vtHand: cr:=crPanHand;
+    vtRota: cr:=crRotate;
+    vtZoom: cr:=crZoom;
   end;
+  fGlWnd.Cursor:=TCursor(cr);
 end;
 
 procedure TFrmModelViewer.MoveScene;

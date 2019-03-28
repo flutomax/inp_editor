@@ -34,6 +34,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdToolsMonitor: TAction;
     cmdFileShowLocation: TAction;
     cmdAddBCPressure: TAction;
     cmdEditCut: TAction;
@@ -245,6 +246,7 @@ type
     MenuItem186: TMenuItem;
     MenuItem187: TMenuItem;
     MenuItem188: TMenuItem;
+    MenuItem189: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -467,6 +469,7 @@ type
     procedure cmdToolsExportRTFExecute(Sender: TObject);
     procedure cmdToolsGroupViewExecute(Sender: TObject);
     procedure cmdToolsModelViewerExecute(Sender: TObject);
+    procedure cmdToolsMonitorExecute(Sender: TObject);
     procedure cmdToolsNodesTransformExecute(Sender: TObject);
     procedure cmdToolsOptionsExecute(Sender: TObject);
     procedure cmdViewSpecialCharsExecute(Sender: TObject);
@@ -544,9 +547,9 @@ implementation
 
 uses
   InterfaceBase, LazUTF8, Math, StrUtils, LCLIntf, Themes, SynEditKeyCmds,
-  uFrmGotoLine, uFrmOptions, uFrmTextSearch, uFrmTextReplace,
-  uFrmExportText, uFrmAbout, uFrmEditorKeystrokes, uFrmNodesTransform,
-  uFrmViewGroup, uFrmGroupSelector, ufrmFileImport, uHighliter, uFileUtils,
+  uFrmGotoLine, uFrmOptions, uFrmTextSearch, uFrmTextReplace, uFrmExportText,
+  uFrmAbout, uFrmEditorKeystrokes, uFrmNodesTransform, uFrmViewGroup,
+  uFrmGroupSelector, ufrmFileImport, uFrmMonitor, uHighliter, uFileUtils,
   uCalculix, uDialogs, uAddBCFunctions, SynEditMouseCmds;
 
 { TFrmMain }
@@ -679,6 +682,7 @@ begin
   cmdToolsExportRTF.Enabled:=cmdEditSelectAll.Enabled;
   cmdToolsExportHTML.Enabled:=cmdEditSelectAll.Enabled;
   cmdToolsModelViewer.Enabled:=cmdEditSelectAll.Enabled;
+  cmdToolsMonitor.Enabled:=cmdFileReload.Enabled;
   cmdToolsNodesTransform.Enabled:=cmdEditSelectAll.Enabled;
   cmdToolsGroupView.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCFaces.Enabled:=cmdEditSelectAll.Enabled;
@@ -921,31 +925,6 @@ begin
   if IsActiveEditor then
     ActiveEditor.OpenFileAtCursor;
 end;
-
-{
-procedure TFrmMain.Import(const aFileName: string);
-var
-  b: Boolean;
-  ext: string;
-begin
-  b:=Screen.Cursor<>crHourGlass;
-  if b then
-    Screen.Cursor:=crHourGlass;
-  try
-    ext:=ExtractFileExt(aFileName);
-    if SameText(ext,'.unv') then begin
-      FrmPopupNotifier.Title:=Format('Importing %s',[ExtractFileName(aFileName)]); ;
-      sbEditor.Panels[3].Text:=FrmPopupNotifier.Title;
-      sbEditor.Tag:=0;
-      Application.ProcessMessages;
-
-    end;
-  finally
-    if b then
-      Screen.Cursor:=crDefault;
-  end;
-end;
-}
 
 procedure TFrmMain.cmdFileImportAccept(Sender: TObject);
 begin
@@ -1744,6 +1723,12 @@ begin
     ShowModelViewer(ActiveEditor);
 end;
 
+procedure TFrmMain.cmdToolsMonitorExecute(Sender: TObject);
+begin
+  if IsActiveEditor then
+    ShowMonitor(ActiveEditor.FileName);
+end;
+
 procedure TFrmMain.cmdToolsGroupViewExecute(Sender: TObject);
 begin
   if IsActiveEditor then
@@ -1753,9 +1738,24 @@ end;
 // Add BC
 
 procedure TFrmMain.cmdAddBCFacesExecute(Sender: TObject);
+var
+  DotnShow: Boolean;
+  Editor: TInpEditor;
 begin
-  if IsActiveEditor then
-    ShowGroupSelector(ActiveEditor,TAddBCCmd(TAction(Sender).Tag));
+  if not IsActiveEditor then
+    Exit;
+  Editor:=ActiveEditor;
+  // show warnind on not saved working file
+  if Editor.Modified then begin
+    if Config.ShowWarning['SaveBeforeRunBC'] then begin
+      if WarningOnce(sWarnBeforeRunAddBC,DotnShow)=mrCancel then
+        Exit;
+      Config.ShowWarning['SaveBeforeRunBC']:=not DotnShow;
+    end;
+    cmdFileSave.Execute;
+  end;
+
+  ShowGroupSelector(Editor,TAddBCCmd(TAction(Sender).Tag));
 end;
 
 // Calculix
