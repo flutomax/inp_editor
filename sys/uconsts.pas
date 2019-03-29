@@ -92,6 +92,7 @@ resourcestring
   sNewFileName = 'New file name';
   sEnterNewFileName = 'Enter a new file name';
   sWarnBeforeRunCalculix = 'Required to save changes before running Calculix.';
+  sWarnBeforeRunAddBC = 'Required to save changes before running Add BC.';
   sWarnEmptyValue = 'The requested value should not be empty.';
 
 implementation
