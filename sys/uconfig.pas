@@ -32,6 +32,8 @@ type
   TConfig = class(TComponent)
   private
     fMainForm: TForm;
+    fMonitorScanTime: Integer;
+    fMonitorShowLegend: Boolean;
     fShowHints: Boolean;
     fStoreFormPlacement: Boolean;
     fUniqueInstance: Boolean;
@@ -93,6 +95,8 @@ type
     property BCAutoInsert: Boolean read fBCAutoInsert write fBCAutoInsert;
     property BCAddComment: Boolean read fBCAddComment write fBCAddComment;
     property BCMakeInclude: Boolean read fBCMakeInclude write fBCMakeInclude;
+    property MonitorShowLegend: Boolean read fMonitorShowLegend write fMonitorShowLegend;
+    property MonitorScanTime: Integer read fMonitorScanTime write fMonitorScanTime;
   end;
 
 implementation
@@ -101,7 +105,7 @@ uses
   {$IfDef Windows}
     Windows, JwaWinBase, uFileAssoc, uCalculix,
   {$EndIf}
-  LazUTF8, FileUtil, uFileUtils, uConsts;
+  Math, LazUTF8, FileUtil, uFileUtils, uConsts;
 
 function GetCmdShell: string;
 {$IfDef Windows}
@@ -157,6 +161,8 @@ begin
     fCGXPath:=ProgramDirectory+'bin/cgx2.15';
     fTerminalPath:='/usr/bin/xterm';
   {$EndIf}
+  fMonitorShowLegend:=true;
+  fMonitorScanTime:=3;
 end;
 
 destructor TConfig.Destroy;
@@ -237,6 +243,8 @@ begin
     fTerminalPath:=ini.ReadString(aSection,'TerminalPath',fTerminalPath);
     ini.ReadStringList(aSection,'TerminalPaths',fTerminalPaths);
   {$EndIf}
+  fMonitorScanTime:=EnsureRange(ini.ReadInteger('Monitor','ScanInterval',3),1,5);
+  fMonitorShowLegend:=ini.ReadBool('Monitor','ShowLegend',true);
   ini.ReadStringList(aSection,'Warnings',fWarnings);
   fBCAutoInsert:=ini.ReadBool(aSection,'BCAutoInsert',fBCAutoInsert);
   fBCAddComment:=ini.ReadBool(aSection,'BCAddComment',fBCAddComment);
@@ -285,6 +293,8 @@ begin
     ini.WriteString(aSection,'TerminalPath',fTerminalPath);
     ini.WriteStringList(aSection,'TerminalPaths',fTerminalPaths);
   {$EndIf}
+  ini.WriteInteger('Monitor','ScanInterval',fMonitorScanTime);
+  ini.WriteBool('Monitor','ShowLegend',fMonitorShowLegend);
   ini.WriteStringList(aSection,'Warnings',fWarnings);
   ini.WriteBool(aSection,'ShowHints',fShowHints);
   ini.WriteBool(aSection,'BCAutoInsert',fBCAutoInsert);
