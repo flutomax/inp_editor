@@ -788,18 +788,18 @@ var
   i,j,k,l,n: Integer;
 begin
   Message('writemesh: writing node point data.');
-  fText.Add('** Imported from SDRL file format. Source file "%s"',
+  fText.WriteLn('** Imported from SDRL file format. Source file "%s"',
     [ExtractFileName(fFileName)]);
   // writing node point data.
-  fText.WriteString('*node, nset=Nall');
+  fText.Write('*node, nset=Nall');
   for i:=0 to fMaxNode-1 do begin
     if Terminated then
       Abort;
     if (i mod 10000=0) and (i>0) then
       Message(Format('writemesh: writing node %d',[i]));
-    fText.AddEOL;
+    fText.WriteLn;
     with fCoords[i] do
-      fText.WriteString('%d, %.7e, %.7e, %.7e',[fNodeNumbers[i],X,Y,Z]);
+      fText.Write('%d, %.7e, %.7e, %.7e',[fNodeNumbers[i],X,Y,Z]);
   end;
 
   // writing groups of nodes.
@@ -812,17 +812,17 @@ begin
     for k:=0 to fNumEnt-1 do begin
       if fGroups[i].Entities[k].Type_=7 then begin
         if j=0 then begin
-          fText.AddEOL;
-          fText.Add('*nset, nset=%s',[fGroups[i].Name]);
+          fText.WriteLn;
+          fText.WriteLn('*nset, nset=%s',[fGroups[i].Name]);
         end;
         Inc(j);
         if (j mod 8)=0 then
-          fText.AddEOL;
-        fText.WriteString('%d, ',[fGroups[i].Entities[k].Member]);
+          fText.WriteLn;
+        fText.Write('%d, ',[fGroups[i].Entities[k].Member]);
       end;
     end;
   end;
-  fText.AddEOL;
+  fText.WriteLn;
 
   // writing element connectivity data.
   Message('writemesh: writing element connectivity data.');
@@ -832,19 +832,19 @@ begin
       Abort;
     if (fElNumber[i]>0) and ((DIMENSIONS[i]=fMaxDimen) or fFull) then begin
       Message(Format('writemesh: processing elset %s',[NOMABQ[i]]));
-      fText.Add('*element, elset=%s, type=%s',[NOMABQ[i],NOMABQ[i]]);
+      fText.WriteLn('*element, elset=%s, type=%s',[NOMABQ[i],NOMABQ[i]]);
       Message(Format('writemesh: elnumber %d',[fElNumber[i]]));
       for l:=0 to fElNumber[i]-1 do begin
         Inc(k);
         if (k mod 10000=0) then
           Message(Format('writemesh: writing element %d',[k]));
-        fText.WriteString('%d, ',[fElNumbers[i,l]]);
+        fText.Write('%d, ',[fElNumbers[i,l]]);
         for n:=0 to NUMNODES[i]-1 do begin
-          fText.WriteString('%d, ',[fElem[i,NUMNODES[i]*l+n]]);
+          fText.Write('%d, ',[fElem[i,NUMNODES[i]*l+n]]);
           if n=12 then
-            fText.AddEOL;
+            fText.WriteLn;
         end;
-        fText.AddEOL;
+        fText.WriteLn;
       end;
     end;
   end;
@@ -860,13 +860,13 @@ begin
     for k:=0 to fNumEnt-1 do begin
       if (DIMENSIONS[fGroups[i].Entities[k].ElType]=fMaxDimen) or fFull then begin
         if j=0 then begin
-          fText.AddEOL;
-          fText.Add('*elset, elset=%s',[fGroups[i].Name]);
+          fText.WriteLn;
+          fText.WriteLn('*elset, elset=%s',[fGroups[i].Name]);
         end;
         Inc(j);
         if (j mod 8)=0 then
-          fText.AddEOL;
-        fText.WriteString('%d, ',[fGroups[i].Entities[k].Member]);
+          fText.WriteLn;
+        fText.Write('%d, ',[fGroups[i].Entities[k].Member]);
       end;
     end;
   end;
@@ -966,17 +966,17 @@ begin
         if (fGroup[q]=m) and (fFaceNum[q]=p) then begin
           Inc(n);
           if (n mod 8)=0 then
-            fText.AddEOL;
+            fText.WriteLn;
           if n=1 then begin
-            fText.AddEOL;
-            fText.Add('*elset, elset=%sF%d',[fGroups[m].Name,p]);
+            fText.WriteLn;
+            fText.WriteLn('*elset, elset=%sF%d',[fGroups[m].Name,p]);
           end;
-          fText.WriteString('%d, ',[fVolElNum[q]]);
+          fText.Write('%d, ',[fVolElNum[q]]);
         end;
       end;
     end;
   end;
-  fText.AddEOL;
+  fText.WriteLn;
 
   // generate ABAQUS input lines for element surfaces.
   for m:=0 to fMaxGroup-1 do begin
@@ -990,9 +990,9 @@ begin
           Inc(i);
           Inc(j);
           if i=1 then
-            fText.Add('*surface, type=element, name=s%s',[fGroups[m].Name]);
+            fText.WriteLn('*surface, type=element, name=s%s',[fGroups[m].Name]);
           if j=1 then
-            fText.Add('%sF%d, S%d',[fGroups[m].Name,p,p]);
+            fText.WriteLn('%sF%d, S%d',[fGroups[m].Name,p,p]);
         end;
       end;
     end;
@@ -1014,7 +1014,7 @@ begin
     ReadGroups;          // read group information.
     WriteMesh;           // write node point and element data to abaqus/calculix input file.
     WriteSurface;        // process groups for boundary conditions.
-    fText.AddEOL;        // add empty last line
+    fText.WriteLn;       // add empty last line
     fText.Seek(0,0);
     fSuccessfully:=true; // process ended successfully
   except

@@ -44,10 +44,11 @@ type
 
   TStringStreamEx = class(TStringStream)
   public
-    procedure Add(const s: string); overload;
-    procedure Add(const Fmt: string; const Args: array of const); overload;
-    procedure AddEOL;
-    procedure WriteString(const Fmt: string; const Args: array of const); overload;
+    procedure Write(const aString: string); overload;
+    procedure Write(const aFmt: string; const Args: array of const); overload;
+    procedure WriteLn; overload;
+    procedure WriteLn(const aString: string); overload;
+    procedure WriteLn(const aFmt: string; const Args: array of const); overload;
   end;
 
   { TStringListEx }
@@ -203,25 +204,29 @@ end;
 
 { TStringStreamEx }
 
-procedure TStringStreamEx.Add(const s: string);
+procedure TStringStreamEx.Write(const aString: string);
 begin
-  WriteString(s+LineEnding);
+  Write(PChar(aString)[0],Length(AString));
 end;
 
-procedure TStringStreamEx.Add(const Fmt: string; const Args: array of const);
+procedure TStringStreamEx.Write(const aFmt: string; const Args: array of const);
 begin
-  Add(Format(Fmt,Args));
+  Write(Format(aFmt,Args));
 end;
 
-procedure TStringStreamEx.AddEOL;
+procedure TStringStreamEx.WriteLn;
 begin
-  WriteString(LineEnding);
+  Write(LineEnding);
 end;
 
-procedure TStringStreamEx.WriteString(const Fmt: string;
-  const Args: array of const);
+procedure TStringStreamEx.WriteLn(const aString: string);
 begin
-  WriteString(Format(Fmt,Args));
+  Write(aString+LineEnding);
+end;
+
+procedure TStringStreamEx.WriteLn(const aFmt: string; const Args: array of const);
+begin
+  Write(Format(aFmt,Args));
 end;
 
 { TStringListEx }

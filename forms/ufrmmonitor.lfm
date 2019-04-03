@@ -1,7 +1,7 @@
 object FrmMonitor: TFrmMonitor
-  Left = 240
+  Left = 280
   Height = 623
-  Top = 36
+  Top = 121
   Width = 937
   Caption = 'Monitor'
   ClientHeight = 603

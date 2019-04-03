@@ -1,0 +1,5 @@
+*.bak
+**/backup
+exe/
+lib/
+forms/busy.lrs

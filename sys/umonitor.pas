@@ -20,7 +20,7 @@ unit uMonitor;
 
 interface
 
-uses Classes, Sysutils;
+uses Classes, Sysutils, uDerivedClasses;
 
 type
 
@@ -80,29 +80,6 @@ type
 
 implementation
 
-// This function allows reading busy files
-function LoadStringsFromFile(const FileName: string; list: TStrings): boolean;
-var
-  f: TFileStream;
-begin
-  result:=false;
-  try
-    f:=TFileStream.Create(FileName,fmShareDenyNone);
-	except
-    exit;
-	end;
-  try
-    try
-      list.LoadFromStream(f);
-  	except
-      exit;
-  	end;
-	finally
-    f.Free;
-	end;
-  result:=true;
-end;
-
 { TMonitorThread }
 
 constructor TMonitorThread.Create(const aStaFileName, aCvgFileName: string);
@@ -143,6 +120,8 @@ var
   n: string;
 begin
 for i:=0 to 6 do begin
+  if Terminated then
+    Abort;
   s:=TrimLeft(s);
   p:=Pos(' ',s);
   if p=0 then
@@ -154,7 +133,7 @@ for i:=0 to 6 do begin
     //col 2 (ATT) can be like as '1U'
     FillChar(sta,SizeOf(sta),0);
     for p:=0 to 2 do
-       sta[p]:=1;
+      sta[p]:=1;
     Exit;
   end;
   Delete(s,1,p);
@@ -167,6 +146,8 @@ var
   n: string;
 begin
   for i:=0 to 8 do begin
+    if Terminated then
+      Abort;
     s:=TrimLeft(s);
     p:=Pos(' ',s);
     if p=0 then
@@ -184,90 +165,72 @@ end;
 
 procedure TMonitorThread.Execute;
 var
-  StaList: TStringList;
-  CvgList: TStringList;
+  StaList: TStringListEx;
+  CvgList: TStringListEx;
   sta: array of TStaItem;
   cvg: TCvgItem;
   kProgress: double;
   i,j,p,cnt,iters,step,incr,imax: integer;
-  str: TFileStream;
 begin
-  StaList:=TStringList.Create;
+  StaList:=TStringListEx.Create;
   try
-    {$IFDEF WINDOWS}
-    if not LoadStringsFromFile(fStaFileName,StaList) then begin
-      Terminate;
-      Exit;
-		end;
-		{$ELSE}
     try
-    StaList.LoadFromFile(fStaFileName);
+      StaList.LoadFromFile(fStaFileName);
     except
-      Terminate;
       Exit;
     end;
-    {$ENDIF}
     cnt:=StaList.Count-2;
     if cnt<1 then
       exit;
     SetLength(sta,cnt);
     for i:=2 to StaList.Count-1 do
-       ParseSta(StaList[i],sta[i-2]);
+      ParseSta(StaList[i],sta[i-2]);
   finally
     StaList.Free;
   end;
 
-  CvgList:=TStringList.Create;
+  CvgList:=TStringListEx.Create;
   try
-    {$IFDEF WINDOWS}
-    if not LoadStringsFromFile(fCvgFileName,CvgList) then begin
-      Terminate;
-      Exit;
-	  end;
-	  {$ELSE}
     try
-    CvgList.LoadFromFile(fCvgFileName);
+      CvgList.LoadFromFile(fCvgFileName);
     except
-      Terminate;
       Exit;
     end;
-    {$ENDIF}
-  iters:=CvgList.Count-4;
-  if iters<1 then
-    exit;
-  SetLength(fDt,iters);
-  SetLength(fDisp,iters);
-  SetLength(fForce,iters);
-  SetLength(fStepTime,iters);
-  SetLength(fCont,iters);
-  imax:=0;  p:=0;
-  if iters>0 then
-     kProgress:=100/iters;
-  for i:=0 to iters-1 do begin
-    ParseCvg(CvgList[i+4],cvg);
-    if cvg[5]=0 then
-      cvg[5]:=0.5;
-    step:=Trunc(cvg[0]);
-    incr:=Trunc(cvg[1]);
-    fDisp[i]:=cvg[6];
-    fForce[i]:=cvg[5];
-    fCont[i]:=cvg[4];
-    for j:=0 to cnt-1 do
-      if (step=Trunc(sta[j,0])) and (incr=Trunc(sta[j,1])) then begin
-         fDt[i]:=sta[j,6];
-         fStepTime[i]:=sta[j,5];
-         imax:=i;
-         if Terminated then
-           break;
+
+    iters:=CvgList.Count-4;
+    if iters<1 then
+      exit;
+    SetLength(fDt,iters);
+    SetLength(fDisp,iters);
+    SetLength(fForce,iters);
+    SetLength(fStepTime,iters);
+    SetLength(fCont,iters);
+    imax:=0;  p:=0;
+    if iters>0 then
+      kProgress:=100/iters;
+    for i:=0 to iters-1 do begin
+      ParseCvg(CvgList[i+4],cvg);
+      if cvg[5]=0 then
+        cvg[5]:=0.5;
+      step:=Trunc(cvg[0]);
+      incr:=Trunc(cvg[1]);
+      fDisp[i]:=cvg[6];
+      fForce[i]:=cvg[5];
+      fCont[i]:=cvg[4];
+      for j:=0 to cnt-1 do
+        if (step=Trunc(sta[j,0])) and (incr=Trunc(sta[j,1])) then begin
+          fDt[i]:=sta[j,6];
+          fStepTime[i]:=sta[j,5];
+          imax:=i;
+          if Terminated then
+            Abort;
+        end;
+      p:=Trunc(kProgress*(i+1));
+      if p>fPercentDone then begin
+        fPercentDone:=p;
+        Synchronize(@DoProgress);
       end;
-    if Terminated then
-       break;
-    p:=Trunc(kProgress*(i+1));
-    if p>fPercentDone then begin
-       fPercentDone:=p;
-       Synchronize(@DoProgress);
     end;
-  end;
   finally
     CvgList.Free;
   end;

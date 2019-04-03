@@ -25,6 +25,7 @@ interface
 uses
   Classes, SysUtils;
 
+  function ZFileSize(const FileName: string): Int64;
   function ZFileExists(const FileName: string): Boolean;
   function ZFileReadOnly(const FileName: string): Boolean;
   function ZFileAccess(const FileName: string; Mode: Word): Boolean;
@@ -182,6 +183,34 @@ begin
 end;
 {$ENDIF}
 
+
+function ZFileSize(const FileName: string): Int64;
+{$IFDEF MSWINDOWS}
+var
+  Handle: System.THandle;
+  FindData: TWin32FindDataW;
+begin
+  Result:=0;
+  Handle:=FindFirstFileW(PWideChar(UTF16LongName(FileName)),FindData);
+  if Handle<>INVALID_HANDLE_VALUE then begin
+      Windows.FindClose(Handle);
+      if (FindData.dwFileAttributes and FILE_ATTRIBUTE_DIRECTORY)=0 then
+      begin
+        Int64Rec(Result).Lo:=FindData.nFileSizeLow;
+        Int64Rec(Result).Hi:=FindData.nFileSizeHigh;
+      end;
+    end;
+end;
+{$ELSE}
+var
+  Info: BaseUnix.Stat;
+begin
+  Result:=0;
+  if fpStat(UTF8ToSys(FileName),Info)>=0 then
+    Result:=Info.st_size;
+end;
+{$ENDIF}
+
 function ZFileExists(const FileName: string): Boolean;
 {$IFDEF MSWINDOWS}
 var
@@ -203,6 +232,7 @@ begin
     Result:=False;
 end;
 {$ENDIF}
+
 
 function ZFileCreate(const FileName: string; Mode, Rights: LongWord): THandle;
 {$IF DEFINED(MSWINDOWS)}

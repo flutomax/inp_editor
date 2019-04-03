@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="34">
+      <Unit0>
+        <Filename Value="InpEditor.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="forms\ufrmmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmMain"/>
+        <IsVisibleTab Value="True"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="edit\uinpeditor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uInpEditor"/>
+        <UsageCount Value="20"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="sys\uconsts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uConsts"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="forms\ufrmgotoline.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmGoToLine"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmGoToLine"/>
+        <UsageCount Value="20"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="sys\uconfig.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uConfig"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="forms\ufrmoptions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmOptions"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmOptions"/>
+        <UsageCount Value="20"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="forms\ufrmtextsearch.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmTextSearch"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmTextSearch"/>
+        <UsageCount Value="20"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="forms\ufrmtextreplace.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmTextReplace"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmTextReplace"/>
+        <UsageCount Value="20"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="edit\ueditormisc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uEditorMisc"/>
+        <UsageCount Value="20"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="edit\synexportrtf.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SynExportRTF"/>
+        <UsageCount Value="20"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="forms\ufrmexporttext.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmExportText"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmExportText"/>
+        <UsageCount Value="20"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="forms\ufrmabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmAbout"/>
+        <UsageCount Value="20"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="sys\usysinfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uSysInfo"/>
+        <UsageCount Value="20"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="sys\uanimatebackgound.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uAnimateBackgound"/>
+        <UsageCount Value="20"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="forms\ufrmeditorkeystrokes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmEditorKeystrokes"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmEditorKeystrokes"/>
+        <UsageCount Value="20"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="edit\usyneditoroptions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uSynEditorOptions"/>
+        <UsageCount Value="20"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="sys\uderivedclasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDerivedClasses"/>
+        <UsageCount Value="20"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="edit\uhighliter.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uHighliter"/>
+        <UsageCount Value="20"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="sys\ufileutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uFileUtils"/>
+        <UsageCount Value="20"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="sys\umrulist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uMRUList"/>
+        <UsageCount Value="20"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="sys\uencodingfunc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uEncodingFunc"/>
+        <UsageCount Value="20"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="forms\ufrmnodestransform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmNodesTransform"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmNodesTransform"/>
+        <UsageCount Value="20"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="forms\ufrmmodelviewer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmModelViewer"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmModelViewer"/>
+        <UsageCount Value="20"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="sys\ucalculix.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uCalculix"/>
+        <UsageCount Value="20"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="forms\ufrmviewgroup.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmViewGroup"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmViewGroup"/>
+        <UsageCount Value="20"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="math\uinptranslator.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uInpTranslator"/>
+        <UsageCount Value="20"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="forms\ufrmgroupselector.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmGroupSelector"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmGroupSelector"/>
+        <UsageCount Value="20"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="math\uaddbcfunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uAddBCFunctions"/>
+        <UsageCount Value="20"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="sys\udialogs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uDialogs"/>
+        <UsageCount Value="20"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="math\uunicalconv.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uUnicalConv"/>
+        <UsageCount Value="20"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="forms\ufrmfileimport.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmPopupNotifier"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="ufrmFileImport"/>
+        <UsageCount Value="20"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="sys\ucursors.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uCursors"/>
+        <UsageCount Value="20"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="forms\ufrmmonitor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmMonitor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFrmMonitor"/>
+        <UsageCount Value="20"/>
+      </Unit33>
+    </Units>
+    <JumpHistory HistoryIndex="-1"/>
+  </ProjectSession>
+</CONFIG>

@@ -161,7 +161,7 @@ implementation
 {$R *.lfm}
 
 uses
-  LazFileUtils, Math, TAGeometry, uFrmMain, uCursors;
+  LazFileUtils, Math, TAGeometry, uFrmMain, uCursors, uFileUtils;
 
 const
 
@@ -192,8 +192,6 @@ begin
   Chart1.Legend.Transparency:=50;
   Chart2.Legend.Transparency:=50;
   {$ENDIF}
-
-
   fPbRight:=Width-pbProgress.Left;
   fThread:=nil;
   cmdShowLegend.Checked:=FrmMain.Config.MonitorShowLegend;
@@ -205,8 +203,23 @@ end;
 
 procedure TFrmMonitor.FormDestroy(Sender: TObject);
 begin
+  while Assigned(fThread) do begin
+    fThread.Terminate;
+    Sleep(0);
+    Application.ProcessMessages;
+  end;
   FrmMain.Config.MonitorShowLegend:=cmdShowLegend.Checked;
   FrmMain.Config.MonitorScanTime:=fScanTime;
+end;
+
+procedure TFrmMonitor.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  trScan.Enabled:=false;
+end;
+
+procedure TFrmMonitor.cmdFileExitExecute(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TFrmMonitor.FormResize(Sender: TObject);
@@ -238,25 +251,10 @@ begin
   c.TextOut(x,y,s);
 end;
 
-
-procedure TFrmMonitor.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  trScan.Enabled:=false;
-  if Assigned(fThread) then begin
-     fThread.Terminate;
-     fThread.WaitFor;
-     fThread:=nil;
-  end;
-end;
-
-procedure TFrmMonitor.cmdFileExitExecute(Sender: TObject);
-begin
-  Close;
-end;
-
 procedure TFrmMonitor.LoadJob(Data: PtrInt);
 begin
-  Chart1.Title.Text.Text:=Format('sta and cvg data of "%s"',[ExtractFileNameOnly(fJobName)]);
+  Chart1.Title.Text.Text:=Format('sta and cvg data of "%s"',
+    [ExtractFileNameOnly(fJobName)]);
   fStaFileName:=fJobName+'.sta';
   fCvgFileName:=fJobName+'.cvg';
   fStaFileSize:=0;
@@ -265,7 +263,7 @@ begin
   trScan.Enabled:=true;
   sbMain.InvalidatePanel(0,[ppText]);
   cmdZoomOutAll.Execute;
-  //trScanTimer(nil); // <- форсированно построить графики
+  trScanTimer(nil); // <- форсированно построить графики
 end;
 
 procedure TFrmMonitor.cmdMonitorActiveExecute(Sender: TObject);
@@ -354,7 +352,6 @@ begin
   srStepTime.AddArray(StepTime);
   srCont.AddArray(Cont);
   fIteration:=Length(Cont);
-  Sender.Terminate;
 end;
 
 procedure TFrmMonitor.ThreadTerminate(Sender: TObject);
@@ -373,12 +370,12 @@ begin
   if Assigned(fThread) then
      Exit;
   // What we do if there are no files
-  if (not FileExists(fStaFileName)) or (not FileExists(fCvgFileName)) then
+  if (not ZFileExists(fStaFileName)) or (not ZFileExists(fCvgFileName)) then
      Exit;
   // If the file size did not change, therefore it does not make a sense
   // to launch a monitor thread
-  f1:=FileSize(fStaFileName);
-  f2:=FileSize(fCvgFileName);
+  f1:=ZFileSize(fStaFileName);
+  f2:=ZFileSize(fCvgFileName);
   if (f1=fStaFileSize) and (f2=fCvgFileSize) then
      Exit;
   fStaFileSize:=f1;
@@ -472,9 +469,6 @@ procedure TFrmMonitor.PostChartCmd(Data: PtrInt);
 begin
   ceLink.Enabled:=true;
 end;
-
-
-
 
 end.
 
