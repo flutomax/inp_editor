@@ -337,9 +337,11 @@ end;
 procedure TConfig.LoadFormLayout(aForm: TForm; const aSection: string);
 var
   ws: TWindowState;
+  v: Boolean;
 begin
   with aForm do begin
-    if not (fsModal in FormState) then
+    v:=Visible;
+    if v then
       Visible:=false;
     ws:=TWindowState(fIni.ReadInteger(aSection,'WindowState',Ord(WindowState)));
     if ws=wsMaximized then begin
@@ -357,7 +359,7 @@ begin
         fIni.ReadInteger(aSection,'NormalTop',Top),
         fIni.ReadInteger(aSection,'NormalWidth',Width),
         fIni.ReadInteger(aSection,'NormalHeight',Height));
-    if not (fsModal in FormState) then
+    if v then
        Visible:=true;
     end;
   end;

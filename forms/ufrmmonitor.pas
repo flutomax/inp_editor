@@ -211,10 +211,10 @@ begin
 ;   fConfig:=FrmMain.Config;
   {$ENDIF}
   cmdShowLegend.Checked:=fConfig.MonitorShowLegend;
+  cmdShowLegendExecute(nil);
   fScanTime:=fConfig.MonitorScanTime;
   Chart2.Legend.Visible:=Chart1.Legend.Visible;
   fConfig.LoadFormLayout(self,'Monitor');
-  cmdShowLegendExecute(nil);
   cmdScanTime1Execute(TAction(FindComponent(Format('cmdScanTime%d',[fScanTime]))));
 end;
 
@@ -274,10 +274,11 @@ begin
   fStaFileSize:=0;
   fCvgFileSize:=0;
   fIteration:=0;
-  trScan.Enabled:=true;
+
   sbMain.InvalidatePanel(0,[ppText]);
   cmdZoomOutAll.Execute;
-  trScanTimer(nil); // <- форсированно построить графики
+  trScan.Enabled:=true;
+  trScanTimer(nil); // for force plot
 end;
 
 procedure TFrmMonitor.cmdMonitorActiveExecute(Sender: TObject);

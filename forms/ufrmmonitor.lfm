@@ -12,7 +12,7 @@ object FrmMonitor: TFrmMonitor
   OnResize = FormResize
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.6.0.4'
+  LCLVersion = '1.8.4.0'
   object ToolBar1: TToolBar
     Left = 0
     Height = 580
@@ -56,7 +56,6 @@ object FrmMonitor: TFrmMonitor
     end
     object tbSep1: TToolButton
       Left = 1
-      Height = 6
       Top = 102
       Width = 27
       Caption = 'tbSep1'
@@ -64,7 +63,7 @@ object FrmMonitor: TFrmMonitor
     end
     object ToolButton6: TToolButton
       Left = 1
-      Top = 108
+      Top = 110
       Action = cmdZoomOutAll
     end
   end
@@ -158,6 +157,7 @@ object FrmMonitor: TFrmMonitor
             LabelSize = 60
             Marks.LabelFont.Pitch = fpVariable
             Marks.LabelFont.Quality = fqDraft
+            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <            
               item
@@ -165,8 +165,10 @@ object FrmMonitor: TFrmMonitor
                 Intervals.Count = 9
                 Intervals.MinLength = 5
                 Intervals.Options = [aipUseCount, aipUseMaxLength, aipUseMinLength, aipUseNiceSteps]
+                Marks.LabelBrush.Style = bsClear
               end>
             Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
             Transformations = catLog1
             OnMarkToText = Chart1AxisList0MarkToText
           end        
@@ -175,15 +177,19 @@ object FrmMonitor: TFrmMonitor
             Margin = 4
             Marks.OnGetShape = BottomAxisGetShape
             Marks.Shape = clsUserDefined
+            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.Distance = 0
+            Title.LabelBrush.Style = bsClear
           end        
           item
             Alignment = calRight
             LabelSize = 60
             Marks.Visible = False
+            Marks.LabelBrush.Style = bsClear
             Minors = <>
+            Title.LabelBrush.Style = bsClear
           end>
         BackColor = clWhite
         Extent.UseXMin = True
@@ -276,9 +282,11 @@ object FrmMonitor: TFrmMonitor
           item
             Intervals.Options = [aipGraphCoords, aipUseCount, aipUseMinLength, aipUseNiceSteps]
             LabelSize = 60
+            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
             Transformations = LeftAxisTransformations
             OnMarkToText = Chart2AxisList0MarkToText
           end        
@@ -287,20 +295,24 @@ object FrmMonitor: TFrmMonitor
             Margin = 5
             Marks.OnGetShape = BottomAxisGetShape
             Marks.Shape = clsUserDefined
+            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Range.UseMin = True
             Title.Visible = True
             Title.Caption = 'iteration'
+            Title.LabelBrush.Style = bsClear
           end        
           item
             Grid.Visible = False
             Intervals.Options = [aipGraphCoords, aipUseCount, aipUseMinLength, aipUseNiceSteps]
             Alignment = calRight
             LabelSize = 60
+            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.LabelFont.Orientation = 900
+            Title.LabelBrush.Style = bsClear
             Transformations = RightAxisTransformations
             OnMarkToText = Chart1AxisList0MarkToText
           end>
@@ -482,15 +494,18 @@ object FrmMonitor: TFrmMonitor
     object tlZoomIn: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
+      Brush.Style = bsClear
     end
     object tlZoomHor: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
+      Brush.Style = bsClear
       RatioLimit = zrlFixedY
     end
     object tlZoomVer: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
+      Brush.Style = bsClear
       RatioLimit = zrlFixedX
     end
   end
