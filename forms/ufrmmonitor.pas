@@ -19,13 +19,14 @@
 unit uFrmMonitor;
 
 {$mode objfpc}{$H+}
+{$I general.inc}
 
 interface
 
 uses
   Classes, SysUtils, Types, LCLType, FileUtil, FileCtrl, TAGraph, TASeries,
   TATransformations, Forms, Controls, Graphics, Dialogs, Menus, ActnList,
-  StdCtrls, ComCtrls, ExtCtrls, uMonitor, TAChartAxisUtils, TASources,
+  StdCtrls, ComCtrls, ExtCtrls, uMonitor, uConfig, TAChartAxisUtils, TASources,
   TAFuncSeries, TALegend, TADrawUtils, TAChartUtils, TATools, TAChartExtentLink,
   TANavigation, TATextElements;
 
@@ -48,6 +49,7 @@ type
     cmdScanTime2: TAction;
     cmdScanTime1: TAction;
     IlStatus: TImageList;
+    ilMonitor: TImageList;
     LeftAxisAutoScaleTransform: TAutoScaleAxisTransform;
     LeftAxisTransformations: TChartAxisTransformations;
     pbLeftAxis: TPaintBox;
@@ -123,7 +125,6 @@ type
     procedure cmdZoomOutAllExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pbLeftAxisPaint(Sender: TObject);
@@ -131,7 +132,6 @@ type
       const Rect: TRect);
     procedure trScanTimer(Sender: TObject);
   private
-    fIniPath: string;
     fJobName: string;
     fStaFileName: string;
     fCvgFileName: string;
@@ -141,6 +141,7 @@ type
     fIteration: Integer;
     fPbRight: Integer;
     fThread: TMonitorThread;
+    fConfig: TConfig;
     procedure ThreadProgress(Sender: TMonitorThread; PercentDone: Byte);
     procedure ThreadDone(Sender: TMonitorThread; const Dt, Disp, Force,
               StepTime, Cont: TDoubleArr);
@@ -161,7 +162,9 @@ implementation
 {$R *.lfm}
 
 uses
-  LazFileUtils, Math, TAGeometry, uFrmMain, uCursors, uFileUtils;
+  LazFileUtils, Math, TAGeometry,
+  {$IFNDEF MONITOR_DETACH}uFrmMain,{$ENDIF}
+  uCursors, uConsts, uFileUtils;
 
 const
 
@@ -194,34 +197,38 @@ begin
   {$ENDIF}
   fPbRight:=Width-pbProgress.Left;
   fThread:=nil;
-  cmdShowLegend.Checked:=FrmMain.Config.MonitorShowLegend;
-  fScanTime:=FrmMain.Config.MonitorScanTime;
+  {$IFDEF MONITOR_DETACH}
+    fConfig:=TConfig.Create(self);
+    fConfig.MainForm:=nil;
+    fJobName:=AnsiDequotedStr(ParamStr(2),'"');
+    if not ZFileExists(fJobName) then begin
+      MessageDlg(Format(sFileNotFound,[fJobName]),mtError,[mbOK],0);
+      Application.Terminate;
+    end;
+    fJobName:=ExtractFileNameWithoutExt(fJobName);
+    Application.Title:='Monitor';
+  {$ELSE}
+;   fConfig:=FrmMain.Config;
+  {$ENDIF}
+  cmdShowLegend.Checked:=fConfig.MonitorShowLegend;
+  fScanTime:=fConfig.MonitorScanTime;
   Chart2.Legend.Visible:=Chart1.Legend.Visible;
+  fConfig.LoadFormLayout(self,'Monitor');
   cmdShowLegendExecute(nil);
   cmdScanTime1Execute(TAction(FindComponent(Format('cmdScanTime%d',[fScanTime]))));
-end;
-
-procedure TFrmMonitor.FormDestroy(Sender: TObject);
-begin
-  while Assigned(fThread) do begin
-    fThread.Terminate;
-    Sleep(0);
-    Application.ProcessMessages;
-  end;
-
 end;
 
 procedure TFrmMonitor.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   trScan.Enabled:=false;
-  FrmMain.Config.MonitorShowLegend:=cmdShowLegend.Checked;
-  FrmMain.Config.MonitorScanTime:=fScanTime;
-  FrmMain.Config.SaveFormLayout(self,'Monitor');
-end;
-
-procedure TFrmMonitor.cmdFileExitExecute(Sender: TObject);
-begin
-  Close;
+  while Assigned(fThread) do begin
+    fThread.Terminate;
+    Sleep(0);
+    Application.ProcessMessages;
+  end;
+  fConfig.MonitorShowLegend:=cmdShowLegend.Checked;
+  fConfig.MonitorScanTime:=fScanTime;
+  fConfig.SaveFormLayout(self,'Monitor');
 end;
 
 procedure TFrmMonitor.FormResize(Sender: TObject);
@@ -232,10 +239,14 @@ end;
 
 procedure TFrmMonitor.FormShow(Sender: TObject);
 begin
-  FrmMain.Config.LoadFormLayout(self,'Monitor');
   tbSep1.Height:=8; // bugfix of vertical toolbar
   cmdHand.Execute;
   Application.QueueAsyncCall(@LoadJob,0);
+end;
+
+procedure TFrmMonitor.cmdFileExitExecute(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TFrmMonitor.pbLeftAxisPaint(Sender: TObject);

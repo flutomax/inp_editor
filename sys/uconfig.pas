@@ -136,7 +136,7 @@ end;
 constructor TConfig.Create(aOwner: TComponent);
 begin
   inherited Create(aOwner);
-  fIniPath:=ChangeFileExt(Application.ExeName,'.fIni');
+  fIniPath:=ChangeFileExt(Application.ExeName,'.ini');
   fIni:=TIniFileEx.Create(fIniPath);
   fStoreFormPlacement:=true;
   fShowHints:=true;
@@ -185,8 +185,10 @@ end;
 
 procedure TConfig.MaximizeMainForm(Data: PtrInt);
 begin
-  fMainForm.WindowState:=wsMaximized;
-  fMainForm.Visible:=true;
+  if Assigned(fMainForm) then begin
+    fMainForm.WindowState:=wsMaximized;
+    fMainForm.Visible:=true;
+  end;
 end;
 
 procedure TConfig.ReformStringList(aList: TStrings; const aText: string);
@@ -261,7 +263,7 @@ begin
   fFileAssociation:=fIni.ReadBool(aSection,'FileAssociation',fFileAssociation);
   fExportAsFile:=fIni.ReadBool(aSection,'ExportAsFile',fExportAsFile);
   fStatusbarVisible:=fIni.ReadBool(aSection,'StatusbarVisible',fStatusbarVisible);
-  if fStoreFormPlacement then
+  if fStoreFormPlacement and Assigned(fMainForm) then
     LoadFormLayout(fMainForm, aSection);
   UpdateConfig;
 end;
@@ -291,7 +293,7 @@ begin
   fIni.WriteBool(aSection,'FileAssociation',fFileAssociation);
   fIni.WriteBool(aSection,'ExportAsFile',fExportAsFile);
   fIni.WriteBool(aSection,'StatusbarVisible',fStatusbarVisible);
-  if fStoreFormPlacement then
+  if fStoreFormPlacement and Assigned(fMainForm) then
     SaveFormLayout(fMainForm,aSection);
 end;
 

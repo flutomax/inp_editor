@@ -9,12 +9,10 @@ object FrmMonitor: TFrmMonitor
   Menu = MainMenu1
   OnClose = FormClose
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnResize = FormResize
   OnShow = FormShow
-  Position = poScreenCenter
   ShowHint = True
-  LCLVersion = '1.8.4.0'
+  LCLVersion = '1.6.0.4'
   object ToolBar1: TToolBar
     Left = 0
     Height = 580
@@ -58,6 +56,7 @@ object FrmMonitor: TFrmMonitor
     end
     object tbSep1: TToolButton
       Left = 1
+      Height = 6
       Top = 102
       Width = 27
       Caption = 'tbSep1'
@@ -65,7 +64,7 @@ object FrmMonitor: TFrmMonitor
     end
     object ToolButton6: TToolButton
       Left = 1
-      Top = 110
+      Top = 108
       Action = cmdZoomOutAll
     end
   end
@@ -159,7 +158,6 @@ object FrmMonitor: TFrmMonitor
             LabelSize = 60
             Marks.LabelFont.Pitch = fpVariable
             Marks.LabelFont.Quality = fqDraft
-            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <            
               item
@@ -167,10 +165,8 @@ object FrmMonitor: TFrmMonitor
                 Intervals.Count = 9
                 Intervals.MinLength = 5
                 Intervals.Options = [aipUseCount, aipUseMaxLength, aipUseMinLength, aipUseNiceSteps]
-                Marks.LabelBrush.Style = bsClear
               end>
             Title.LabelFont.Orientation = 900
-            Title.LabelBrush.Style = bsClear
             Transformations = catLog1
             OnMarkToText = Chart1AxisList0MarkToText
           end        
@@ -179,19 +175,15 @@ object FrmMonitor: TFrmMonitor
             Margin = 4
             Marks.OnGetShape = BottomAxisGetShape
             Marks.Shape = clsUserDefined
-            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.Distance = 0
-            Title.LabelBrush.Style = bsClear
           end        
           item
             Alignment = calRight
             LabelSize = 60
             Marks.Visible = False
-            Marks.LabelBrush.Style = bsClear
             Minors = <>
-            Title.LabelBrush.Style = bsClear
           end>
         BackColor = clWhite
         Extent.UseXMin = True
@@ -284,11 +276,9 @@ object FrmMonitor: TFrmMonitor
           item
             Intervals.Options = [aipGraphCoords, aipUseCount, aipUseMinLength, aipUseNiceSteps]
             LabelSize = 60
-            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.LabelFont.Orientation = 900
-            Title.LabelBrush.Style = bsClear
             Transformations = LeftAxisTransformations
             OnMarkToText = Chart2AxisList0MarkToText
           end        
@@ -297,24 +287,20 @@ object FrmMonitor: TFrmMonitor
             Margin = 5
             Marks.OnGetShape = BottomAxisGetShape
             Marks.Shape = clsUserDefined
-            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Range.UseMin = True
             Title.Visible = True
             Title.Caption = 'iteration'
-            Title.LabelBrush.Style = bsClear
           end        
           item
             Grid.Visible = False
             Intervals.Options = [aipGraphCoords, aipUseCount, aipUseMinLength, aipUseNiceSteps]
             Alignment = calRight
             LabelSize = 60
-            Marks.LabelBrush.Style = bsClear
             Marks.OverlapPolicy = opHideNeighbour
             Minors = <>
             Title.LabelFont.Orientation = 900
-            Title.LabelBrush.Style = bsClear
             Transformations = RightAxisTransformations
             OnMarkToText = Chart1AxisList0MarkToText
           end>
@@ -350,7 +336,7 @@ object FrmMonitor: TFrmMonitor
     end
   end
   object MainMenu1: TMainMenu
-    Images = FrmMain.IlMain
+    Images = ilMonitor
     left = 128
     top = 176
     object MenuItem1: TMenuItem
@@ -405,14 +391,14 @@ object FrmMonitor: TFrmMonitor
     end
   end
   object AlMain: TActionList
-    Images = FrmMain.IlMain
+    Images = ilMonitor
     left = 160
     top = 176
     object cmdFileExit: TAction
       Category = 'File'
       Caption = 'Exit'
       Hint = 'Exit'
-      ImageIndex = 9
+      ImageIndex = 0
       OnExecute = cmdFileExitExecute
       ShortCut = 32883
     end
@@ -496,18 +482,15 @@ object FrmMonitor: TFrmMonitor
     object tlZoomIn: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
-      Brush.Style = bsClear
     end
     object tlZoomHor: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
-      Brush.Style = bsClear
       RatioLimit = zrlFixedY
     end
     object tlZoomVer: TZoomDragTool
       Enabled = False
       Shift = [ssLeft]
-      Brush.Style = bsClear
       RatioLimit = zrlFixedX
     end
   end
@@ -1458,5 +1441,44 @@ object FrmMonitor: TFrmMonitor
     top = 488
     object LeftAxisAutoScaleTransform: TAutoScaleAxisTransform
     end
+  end
+  object ilMonitor: TImageList
+    left = 192
+    top = 112
+    Bitmap = {
+      4C69010000001000000010000000000000000808A5000808AD001010AD001010
+      AD001010AD001010AD001010AD001010AD001010AD001010AD001010AD001010
+      AD000808AD000808A5000000000008089C006B6BEFBB7373DEFF6B6BDEFF6B6B
+      DEFF6B6BDEFF6B6BDEFF6B6BDEFF6B6BDEFF6B6BDEFF6B6BDEFF6B6BD6FF6B6B
+      D6FF7373DEFF6B6BE6BB0808A5000000A5005A5ACEFF9C9CD6FF9C9CD6FF9C9C
+      D6FF9C9CD6FF9C9CD6FF9C9CD6FF9C9CD6FF9C9CD6FF9C9CD6FF9C9CD6FF9C9C
+      D6FF9C9CD6FF6363C5FF0000B5000000A5004242C5FF8C8CCEFF8C8CC5FFADAD
+      C5FFA5A5C5FF8C8CCEFFA5A5C5FFA5A5C5FF8C8CCEFFA5A5C5FFADADC5FF8C8C
+      C5FF8C8CCEFF5252BDFF0000AD000000A5003A3ABDFF7B7BC5FFADADCEFFE6E6
+      E6FFD6D6E6FF7B7BC5FFE6E6EFFFE6E6EFFF7B7BC5FFD6D6E6FFE6E6E6FFADAD
+      C5FF7B7BC5FF5252BDFF0000B5000000A5003131B5FF7373BDFFE6E6E6FFEFEF
+      EFFF8484CEFF6B6BBDFFE6E6EFFFE6E6EFFF6B6BBDFF848CCEFFEFEFEFFFDEDE
+      DEFF7373BDFF4A4AB5FF0000B5000000A5112929B5FF8484C5FFEFEFEFFFCECE
+      E6FF5A63BDFF5A63C5FFE6E6E6FFDEE6E6FF5A63C5FF5A63BDFFCECEE6FFE6E6
+      E6FF8484C5FF4A4AB5FF0000AD1100009C112121A5FF8484C5FFEFEFEFFFB5B5
+      DEFF4A5AC5FF4A5ACEFFDEDEE6FFDEDEE6FF4A63CEFF5263C5FFB5B5DEFFEFEF
+      EFFF7B7BBDFF080894FF0000AD110000941108089CFF4A4AADFFEFEFEFFFC5C5
+      DEFF1031BDFF103AC5FFC5CEDEFFC5CEDEFF0831C5FF0021B5FFBDC5DEFFEFEF
+      EFFF4242ADFF08088CFF0000A5110000941108089CFF08109CFFE6E6EFFFEFEF
+      EFFF4A6BC5FF0031D6FF104ADEFF104ADEFF0031D6FF4A63C5FFEFEFEFFFDEDE
+      EFFF08109CFF08108CFF0000A5110000941108109CFF00089CFF6B73CEFFEFEF
+      EFFFE6E6E6FF738CC5FF295ACEFF295ACEFF738CC5FFDEDEDEFFEFEFEFFF6B73
+      CEFF00089CFF08108CFF0000A5110000941108109CFF00089CFF0019ADFF7B94
+      DEFFEFEFEFFFE6E6E6FFD6D6D6FFD6D6D6FFDEDEDEFFE6E6E6FF7B8CDEFF0019
+      ADFF00089CFF08198CFF0000A5110000941110199CFF00089CFF0010ADFF0021
+      BDFF3152D6FF8CA5E6FFB5C5E6FFB5C5E6FF8CA5E6FF3152D6FF0021BDFF0010
+      ADFF00089CFF101994FF0000A5110000941110219CFF000094FF0010A5FF0019
+      B5FF0029C5FF0031D6FF003ADEFF003ADEFF0031D6FF0029C5FF0019B5FF0010
+      A5FF000094FF102194FF0000A51100008C002129ADBB102194FF10219CFF1029
+      9CFF1029A5FF1029A5FF1031A5FF1031A5FF1029A5FF10299CFF10299CFF1021
+      94FF102194FF10199CBB000094000000000000008C0000009C11000094110000
+      9411000094110000941100009411000094110000941100009411000094110000
+      941100009C1100008C0000000000
+    }
   end
 end

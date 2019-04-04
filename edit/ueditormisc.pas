@@ -114,7 +114,7 @@ end;
 procedure ShowFileLocation(const s: string);
 begin
   {$IfDef Windows}
-  with FrmMain.apCalculix do begin
+  with FrmMain.apRuner do begin
     Executable:='explorer.exe';
     Parameters.Clear;
     Parameters.Add('/e,');

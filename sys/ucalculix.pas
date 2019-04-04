@@ -91,9 +91,9 @@ begin
     Exit;
   end;
   term:=FrmMain.Config.TerminalPath;
-  FrmMain.apCalculix.Executable:=term;
-  FrmMain.apCalculix.Parameters.Clear;
-  FrmMain.apCalculix.CurrentDirectory:=ExtractFileDir(aFileName);
+  FrmMain.apRuner.Executable:=term;
+  FrmMain.apRuner.Parameters.Clear;
+  FrmMain.apRuner.CurrentDirectory:=ExtractFileDir(aFileName);
 
   {$IfDef Windows}
   case aOper of
@@ -101,7 +101,7 @@ begin
     coCGXPre: path:=Format('/k ""%s" %s "%s""',[path,CGXPreFlagToStr(f),aFileName]);
     coCGXPost: path:=Format('/k ""%s" -v "%s""',[path,ChangeFileExt(aFileName,'.frd')]);
   end;
-  FrmMain.apCalculix.Parameters.Add(path);
+  FrmMain.apRuner.Parameters.Add(path);
 
   {$Else}
   case aOper of
@@ -114,24 +114,24 @@ begin
 
   if std_term then begin
     // xterm not allowed quoted arguments on cmdline
-    FrmMain.apCalculix.Parameters.Add('-hold');
-    FrmMain.apCalculix.Parameters.Add('-e');
+    FrmMain.apRuner.Parameters.Add('-hold');
+    FrmMain.apRuner.Parameters.Add('-e');
   end else begin
     // zterm allowed quoted arguments on cmdline
     aFileName:=AnsiQuotedStr(aFileName,'"');
     path:=AnsiQuotedStr(path,'"');
   end;
 
-  FrmMain.apCalculix.Parameters.Add(path);
+  FrmMain.apRuner.Parameters.Add(path);
   case aOper of
-    coCGXPre: FrmMain.apCalculix.Parameters.Add(CGXPreFlagToStr(f));
-    //coCGXPost: FrmMain.apCalculix.Parameters.Add('-v');
-    coCGXPost: FrmMain.apCalculix.Parameters.Add('-r'); //work oh xterm!
+    coCGXPre: FrmMain.apRuner.Parameters.Add(CGXPreFlagToStr(f));
+    //coCGXPost: FrmMain.apRuner.Parameters.Add('-v');
+    coCGXPost: FrmMain.apRuner.Parameters.Add('-r'); //work oh xterm!
   end;
-  FrmMain.apCalculix.Parameters.Add(aFileName);
+  FrmMain.apRuner.Parameters.Add(aFileName);
   {$EndIf}
 
-  FrmMain.apCalculix.Execute;
+  FrmMain.apRuner.Execute;
 end;
 
 

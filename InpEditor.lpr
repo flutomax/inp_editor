@@ -19,13 +19,14 @@
 program InpEditor;
 
 {$mode objfpc}{$H+}
-
+{$I general.inc}
 
 uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
+  SysUtils,
   Forms, printer4lazarus, lazcontrols, lazopenglcontext, tachartlazaruspkg,
   uFrmMain, uInpEditor, uConsts, uFrmGotoLine, uFrmOptions, uConfig,
   uFrmTextSearch, uFrmTextReplace, SynExportRTF, uEditorMisc, uSynEditorOptions,
@@ -45,7 +46,14 @@ begin
   Randomize;
   RequireDerivedFormResource:=True;
   Application.Initialize;
+  {$IFDEF MONITOR_DETACH}
+  if (ParamCount=2) and SameText(ParamStr(1),'-m') then
+    Application.CreateForm(TFrmMonitor, FrmMonitor)
+  else
+    Application.CreateForm(TFrmMain, FrmMain);
+  {$ELSE}
   Application.CreateForm(TFrmMain, FrmMain);
+  {$ENDIF}
   Application.Run;
 end.
 

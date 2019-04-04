@@ -16,9 +16,11 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
 
+{%RunCommand $MakeExe($(EdFile)) -m H:\Work\calculix\CL32-win32\hlp\examples\nl\nl-buckl\_nlb.inp}
 unit uFrmMain;
 
 {$mode objfpc}{$H+}
+{$I general.inc}
 
 interface
 
@@ -40,7 +42,7 @@ type
     cmdEditCut: TAction;
     cmdAddBCFaces: TAction;
     cmdToolsGroupView: TAction;
-    apCalculix: TAsyncProcess;
+    apRuner: TAsyncProcess;
     cmdViewTbCalculix: TAction;
     cmdCalculixPreFlagStl: TAction;
     cmdCalculixPreFlagStep: TAction;
@@ -1709,7 +1711,18 @@ end;
 procedure TFrmMain.cmdToolsMonitorExecute(Sender: TObject);
 begin
   if IsActiveEditor then
-    ShowMonitor(ActiveEditor.FileName);
+  {$IFDEF MONITOR_DETACH}
+  begin
+    apRuner.Executable:=Application.ExeName;
+    apRuner.Parameters.Clear;
+    apRuner.Parameters.Add('-m');
+    apRuner.Parameters.Add(AnsiQuotedStr(ActiveEditor.FileName,'"'));
+    apRuner.Execute;
+  end;
+  {$ELSE}
+  ShowMonitor(ActiveEditor.FileName);
+  {$ENDIF}
+
 end;
 
 procedure TFrmMain.cmdToolsGroupViewExecute(Sender: TObject);
