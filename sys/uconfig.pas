@@ -31,6 +31,8 @@ type
 
   TConfig = class(TComponent)
   private
+    fIni: TIniFileEx;
+    fIniPath: string;
     fMainForm: TForm;
     fMonitorScanTime: Integer;
     fMonitorShowLegend: Boolean;
@@ -67,11 +69,14 @@ type
   public
     constructor Create(aOwner: TComponent); override;
     destructor Destroy; override;
-    procedure LoadFromIni(Ini: TIniFileEx; const aSection: string);
-    procedure SaveToIni(Ini: TIniFileEx; const aSection: string);
-    procedure LoadCoolBar(Ini: TIniFileEx; const aSection: string; cb: TCoolBar);
-    procedure SaveCoolBar(Ini: TIniFileEx; const aSection: string; cb: TCoolBar);
+    procedure LoadFromIni(const aSection: string);
+    procedure SaveToIni(const aSection: string);
+    procedure LoadCoolBar(const aSection: string; cb: TCoolBar);
+    procedure SaveCoolBar(const aSection: string; cb: TCoolBar);
+    procedure LoadFormLayout(aForm: TForm; const aSection: string);
+    procedure SaveFormLayout(aForm: TForm; const aSection: string);
     procedure UpdateConfig;
+    property Ini: TIniFileEx read fIni;
     property ShowWarning[const aName: string]: Boolean read GetShowWarning write SetShowWarning;
   published
     property MainForm: TForm read fMainForm write fMainForm;
@@ -131,6 +136,8 @@ end;
 constructor TConfig.Create(aOwner: TComponent);
 begin
   inherited Create(aOwner);
+  fIniPath:=ChangeFileExt(Application.ExeName,'.fIni');
+  fIni:=TIniFileEx.Create(fIniPath);
   fStoreFormPlacement:=true;
   fShowHints:=true;
   fUniqueInstance:=true;
@@ -172,6 +179,7 @@ begin
   FreeAndNil(fCCXPaths);
   FreeAndNil(fCGXPaths);
   FreeAndNil(fWarnings);
+  FreeAndNil(fIni);
   inherited Destroy;
 end;
 
@@ -228,98 +236,66 @@ begin
   ReformStringList(fCGXPaths,fCGXPath);
 end;
 
-procedure TConfig.LoadFromIni(Ini: TIniFileEx; const aSection: string);
-var
-  ws: TWindowState;
+procedure TConfig.LoadFromIni(const aSection: string);
 begin
-  fTemplatesPath:=ini.ReadString(aSection,'TemplatesPath',fDefTemplatesPath);
-  ini.ReadStringList(aSection,'TemplatesPaths',fTemplatesPaths);
-  fCCXPath:=ini.ReadString(aSection,'CCXPath',fCCXPath);
-  ini.ReadStringList(aSection,'CCXPaths',fCCXPaths);
-  fCGXPath:=ini.ReadString(aSection,'CGXPath',fCGXPath);
-  ini.ReadStringList(aSection,'CGXPaths',fCGXPaths);
-  fCGXPreFlag:=ini.ReadString(aSection,'CGXPreFlag',fCGXPreFlag);
+  fTemplatesPath:=fIni.ReadString(aSection,'TemplatesPath',fDefTemplatesPath);
+  fIni.ReadStringList(aSection,'TemplatesPaths',fTemplatesPaths);
+  fCCXPath:=fIni.ReadString(aSection,'CCXPath',fCCXPath);
+  fIni.ReadStringList(aSection,'CCXPaths',fCCXPaths);
+  fCGXPath:=fIni.ReadString(aSection,'CGXPath',fCGXPath);
+  fIni.ReadStringList(aSection,'CGXPaths',fCGXPaths);
+  fCGXPreFlag:=fIni.ReadString(aSection,'CGXPreFlag',fCGXPreFlag);
   {$IfNDef Windows}
-    fTerminalPath:=ini.ReadString(aSection,'TerminalPath',fTerminalPath);
-    ini.ReadStringList(aSection,'TerminalPaths',fTerminalPaths);
+    fTerminalPath:=fIni.ReadString(aSection,'TerminalPath',fTerminalPath);
+    fIni.ReadStringList(aSection,'TerminalPaths',fTerminalPaths);
   {$EndIf}
-  fMonitorScanTime:=EnsureRange(ini.ReadInteger('Monitor','ScanInterval',3),1,5);
-  fMonitorShowLegend:=ini.ReadBool('Monitor','ShowLegend',true);
-  ini.ReadStringList(aSection,'Warnings',fWarnings);
-  fBCAutoInsert:=ini.ReadBool(aSection,'BCAutoInsert',fBCAutoInsert);
-  fBCAddComment:=ini.ReadBool(aSection,'BCAddComment',fBCAddComment);
-  fBCMakeInclude:=ini.ReadBool(aSection,'BCMakeInclude',fBCMakeInclude);
-  fShowHints:=ini.ReadBool(aSection,'ShowHints',fShowHints);
-  fStoreFormPlacement:=ini.ReadBool(aSection,'StoreFormPlacement',fStoreFormPlacement);
-  fUniqueInstance:=ini.ReadBool(aSection,'UniqueInstance',fUniqueInstance);
-  fFileAssociation:=ini.ReadBool(aSection,'FileAssociation',fFileAssociation);
-  fExportAsFile:=ini.ReadBool(aSection,'ExportAsFile',fExportAsFile);
-  fStatusbarVisible:=ini.ReadBool(aSection,'StatusbarVisible',fStatusbarVisible);
+  fMonitorScanTime:=EnsureRange(fIni.ReadInteger('Monitor','ScanInterval',3),1,5);
+  fMonitorShowLegend:=fIni.ReadBool('Monitor','ShowLegend',true);
+  fIni.ReadStringList(aSection,'Warnings',fWarnings);
+  fBCAutoInsert:=fIni.ReadBool(aSection,'BCAutoInsert',fBCAutoInsert);
+  fBCAddComment:=fIni.ReadBool(aSection,'BCAddComment',fBCAddComment);
+  fBCMakeInclude:=fIni.ReadBool(aSection,'BCMakeInclude',fBCMakeInclude);
+  fShowHints:=fIni.ReadBool(aSection,'ShowHints',fShowHints);
+  fStoreFormPlacement:=fIni.ReadBool(aSection,'StoreFormPlacement',fStoreFormPlacement);
+  fUniqueInstance:=fIni.ReadBool(aSection,'UniqueInstance',fUniqueInstance);
+  fFileAssociation:=fIni.ReadBool(aSection,'FileAssociation',fFileAssociation);
+  fExportAsFile:=fIni.ReadBool(aSection,'ExportAsFile',fExportAsFile);
+  fStatusbarVisible:=fIni.ReadBool(aSection,'StatusbarVisible',fStatusbarVisible);
   if fStoreFormPlacement then
-    with fMainForm do begin
-      Visible:=false;
-      ws:=TWindowState(ini.ReadInteger(aSection,'WindowState',Ord(WindowState)));
-      if ws=wsMaximized then begin
-        WindowState:=wsNormal;
-        BoundsRect:=Bounds(
-          ini.ReadInteger(aSection,'RestoredLeft',RestoredLeft),
-          ini.ReadInteger(aSection,'RestoredTop',RestoredTop),
-          ini.ReadInteger(aSection,'RestoredWidth',RestoredWidth),
-          ini.ReadInteger(aSection,'RestoredHeight',RestoredHeight));
-        Application.QueueAsyncCall(@MaximizeMainForm,0);
-      end else begin
-        WindowState:=wsNormal;
-        BoundsRect:=Bounds(
-          ini.ReadInteger(aSection,'NormalLeft',Left),
-          ini.ReadInteger(aSection,'NormalTop',Top),
-          ini.ReadInteger(aSection,'NormalWidth',Width),
-          ini.ReadInteger(aSection,'NormalHeight',Height));
-        Visible:=true;
-      end;
-    end;
+    LoadFormLayout(fMainForm, aSection);
   UpdateConfig;
 end;
 
-procedure TConfig.SaveToIni(Ini: TIniFileEx; const aSection: string);
+procedure TConfig.SaveToIni(const aSection: string);
 begin
-  ini.WriteString(aSection,'TemplatesPath',fTemplatesPath);
-  ini.WriteStringList(aSection,'TemplatesPaths',fTemplatesPaths);
-  ini.WriteString(aSection,'CCXPath',fCCXPath);
-  ini.WriteStringList(aSection,'CCXPaths',fCCXPaths);
-  ini.WriteString(aSection,'CGXPath',fCGXPath);
-  ini.WriteStringList(aSection,'CGXPaths',fCGXPaths);
-  ini.WriteString(aSection,'CGXPreFlag',fCGXPreFlag);
+  fIni.WriteString(aSection,'TemplatesPath',fTemplatesPath);
+  fIni.WriteStringList(aSection,'TemplatesPaths',fTemplatesPaths);
+  fIni.WriteString(aSection,'CCXPath',fCCXPath);
+  fIni.WriteStringList(aSection,'CCXPaths',fCCXPaths);
+  fIni.WriteString(aSection,'CGXPath',fCGXPath);
+  fIni.WriteStringList(aSection,'CGXPaths',fCGXPaths);
+  fIni.WriteString(aSection,'CGXPreFlag',fCGXPreFlag);
   {$IfNDef Windows}
-    ini.WriteString(aSection,'TerminalPath',fTerminalPath);
-    ini.WriteStringList(aSection,'TerminalPaths',fTerminalPaths);
+    fIni.WriteString(aSection,'TerminalPath',fTerminalPath);
+    fIni.WriteStringList(aSection,'TerminalPaths',fTerminalPaths);
   {$EndIf}
-  ini.WriteInteger('Monitor','ScanInterval',fMonitorScanTime);
-  ini.WriteBool('Monitor','ShowLegend',fMonitorShowLegend);
-  ini.WriteStringList(aSection,'Warnings',fWarnings);
-  ini.WriteBool(aSection,'ShowHints',fShowHints);
-  ini.WriteBool(aSection,'BCAutoInsert',fBCAutoInsert);
-  ini.WriteBool(aSection,'BCAddComment',fBCAddComment);
-  ini.WriteBool(aSection,'BCMakeInclude',fBCMakeInclude);
-  ini.WriteBool(aSection,'StoreFormPlacement',fStoreFormPlacement);
-  ini.WriteBool(aSection,'UniqueInstance',fUniqueInstance);
-  ini.WriteBool(aSection,'FileAssociation',fFileAssociation);
-  ini.WriteBool(aSection,'ExportAsFile',fExportAsFile);
-  ini.WriteBool(aSection,'StatusbarVisible',fStatusbarVisible);
+  fIni.WriteInteger('Monitor','ScanInterval',fMonitorScanTime);
+  fIni.WriteBool('Monitor','ShowLegend',fMonitorShowLegend);
+  fIni.WriteStringList(aSection,'Warnings',fWarnings);
+  fIni.WriteBool(aSection,'ShowHints',fShowHints);
+  fIni.WriteBool(aSection,'BCAutoInsert',fBCAutoInsert);
+  fIni.WriteBool(aSection,'BCAddComment',fBCAddComment);
+  fIni.WriteBool(aSection,'BCMakeInclude',fBCMakeInclude);
+  fIni.WriteBool(aSection,'StoreFormPlacement',fStoreFormPlacement);
+  fIni.WriteBool(aSection,'UniqueInstance',fUniqueInstance);
+  fIni.WriteBool(aSection,'FileAssociation',fFileAssociation);
+  fIni.WriteBool(aSection,'ExportAsFile',fExportAsFile);
+  fIni.WriteBool(aSection,'StatusbarVisible',fStatusbarVisible);
   if fStoreFormPlacement then
-    with fMainForm do begin
-      ini.WriteInteger(aSection,'NormalLeft',Left);
-      ini.WriteInteger(aSection,'NormalTop',Top);
-      ini.WriteInteger(aSection,'NormalWidth',Width);
-      ini.WriteInteger(aSection,'NormalHeight',Height);
-      ini.WriteInteger(aSection,'RestoredLeft',RestoredLeft);
-      ini.WriteInteger(aSection,'RestoredTop',RestoredTop);
-      ini.WriteInteger(aSection,'RestoredWidth',RestoredWidth);
-      ini.WriteInteger(aSection,'RestoredHeight',RestoredHeight);
-      ini.WriteInteger(aSection,'WindowState',Ord(WindowState));
-    end;
+    SaveFormLayout(fMainForm,aSection);
 end;
 
-procedure TConfig.LoadCoolBar(Ini: TIniFileEx; const aSection: string;
+procedure TConfig.LoadCoolBar(const aSection: string;
   cb: TCoolBar);
 var
   i,j,p: integer;
@@ -327,7 +303,7 @@ begin
   cb.DisableAutoSizing;
   try
     for i:=0 to cb.Bands.Count-1 do begin
-      p:=ini.ReadInteger(aSection,Format('Band%d.Position',[i]),i);
+      p:=fIni.ReadInteger(aSection,Format('Band%d.Position',[i]),i);
       if p<>cb.Bands[i].ID then
         for j:=i+1 to cb.Bands.Count-1 do
           if cb.Bands[j].ID=p then begin
@@ -336,8 +312,8 @@ begin
           end;
     end;
     for i:=0 to cb.Bands.Count-1 do begin
-      cb.Bands[i].Break:=ini.ReadBool(aSection,Format('Band%d.Break',[i]),false);
-      cb.Bands[i].Visible:=ini.ReadBool(aSection,Format('Band%d.Visible',[i]),true);
+      cb.Bands[i].Break:=fIni.ReadBool(aSection,Format('Band%d.Break',[i]),false);
+      cb.Bands[i].Visible:=fIni.ReadBool(aSection,Format('Band%d.Visible',[i]),true);
     end;
 
   finally
@@ -345,14 +321,58 @@ begin
   end;
 end;
 
-procedure TConfig.SaveCoolBar(Ini: TIniFileEx; const aSection: string; cb: TCoolBar);
+procedure TConfig.SaveCoolBar(const aSection: string; cb: TCoolBar);
 var
   i: integer;
 begin
   for i:=0 to cb.Bands.Count-1 do begin
-    ini.WriteInteger(aSection,Format('Band%d.Position',[i]),cb.Bands[i].ID);
-    ini.WriteBool(aSection,Format('Band%d.Visible',[i]),cb.Bands[i].Visible);
-    ini.WriteBool(aSection,Format('Band%d.Break',[i]),cb.Bands[i].Break);
+    fIni.WriteInteger(aSection,Format('Band%d.Position',[i]),cb.Bands[i].ID);
+    fIni.WriteBool(aSection,Format('Band%d.Visible',[i]),cb.Bands[i].Visible);
+    fIni.WriteBool(aSection,Format('Band%d.Break',[i]),cb.Bands[i].Break);
+  end;
+end;
+
+procedure TConfig.LoadFormLayout(aForm: TForm; const aSection: string);
+var
+  ws: TWindowState;
+begin
+  with aForm do begin
+    if not (fsModal in FormState) then
+      Visible:=false;
+    ws:=TWindowState(fIni.ReadInteger(aSection,'WindowState',Ord(WindowState)));
+    if ws=wsMaximized then begin
+      WindowState:=wsNormal;
+      BoundsRect:=Bounds(
+        fIni.ReadInteger(aSection,'RestoredLeft',RestoredLeft),
+        fIni.ReadInteger(aSection,'RestoredTop',RestoredTop),
+        fIni.ReadInteger(aSection,'RestoredWidth',RestoredWidth),
+        fIni.ReadInteger(aSection,'RestoredHeight',RestoredHeight));
+      Application.QueueAsyncCall(@MaximizeMainForm,0);
+    end else begin
+      WindowState:=wsNormal;
+      BoundsRect:=Bounds(
+        fIni.ReadInteger(aSection,'NormalLeft',Left),
+        fIni.ReadInteger(aSection,'NormalTop',Top),
+        fIni.ReadInteger(aSection,'NormalWidth',Width),
+        fIni.ReadInteger(aSection,'NormalHeight',Height));
+    if not (fsModal in FormState) then
+       Visible:=true;
+    end;
+  end;
+end;
+
+procedure TConfig.SaveFormLayout(aForm: TForm; const aSection: string);
+begin
+  with aForm do begin
+    fIni.WriteInteger(aSection,'NormalLeft',Left);
+    fIni.WriteInteger(aSection,'NormalTop',Top);
+    fIni.WriteInteger(aSection,'NormalWidth',Width);
+    fIni.WriteInteger(aSection,'NormalHeight',Height);
+    fIni.WriteInteger(aSection,'RestoredLeft',RestoredLeft);
+    fIni.WriteInteger(aSection,'RestoredTop',RestoredTop);
+    fIni.WriteInteger(aSection,'RestoredWidth',RestoredWidth);
+    fIni.WriteInteger(aSection,'RestoredHeight',RestoredHeight);
+    fIni.WriteInteger(aSection,'WindowState',Ord(WindowState));
   end;
 end;
 

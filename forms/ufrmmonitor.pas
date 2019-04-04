@@ -208,13 +208,15 @@ begin
     Sleep(0);
     Application.ProcessMessages;
   end;
-  FrmMain.Config.MonitorShowLegend:=cmdShowLegend.Checked;
-  FrmMain.Config.MonitorScanTime:=fScanTime;
+
 end;
 
 procedure TFrmMonitor.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   trScan.Enabled:=false;
+  FrmMain.Config.MonitorShowLegend:=cmdShowLegend.Checked;
+  FrmMain.Config.MonitorScanTime:=fScanTime;
+  FrmMain.Config.SaveFormLayout(self,'Monitor');
 end;
 
 procedure TFrmMonitor.cmdFileExitExecute(Sender: TObject);
@@ -230,6 +232,7 @@ end;
 
 procedure TFrmMonitor.FormShow(Sender: TObject);
 begin
+  FrmMain.Config.LoadFormLayout(self,'Monitor');
   tbSep1.Height:=8; // bugfix of vertical toolbar
   cmdHand.Execute;
   Application.QueueAsyncCall(@LoadJob,0);

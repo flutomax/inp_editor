@@ -1,7 +1,7 @@
 object FrmMain: TFrmMain
-  Left = 212
+  Left = 500
   Height = 451
-  Top = 155
+  Top = 86
   Width = 873
   AllowDropFiles = True
   Caption = 'Inp Editor'

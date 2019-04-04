@@ -496,7 +496,6 @@ type
     procedure sbEditorDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
       const Rect: TRect);
   private
-    fIniPath: string;
     fMRUList: TMRUList;
     fPrint: TSynEditPrint;
     fUI: TUniqueInstance;
@@ -534,7 +533,6 @@ type
     property IsActiveEditor: Boolean read GetIsActiveEditor;
     property EditorOptions: TSynEditorOptionsStorage read fEditorOptions;
     property Config: TConfig read fConfig;
-    property IniPath: string read fIniPath;
     property MRUList: TMRUList read fMRUList;
   end;
 
@@ -558,7 +556,6 @@ uses
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 begin
-  fIniPath:=ChangeFileExt(Application.ExeName,'.ini');
   fEditorOptions:=TSynEditorOptionsStorage.Create(self);
   fConfig:=TConfig.Create(self);
   fConfig.MainForm:=self;
@@ -754,35 +751,21 @@ end;
 // Ini file
 
 procedure TFrmMain.LoadIni;
-var
-  ini: TIniFileEx;
 begin
-  ini:=TIniFileEx.Create(fIniPath);
-  try
-    fConfig.LoadFromIni(ini,'Application Options');
-    fConfig.LoadCoolBar(ini,'Toolbars',cbMain);
-    fMRUList.LoadFromIni(ini,'Recent Files');
-    fEditorOptions.LoadFromIni(ini,'Editor Options');
-    fPager.LoadHighlighterFromIni(ini,'Highlighter');
-  finally
-    ini.Free;
-  end;
+  fConfig.LoadFromIni('Application Options');
+  fConfig.LoadCoolBar('Toolbars',cbMain);
+  fMRUList.LoadFromIni(fConfig.Ini,'Recent Files');
+  fEditorOptions.LoadFromIni(fConfig.Ini,'Editor Options');
+  fPager.LoadHighlighterFromIni(fConfig.Ini,'Highlighter');
 end;
 
 procedure TFrmMain.SaveIni;
-var
-  ini: TIniFileEx;
 begin
-  ini:=TIniFileEx.Create(fIniPath);
-  try
-    fConfig.SaveToIni(ini,'Application Options');
-    fConfig.SaveCoolBar(ini,'Toolbars',cbMain);
-    fMRUList.SaveToIni(ini,'Recent Files');
-    fEditorOptions.SaveToIni(ini,'Editor Options');
-    fPager.SaveHighlighterToIni(ini,'Highlighter');
-  finally
-    ini.Free;
-  end;
+  fConfig.SaveToIni('Application Options');
+  fConfig.SaveCoolBar('Toolbars',cbMain);
+  fMRUList.SaveToIni(fConfig.Ini,'Recent Files');
+  fEditorOptions.SaveToIni(fConfig.Ini,'Editor Options');
+  fPager.SaveHighlighterToIni(fConfig.Ini,'Highlighter');
 end;
 
 // Bookmark;

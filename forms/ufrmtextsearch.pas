@@ -118,27 +118,13 @@ begin
 end;
 
 procedure TFrmTextSearch.LoadIni;
-var
-  ini: TIniFileEx;
 begin
-  ini:=TIniFileEx.Create(FrmMain.IniPath);
-  try
-    LoadOptions(ini);
-  finally
-    ini.Free;
-  end;
+  LoadOptions(FrmMain.Config.Ini);
 end;
 
 procedure TFrmTextSearch.SaveIni;
-var
-  ini: TIniFileEx;
 begin
-  ini:=TIniFileEx.Create(FrmMain.IniPath);
-  try
-    SaveOptions(ini);
-  finally
-    ini.Free;
-  end;
+  SaveOptions(FrmMain.Config.Ini);
 end;
 
 procedure TFrmTextSearch.LoadOptions(ini: TIniFileEx);
