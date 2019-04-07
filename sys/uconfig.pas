@@ -167,6 +167,8 @@ begin
     fCCXPath:=ProgramDirectory+'bin/ccx212';
     fCGXPath:=ProgramDirectory+'bin/cgx2.15';
     fTerminalPath:='/usr/bin/xterm';
+    if not ZFileExists(fTerminalPath) then
+      fTerminalPath:='/usr/bin/x-terminal-emulator';
   {$EndIf}
   fMonitorShowLegend:=true;
   fMonitorScanTime:=3;

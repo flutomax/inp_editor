@@ -685,6 +685,7 @@ begin
   cmdToolsNodesTransform.Enabled:=cmdEditSelectAll.Enabled;
   cmdToolsGroupView.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCFaces.Enabled:=cmdEditSelectAll.Enabled;
+  cmdAddBCPressure.Enabled:=cmdEditSelectAll.Enabled;
   cmdCalculixSolver.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPreCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPostCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
@@ -1720,9 +1721,8 @@ begin
     apRuner.Execute;
   end;
   {$ELSE}
-  ShowMonitor(ActiveEditor.FileName);
+    ShowMonitor(ActiveEditor.FileName);
   {$ENDIF}
-
 end;
 
 procedure TFrmMain.cmdToolsGroupViewExecute(Sender: TObject);

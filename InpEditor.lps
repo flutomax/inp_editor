@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Win64"/>
     <Units Count="42">
       <Unit0>
         <Filename Value="InpEditor.lpr"/>
@@ -11,7 +11,7 @@
         <EditorIndex Value="8"/>
         <TopLine Value="41"/>
         <CursorPos X="15" Y="52"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,9 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmMain"/>
-        <TopLine Value="1711"/>
-        <CursorPos X="3" Y="1713"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="671"/>
+        <CursorPos X="19" Y="688"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit1>
@@ -31,7 +31,7 @@
         <Filename Value="edit\uinpeditor.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uInpEditor"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit2>
       <Unit3>
         <Filename Value="sys\uconsts.pas"/>
@@ -40,7 +40,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="43"/>
         <CursorPos X="16" Y="43"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit3>
       <Unit4>
         <Filename Value="forms\ufrmgotoline.pas"/>
@@ -49,16 +49,17 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmGoToLine"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit4>
       <Unit5>
         <Filename Value="sys\uconfig.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uConfig"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="334"/>
-        <CursorPos X="9" Y="362"/>
-        <UsageCount Value="25"/>
+        <TopLine Value="153"/>
+        <CursorPos X="55" Y="171"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -68,7 +69,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmOptions"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit6>
       <Unit7>
         <Filename Value="forms\ufrmtextsearch.pas"/>
@@ -77,7 +78,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmTextSearch"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit7>
       <Unit8>
         <Filename Value="forms\ufrmtextreplace.pas"/>
@@ -86,7 +87,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmTextReplace"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit8>
       <Unit9>
         <Filename Value="edit\ueditormisc.pas"/>
@@ -95,14 +96,14 @@
         <EditorIndex Value="6"/>
         <TopLine Value="108"/>
         <CursorPos X="23" Y="117"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="edit\synexportrtf.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SynExportRTF"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit10>
       <Unit11>
         <Filename Value="forms\ufrmexporttext.pas"/>
@@ -111,7 +112,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmExportText"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit11>
       <Unit12>
         <Filename Value="forms\ufrmabout.pas"/>
@@ -120,19 +121,19 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmAbout"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit12>
       <Unit13>
         <Filename Value="sys\usysinfo.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uSysInfo"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit13>
       <Unit14>
         <Filename Value="sys\uanimatebackgound.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAnimateBackgound"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit14>
       <Unit15>
         <Filename Value="forms\ufrmeditorkeystrokes.pas"/>
@@ -141,43 +142,43 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmEditorKeystrokes"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit15>
       <Unit16>
         <Filename Value="edit\usyneditoroptions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uSynEditorOptions"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit16>
       <Unit17>
         <Filename Value="sys\uderivedclasses.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uDerivedClasses"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit17>
       <Unit18>
         <Filename Value="edit\uhighliter.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uHighliter"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit18>
       <Unit19>
         <Filename Value="sys\ufileutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uFileUtils"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit19>
       <Unit20>
         <Filename Value="sys\umrulist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uMRUList"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit20>
       <Unit21>
         <Filename Value="sys\uencodingfunc.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uEncodingFunc"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit21>
       <Unit22>
         <Filename Value="forms\ufrmnodestransform.pas"/>
@@ -186,7 +187,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmNodesTransform"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit22>
       <Unit23>
         <Filename Value="forms\ufrmmodelviewer.pas"/>
@@ -195,7 +196,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmModelViewer"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit23>
       <Unit24>
         <Filename Value="sys\ucalculix.pas"/>
@@ -204,7 +205,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="123"/>
         <CursorPos X="11" Y="134"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
       </Unit24>
       <Unit25>
@@ -214,13 +215,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmViewGroup"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit25>
       <Unit26>
         <Filename Value="math\uinptranslator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uInpTranslator"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit26>
       <Unit27>
         <Filename Value="forms\ufrmgroupselector.pas"/>
@@ -229,25 +230,25 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmGroupSelector"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit27>
       <Unit28>
         <Filename Value="math\uaddbcfunctions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAddBCFunctions"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit28>
       <Unit29>
         <Filename Value="sys\udialogs.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uDialogs"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit29>
       <Unit30>
         <Filename Value="math\uunicalconv.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uUnicalConv"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit30>
       <Unit31>
         <Filename Value="forms\ufrmfileimport.pas"/>
@@ -256,13 +257,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="ufrmFileImport"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit31>
       <Unit32>
         <Filename Value="sys\ucursors.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uCursors"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
       </Unit32>
       <Unit33>
         <Filename Value="forms\ufrmmonitor.pas"/>
@@ -271,11 +272,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmMonitor"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="267"/>
         <CursorPos X="28" Y="281"/>
-        <UsageCount Value="25"/>
+        <UsageCount Value="53"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit33>
@@ -283,7 +283,7 @@
         <Filename Value="general.inc"/>
         <EditorIndex Value="9"/>
         <CursorPos X="3"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit34>
       <Unit35>
@@ -291,7 +291,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="92"/>
         <CursorPos X="25" Y="102"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
       </Unit35>
       <Unit36>
@@ -299,7 +299,7 @@
         <EditorIndex Value="3"/>
         <TopLine Value="8132"/>
         <CursorPos Y="8096"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit36>
       <Unit37>
@@ -308,7 +308,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="25"/>
         <CursorPos X="38" Y="36"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
       </Unit37>
       <Unit38>
@@ -317,7 +317,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="94"/>
         <CursorPos X="11" Y="104"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="7"/>
       </Unit38>
       <Unit39>
         <Filename Value="H:\lazarus\components\lazutils\utf8process.pp"/>
@@ -325,144 +325,144 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="75"/>
         <CursorPos X="3" Y="85"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="7"/>
       </Unit39>
       <Unit40>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\packages\fcl-process\src\process.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="109"/>
         <CursorPos X="3" Y="50"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="7"/>
       </Unit40>
       <Unit41>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
         <EditorIndex Value="10"/>
         <TopLine Value="2922"/>
         <CursorPos Y="2931"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit41>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="216" TopLine="202"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="345" TopLine="335"/>
       </Position1>
       <Position2>
         <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="342" TopLine="335"/>
+        <Caret Line="354" TopLine="337"/>
       </Position2>
       <Position3>
         <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="343" TopLine="335"/>
+        <Caret Line="359" TopLine="350"/>
       </Position3>
       <Position4>
         <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="344" TopLine="335"/>
+        <Caret Line="360" TopLine="350"/>
       </Position4>
       <Position5>
         <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="345" TopLine="335"/>
+        <Caret Line="361" TopLine="350"/>
       </Position5>
       <Position6>
         <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="354" TopLine="337"/>
+        <Caret Line="364" TopLine="350"/>
       </Position6>
       <Position7>
-        <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="359" TopLine="350"/>
-      </Position7>
-      <Position8>
-        <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="360" TopLine="350"/>
-      </Position8>
-      <Position9>
-        <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="361" TopLine="350"/>
-      </Position9>
-      <Position10>
-        <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="364" TopLine="350"/>
-      </Position10>
-      <Position11>
         <Filename Value="forms\ufrmmonitor.pas"/>
         <Caret Line="217" TopLine="202"/>
-      </Position11>
-      <Position12>
+      </Position7>
+      <Position8>
         <Filename Value="forms\ufrmmonitor.pas"/>
         <Caret Line="218" TopLine="202"/>
-      </Position12>
-      <Position13>
+      </Position8>
+      <Position9>
         <Filename Value="forms\ufrmmonitor.pas"/>
         <Caret Line="219" TopLine="203"/>
+      </Position9>
+      <Position10>
+        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
+        <Caret Line="940" TopLine="930"/>
+      </Position10>
+      <Position11>
+        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
+        <Caret Line="941" TopLine="930"/>
+      </Position11>
+      <Position12>
+        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
+        <Caret Line="946" TopLine="930"/>
+      </Position12>
+      <Position13>
+        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
+        <Caret Line="153" TopLine="144"/>
       </Position13>
       <Position14>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="940" TopLine="930"/>
+        <Caret Line="154" TopLine="144"/>
       </Position14>
       <Position15>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="941" TopLine="930"/>
+        <Caret Line="159" TopLine="144"/>
       </Position15>
       <Position16>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="946" TopLine="930"/>
+        <Caret Line="160" TopLine="144"/>
       </Position16>
       <Position17>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="153" TopLine="144"/>
+        <Caret Line="162" TopLine="146"/>
       </Position17>
       <Position18>
         <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="154" TopLine="144"/>
+        <Caret Line="165" TopLine="149"/>
       </Position18>
       <Position19>
-        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="159" TopLine="144"/>
+        <Filename Value="forms\ufrmmonitor.pas"/>
+        <Caret Line="178" TopLine="167"/>
       </Position19>
       <Position20>
-        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="160" TopLine="144"/>
+        <Filename Value="forms\ufrmmonitor.pas"/>
+        <Caret Line="179" TopLine="167"/>
       </Position20>
       <Position21>
-        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="162" TopLine="146"/>
+        <Filename Value="forms\ufrmmonitor.pas"/>
+        <Caret Line="180" TopLine="167"/>
       </Position21>
       <Position22>
-        <Filename Value="H:\lazarus\lcl\include\customform.inc"/>
-        <Caret Line="165" TopLine="149"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="362" Column="9" TopLine="334"/>
       </Position22>
       <Position23>
         <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="178" TopLine="167"/>
+        <Caret Line="151" Column="22" TopLine="142"/>
       </Position23>
       <Position24>
         <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="179" TopLine="167"/>
+        <Caret Line="243" Column="38" TopLine="226"/>
       </Position24>
       <Position25>
         <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="180" TopLine="167"/>
+        <Caret Line="269" Column="10" TopLine="262"/>
       </Position25>
       <Position26>
-        <Filename Value="sys\uconfig.pas"/>
-        <Caret Line="362" Column="9" TopLine="334"/>
+        <Filename Value="forms\ufrmmain.pas"/>
+        <Caret Line="688" Column="3" TopLine="670"/>
       </Position26>
       <Position27>
-        <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="216" Column="42" TopLine="239"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="91" Column="53" TopLine="87"/>
       </Position27>
       <Position28>
-        <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="151" Column="22" TopLine="142"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="54" Column="18" TopLine="46"/>
       </Position28>
       <Position29>
-        <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="243" Column="38" TopLine="226"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="91" Column="53" TopLine="75"/>
       </Position29>
       <Position30>
-        <Filename Value="forms\ufrmmonitor.pas"/>
-        <Caret Line="269" Column="10" TopLine="262"/>
+        <Filename Value="sys\uconfig.pas"/>
+        <Caret Line="163" Column="18" TopLine="147"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>
