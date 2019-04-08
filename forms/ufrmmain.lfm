@@ -803,6 +803,10 @@ object FrmMain: TFrmMain
         Action = cmdViewStatusbar
         AutoCheck = True
       end
+      object MenuItem190: TMenuItem
+        Action = cmdViewTabCloseBtnVisible
+        AutoCheck = True
+      end
       object MenuItem33: TMenuItem
         Caption = '-'
       end
@@ -1851,6 +1855,13 @@ object FrmMain: TFrmMain
       ImageIndex = 57
       OnExecute = cmdToolsMonitorExecute
       ShortCut = 121
+    end
+    object cmdViewTabCloseBtnVisible: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Close Button On Tab'
+      Hint = 'Close button on tab'
+      OnExecute = cmdViewTabCloseBtnVisibleExecute
     end
   end
   object IlMain: TImageList

@@ -94,7 +94,7 @@ begin
   NewFileName:=ChangeFileExt(aFileName,'.inp');
   Editor:=FrmMain.Pager.Open(NewFileName,true);
   Editor.Lines.LoadFromStream(aText);
-  Editor.Sheet.Caption:=ExtractFileName(NewFileName);
+  Editor.Sheet.Title:=ExtractFileName(NewFileName);
   Editor.Modified:=true;
   Editor.CaretToEOF;
 end;

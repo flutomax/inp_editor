@@ -141,8 +141,11 @@ type
   TInpEditTabSheet = class(TTabSheet)
   private
     fEditor: TInpEditor;
+    function GetTitle: string;
+    procedure SetTitle(AValue: string);
   public
     property Editor: TInpEditor read fEditor;
+    property Title: string read GetTitle write SetTitle;
   end;
 
   TOnBeforeClose = procedure(Editor: TInpEditor; var Cancel: Boolean) of object;
@@ -154,6 +157,8 @@ type
     fWatch: TWatchNotifyer;
     fHighliter: TInpHighlighter;
     fCompletion: TSynCompletion;
+    fTabCloseBtnVisible: Boolean;
+    fCloseTabIndex: Integer;
     fOnBeforeClose: TOnBeforeClose;
     fOnStatusChange: TStatusChangeEvent;
     function GetActiveEditor: TInpEditor;
@@ -161,6 +166,7 @@ type
     function IndexFromFilename(const aFileName: TFileName): Integer;
     function IndexOfSpareSheet: Integer;
     function CreateFile(const aFileName: TFileName): Boolean;
+    procedure SetTabCloseBtnVisible(AValue: Boolean);
     procedure WatchFileChange(Sender: TObject; FileName: TFileName;
       Data: Pointer; State: TWatchStateChange);
     procedure UpdateEditorOptions(Editor: TInpEditor);
@@ -174,7 +180,12 @@ type
     function CompletionPaintItem(const AKey: string; ACanvas: TCanvas; X,
       Y: integer; Selected: boolean; Index: integer): boolean;
   protected
-
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: integer); override;
+    procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: integer); override;
+    {$IfDef Windows}
+    procedure PaintWindow(DC: HDC); override;
+    procedure DoChange; override;
+    {$EndIf}
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -190,6 +201,7 @@ type
     property Highliter: TInpHighlighter read fHighliter;
   published
     property ActiveEditor: TInpEditor read GetActiveEditor;
+    property TabCloseBtnVisible: Boolean read fTabCloseBtnVisible write SetTabCloseBtnVisible;
     property OnBeforeClose: TOnBeforeClose read fOnBeforeClose write fOnBeforeClose;
     property OnStatusChange: TStatusChangeEvent read fOnStatusChange write fOnStatusChange;
   end;
@@ -198,11 +210,29 @@ implementation
 
 uses
   Math, StrUtils, LazFileUtils, SynEditKeyCmds, SynEditMouseCmds, SynExportRTF,
-  SynEditHighlighterFoldBase, SynEditMarkupWordGroup, InterfaceBase,
-  uConsts, uFrmMain, uEditorMisc, uFileUtils;
+  SynEditHighlighterFoldBase, SynEditMarkupWordGroup, InterfaceBase, LCLIntf,
+  uConsts, uFrmMain, uEditorMisc, uFileUtils {$IfDef Windows}, Themes{$EndIf};
+
+const
+  BUTTON_SPACES = '     ';
 
 var
   UnnamedCount: Integer = 0;
+
+{ TInpEditTabSheet }
+
+function TInpEditTabSheet.GetTitle: string;
+begin
+  GetTitle:=TrimRight(Caption);
+end;
+
+procedure TInpEditTabSheet.SetTitle(AValue: string);
+begin
+  if TInpEditPager(PageControl).TabCloseBtnVisible then
+    Caption:=TrimRight(AValue)+BUTTON_SPACES
+  else
+    Caption:=AValue;
+end;
 
 
 { TInpEditor }
@@ -277,13 +307,15 @@ begin
 end;
 
 procedure TInpEditor.SetFileName(const aValue: TFileName);
+var
+  s: string;
 begin
   if fFileName=AValue then
     Exit;
   fFileName:=AValue;
   fUnnamed:=fFileName='';
   if not fUnnamed then
-    fSheet.Caption:=ExtractFileName(fFileName);
+    fSheet.Title:=ExtractFileName(fFileName);
 end;
 
 procedure TInpEditor.UpdateHighlightActiveLine;
@@ -698,6 +730,8 @@ end;
 constructor TInpEditPager.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  fTabCloseBtnVisible:=false;
+  fCloseTabIndex:=-1;
   fWatch:=TWatchNotifyer.Create;
   fWatch.OnFileStateChange:=@WatchFileChange;
   fHighliter:=TInpHighlighter.Create(self);
@@ -723,6 +757,7 @@ begin
   {$IF LCL_FULLVERSION>=1080000}
   Options:=Options+[nboDoChangeOnSetIndex];
   {$ENDIF}
+  TabCloseBtnVisible:=true; // show close button on tab
 end;
 
 destructor TInpEditPager.Destroy;
@@ -754,6 +789,24 @@ begin
       end;
     end;
   until not r;
+end;
+
+procedure TInpEditPager.SetTabCloseBtnVisible(AValue: Boolean);
+var
+  i: integer;
+begin
+  if fTabCloseBtnVisible=AValue then
+    Exit;
+  fTabCloseBtnVisible:=AValue;
+  if fTabCloseBtnVisible then
+    Options:=Options+[nboShowCloseButtons]
+  else
+    Options:=Options-[nboShowCloseButtons];
+  for i:=0 to PageCount-1 do
+    if fTabCloseBtnVisible then
+      Pages[i].Caption:=TrimRight(Pages[i].Caption)+BUTTON_SPACES
+    else
+      Pages[i].Caption:=TrimRight(Pages[i].Caption);
 end;
 
 function TInpEditPager.GetActiveEditor: TInpEditor;
@@ -840,10 +893,10 @@ begin
   UpdateEditorOptions(Result);
   if Result.Unnamed then begin
     if FromImport then
-      s.Caption:='' // caption set on future
+      s.Title:='' // title set on future
     else begin
       Inc(UnnamedCount);
-      s.Caption:=Format('New%.2d',[UnnamedCount]);
+      s.Title:=Format('New%.2d',[UnnamedCount]);
     end;
   end else begin
     Result.Open(aFileName);
@@ -862,7 +915,7 @@ var
   c: boolean;
 begin
   result:=true;
-  // if last tab in unused
+  // if fist tab in unused
   if (PageCount=1) and Editor.Unnamed and (not Editor.Modified) then
     exit;
 
@@ -1047,6 +1100,96 @@ begin
   result:=true;
 end;
 
+procedure TInpEditPager.MouseDown(Button: TMouseButton; Shift: TShiftState; X,
+  Y: integer);
+var
+  r: TRect;
+  i, h: Integer;
+  Editor: TInpEditor;
+begin
+  inherited MouseDown(Button, Shift, X, Y);
+  if fTabCloseBtnVisible and (Button=mbLeft) then begin
+    i:=IndexOfTabAt(Point(X,Y));
+    if not InRange(i,0,PageCount-1) then
+      Exit;
+    Editor:=EditorFromIndex(i);
+    if (PageCount=1) and Editor.Unnamed and (not Editor.Modified) then begin
+      if Editor.CanFocus then
+        Editor.SetFocus;
+      Exit;
+    end;
+    r:=TabRect(i);
+    h:=(r.Bottom-r.Top);
+    if (X>r.right-h) and (Y>r.bottom-h) then begin
+      fCloseTabIndex:=i;
+      {$IfDef Windows}
+      Invalidate;
+      {$EndIf}
+      Exit;
+    end;
+  end;
+  fCloseTabIndex:=-1;
+end;
+
+procedure TInpEditPager.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
+  Y: integer);
+begin
+  inherited MouseUp(Button, Shift, X, Y);
+  if InRange(fCloseTabIndex,0,PageCount-1) then begin
+    Close(EditorFromIndex(fCloseTabIndex));
+    fCloseTabIndex:=-1;
+  end;
+end;
+
+
+{$IfDef Windows}
+
+procedure TInpEditPager.PaintWindow(DC: HDC);
+const
+  bs = 13;
+var
+  r: TRect;
+  i,h,n: Integer;
+  d: TThemedWindow;
+  e: TThemedElementDetails;
+  Editor: TInpEditor;
+begin
+  inherited PaintWindow(DC);
+  if not fTabCloseBtnVisible then
+    Exit;
+  n:=SaveDC(DC);
+  try
+    for i:=0 to PageCount-1 do begin
+      r:=TabRect(i);
+      h:=(r.Bottom-r.Top-bs) div 2;
+      r.Left:=r.Right-bs-h;
+      r.Right:=r.Left+bs;
+      r.Top:=r.Top+h;
+      r.Bottom:=r.Top+bs;
+      if ActivePageIndex<>i then
+        OffSetRect(r,0,2);
+      d:=twSmallCloseButtonNormal;
+      Editor:=EditorFromIndex(i);
+      if (PageCount=1) and Editor.Unnamed and (not Editor.Modified) then
+        d:=twSmallCloseButtonDisabled
+      else
+      if i=fCloseTabIndex then
+        d:=twSmallCloseButtonPushed;
+      e:=ThemeServices.GetElementDetails(d);
+      ThemeServices.DrawElement(DC,e,r,nil);
+    end;
+  finally
+    RestoreDC(DC,n);
+  end;
+end;
+
+procedure TInpEditPager.DoChange;
+begin
+  inherited DoChange;
+  Invalidate;
+end;
+
+{$EndIf}
 
 end.
 

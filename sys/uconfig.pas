@@ -56,6 +56,7 @@ type
     fTerminalExists: Boolean;
     fExportAsFile: Boolean;
     fStatusbarVisible: Boolean;
+    fTabCloseBtnVisible: Boolean;
     fWarnings: TStringList;
     function GetShowWarning(const aName: string): Boolean;
     procedure SetCCXPath(AValue: string);
@@ -97,6 +98,7 @@ type
     property FileAssociation: Boolean read fFileAssociation write SetFileAssociation;
     property ExportAsFile: Boolean read fExportAsFile write fExportAsFile;
     property StatusbarVisible: Boolean read fStatusbarVisible write fStatusbarVisible;
+    property TabCloseBtnVisible: Boolean read fTabCloseBtnVisible write fTabCloseBtnVisible;
     property BCAutoInsert: Boolean read fBCAutoInsert write fBCAutoInsert;
     property BCAddComment: Boolean read fBCAddComment write fBCAddComment;
     property BCMakeInclude: Boolean read fBCMakeInclude write fBCMakeInclude;
@@ -144,6 +146,7 @@ begin
   fFileAssociation:=false;
   fExportAsFile:=false;
   fStatusbarVisible:=true;
+  TabCloseBtnVisible:=true;
   fBCAutoInsert:=true;
   fBCAddComment:=true;
   fBCMakeInclude:=true;
@@ -169,6 +172,8 @@ begin
     fTerminalPath:='/usr/bin/xterm';
     if not ZFileExists(fTerminalPath) then
       fTerminalPath:='/usr/bin/x-terminal-emulator';
+    if not ZFileExists(fTerminalPath) then
+      fTerminalPath:='/usr/bin/xterm';
   {$EndIf}
   fMonitorShowLegend:=true;
   fMonitorScanTime:=3;
@@ -265,6 +270,7 @@ begin
   fFileAssociation:=fIni.ReadBool(aSection,'FileAssociation',fFileAssociation);
   fExportAsFile:=fIni.ReadBool(aSection,'ExportAsFile',fExportAsFile);
   fStatusbarVisible:=fIni.ReadBool(aSection,'StatusbarVisible',fStatusbarVisible);
+  fTabCloseBtnVisible:=fIni.ReadBool(aSection,'TabCloseBtnVisible',fTabCloseBtnVisible);
   if fStoreFormPlacement and Assigned(fMainForm) then
     LoadFormLayout(fMainForm, aSection);
   UpdateConfig;
@@ -295,6 +301,7 @@ begin
   fIni.WriteBool(aSection,'FileAssociation',fFileAssociation);
   fIni.WriteBool(aSection,'ExportAsFile',fExportAsFile);
   fIni.WriteBool(aSection,'StatusbarVisible',fStatusbarVisible);
+  fIni.WriteBool(aSection,'TabCloseBtnVisible',fTabCloseBtnVisible);
   if fStoreFormPlacement and Assigned(fMainForm) then
     SaveFormLayout(fMainForm,aSection);
 end;

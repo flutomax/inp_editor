@@ -36,6 +36,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdViewTabCloseBtnVisible: TAction;
     cmdToolsMonitor: TAction;
     cmdFileShowLocation: TAction;
     cmdAddBCPressure: TAction;
@@ -249,6 +250,7 @@ type
     MenuItem187: TMenuItem;
     MenuItem188: TMenuItem;
     MenuItem189: TMenuItem;
+    MenuItem190: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -476,6 +478,7 @@ type
     procedure cmdToolsOptionsExecute(Sender: TObject);
     procedure cmdViewSpecialCharsExecute(Sender: TObject);
     procedure cmdViewStatusbarExecute(Sender: TObject);
+    procedure cmdViewTabCloseBtnVisibleExecute(Sender: TObject);
     procedure cmdViewTbFileExecute(Sender: TObject);
     procedure cmdViewTbResetExecute(Sender: TObject);
     procedure cmdViewUnfoldCurrentExecute(Sender: TObject);
@@ -583,6 +586,8 @@ begin
   fPrint.Colors:=true;
   cmdViewStatusbar.Checked:=fConfig.StatusbarVisible;
   sbEditor.Visible:=cmdViewStatusbar.Checked;
+  cmdViewTabCloseBtnVisible.Checked:=fConfig.TabCloseBtnVisible;
+  fPager.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
   DrawDisabledImagelist(IlMain,IlDMain);
   cbMain.OnPaint:=@cbMainPaint;
   ThemeServices.OnThemeChange:=@ThemeServicesThemeChange;
@@ -816,7 +821,7 @@ begin
     Editor:=ActiveEditor;
     if Editor.CanFocus then
       Editor.SetFocus;
-    Caption:=Format('%s - [%s]',[sAppTitle,Editor.Sheet.Caption]);
+    Caption:=Format('%s - [%s]',[sAppTitle,Editor.Sheet.Title]);
     Application.Title:=Caption;
     PagerStatusChange(Editor,[scCaretX,scCaretY,scModified,scInsertMode]);
   end;
@@ -953,7 +958,7 @@ var
   s: string;
 begin
   if Editor.Modified then begin
-    s:=IfThen(Editor.Unnamed,Editor.Sheet.Caption,Editor.FileName);
+    s:=IfThen(Editor.Unnamed,Editor.Sheet.Title,Editor.FileName);
     case MessageDlg(Format(sSaveChanges,[s]),mtWarning,mbYesNoCancel,0) of
       mrYes: begin
         if Editor.Unnamed or GetReadOnly(Editor) then
@@ -996,10 +1001,8 @@ end;
 
 function TFrmMain.GetFileName(Editor: TInpEditor): Boolean;
 begin
-  if Editor.Unnamed then
-    DlgSave.FileName:=Editor.Sheet.Caption
-  else
-    DlgSave.FileName:=ExtractFileName(Editor.FileName);
+  DlgSave.FileName:=IfThen(Editor.Unnamed,Editor.Sheet.Title,
+    ExtractFileName(Editor.FileName));
   result:=DlgSave.Execute;
   if result then
     Editor.FileName:=DlgSave.FileName;
@@ -1051,7 +1054,7 @@ begin
     if LowerCase(ExtractFileExt(Editor.FileName))<>cmdFileSaveAs.Dialog.DefaultExt then
       cmdFileSaveAs.Dialog.FilterIndex:=2;
   end else
-    cmdFileSaveAs.Dialog.FileName:=Editor.Sheet.Caption;
+    cmdFileSaveAs.Dialog.FileName:=Editor.Sheet.Title;
 end;
 
 
@@ -1144,7 +1147,7 @@ begin
     Exit;
   Editor:=ActiveEditor;
   if Editor.FileName='' then
-    case MessageDlg(sReload,Format(sSaveWanted,[Editor.Sheet.Caption]),
+    case MessageDlg(sReload,Format(sSaveWanted,[Editor.Sheet.Title]),
       mtWarning,mbYesNo,0) of
       mrYes: if GetFileName(Editor) then
                 Editor.Save
@@ -1492,7 +1495,7 @@ begin
   miTabs.Clear;
   for i:=0 to fPager.PageCount-1 do begin
     mi:=TMenuItem.Create(miTabs);
-    mi.Caption:=fPager.Pages[i].Caption;
+    mi.Caption:=TInpEditTabSheet(fPager.Pages[i]).Title;
     mi.Tag:=i;
     mi.RadioItem:=true;
     mi.AutoCheck:=true;
@@ -1645,6 +1648,12 @@ begin
   sbEditor.Visible:=cmdViewStatusbar.Checked;
 end;
 
+procedure TFrmMain.cmdViewTabCloseBtnVisibleExecute(Sender: TObject);
+begin
+  fConfig.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
+  fPager.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
+end;
+
 procedure TFrmMain.cbMainPostPaint(Data: PtrInt);
 var
   x: Integer;
@@ -1765,7 +1774,7 @@ begin
     Exit;
   Editor:=ActiveEditor;
   if Editor.FileName='' then
-    case MessageDlg(sReload,Format(sSaveWanted,[Editor.Sheet.Caption]),
+    case MessageDlg(sReload,Format(sSaveWanted,[Editor.Sheet.Title]),
       mtWarning,mbYesNo,0) of
       mrYes: if GetFileName(Editor) then
                 Editor.Save
