@@ -1,11 +1,11 @@
 object FrmMain: TFrmMain
-  Left = 500
+  Left = 326
   Height = 451
-  Top = 86
+  Top = 84
   Width = 873
   AllowDropFiles = True
   Caption = 'Inp Editor'
-  ClientHeight = 431
+  ClientHeight = 427
   ClientWidth = 873
   Menu = MnMain
   OnCloseQuery = FormCloseQuery
@@ -14,11 +14,11 @@ object FrmMain: TFrmMain
   OnResize = FormResize
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.8.4.0'
+  LCLVersion = '1.8.2.0'
   object sbEditor: TStatusBar
     Left = 0
-    Height = 23
-    Top = 408
+    Height = 18
+    Top = 409
     Width = 873
     Panels = <    
       item

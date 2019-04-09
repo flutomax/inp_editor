@@ -180,12 +180,13 @@ type
     function CompletionPaintItem(const AKey: string; ACanvas: TCanvas; X,
       Y: integer; Selected: boolean; Index: integer): boolean;
   protected
+    {$IfDef Windows}
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: integer); override;
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: integer); override;
-    {$IfDef Windows}
     procedure PaintWindow(DC: HDC); override;
     procedure DoChange; override;
     {$EndIf}
+    procedure DoCloseTabClicked(APage: TCustomPage); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -223,17 +224,24 @@ var
 
 function TInpEditTabSheet.GetTitle: string;
 begin
+  {$IfDef Windows}
   GetTitle:=TrimRight(Caption);
+  {$Else}
+  GetTitle:=Caption;
+  {$EndIf}
 end;
 
 procedure TInpEditTabSheet.SetTitle(AValue: string);
 begin
+  {$IfDef Windows}
   if TInpEditPager(PageControl).TabCloseBtnVisible then
     Caption:=TrimRight(AValue)+BUTTON_SPACES
   else
     Caption:=AValue;
+  {$Else}
+  Caption:=AValue;
+  {$EndIf}
 end;
-
 
 { TInpEditor }
 
@@ -792,8 +800,10 @@ begin
 end;
 
 procedure TInpEditPager.SetTabCloseBtnVisible(AValue: Boolean);
+{$IfDef Windows}
 var
   i: integer;
+{$EndIf}
 begin
   if fTabCloseBtnVisible=AValue then
     Exit;
@@ -802,11 +812,13 @@ begin
     Options:=Options+[nboShowCloseButtons]
   else
     Options:=Options-[nboShowCloseButtons];
+  {$IfDef Windows}
   for i:=0 to PageCount-1 do
     if fTabCloseBtnVisible then
       Pages[i].Caption:=TrimRight(Pages[i].Caption)+BUTTON_SPACES
     else
       Pages[i].Caption:=TrimRight(Pages[i].Caption);
+  {$EndIf}
 end;
 
 function TInpEditPager.GetActiveEditor: TInpEditor;
@@ -1100,6 +1112,14 @@ begin
   result:=true;
 end;
 
+procedure TInpEditPager.DoCloseTabClicked(APage: TCustomPage);
+begin
+  inherited DoCloseTabClicked(APage);
+  if Assigned(APage) then
+    Close(EditorFromIndex(APage.PageIndex));
+end;
+
+{$IfDef Windows}
 procedure TInpEditPager.MouseDown(Button: TMouseButton; Shift: TShiftState; X,
   Y: integer);
 var
@@ -1122,9 +1142,7 @@ begin
     h:=(r.Bottom-r.Top);
     if (X>r.right-h) and (Y>r.bottom-h) then begin
       fCloseTabIndex:=i;
-      {$IfDef Windows}
       Invalidate;
-      {$EndIf}
       Exit;
     end;
   end;
@@ -1140,9 +1158,6 @@ begin
     fCloseTabIndex:=-1;
   end;
 end;
-
-
-{$IfDef Windows}
 
 procedure TInpEditPager.PaintWindow(DC: HDC);
 const

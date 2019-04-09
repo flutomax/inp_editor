@@ -523,6 +523,7 @@ type
     procedure PagerStatusChange(Sender: TObject; Changes: TSynStatusChanges);
     procedure UpdateActiveTab(Data: PtrInt);
     procedure UpdateStatusHint(const aHint: string);
+    procedure UpdateCloseBtn;
     procedure PasteFromFile(const aFileName: TFileName);
     procedure MakeTemplatesMenu;
     procedure TemplatesSearch(const Path: TFileName; MenuItem: TMenuItem);
@@ -587,7 +588,7 @@ begin
   cmdViewStatusbar.Checked:=fConfig.StatusbarVisible;
   sbEditor.Visible:=cmdViewStatusbar.Checked;
   cmdViewTabCloseBtnVisible.Checked:=fConfig.TabCloseBtnVisible;
-  fPager.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
+  UpdateCloseBtn;
   DrawDisabledImagelist(IlMain,IlDMain);
   cbMain.OnPaint:=@cbMainPaint;
   ThemeServices.OnThemeChange:=@ThemeServicesThemeChange;
@@ -1648,10 +1649,18 @@ begin
   sbEditor.Visible:=cmdViewStatusbar.Checked;
 end;
 
+
+procedure TFrmMain.UpdateCloseBtn;
+begin
+  fPager.TabCloseBtnVisible:=fConfig.TabCloseBtnVisible;
+  pnBtnFileClose.Visible:=not fConfig.TabCloseBtnVisible;
+  cbMain.AutosizeBands;
+end;
+
 procedure TFrmMain.cmdViewTabCloseBtnVisibleExecute(Sender: TObject);
 begin
   fConfig.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
-  fPager.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
+  UpdateCloseBtn;
 end;
 
 procedure TFrmMain.cbMainPostPaint(Data: PtrInt);
