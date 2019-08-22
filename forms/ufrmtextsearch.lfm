@@ -9,6 +9,7 @@ object FrmTextSearch: TFrmTextSearch
   ClientHeight = 223
   ClientWidth = 338
   OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
   Position = poOwnerFormCenter
   LCLVersion = '1.8.4.0'
   object btOK: TButton

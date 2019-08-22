@@ -5,7 +5,7 @@ object FrmMain: TFrmMain
   Width = 873
   AllowDropFiles = True
   Caption = 'Inp Editor'
-  ClientHeight = 427
+  ClientHeight = 431
   ClientWidth = 873
   Menu = MnMain
   OnCloseQuery = FormCloseQuery
@@ -14,11 +14,11 @@ object FrmMain: TFrmMain
   OnResize = FormResize
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '1.8.4.0'
   object sbEditor: TStatusBar
     Left = 0
-    Height = 18
-    Top = 409
+    Height = 23
+    Top = 408
     Width = 873
     Panels = <    
       item
@@ -873,6 +873,12 @@ object FrmMain: TFrmMain
           GroupIndex = 7
           RadioItem = True
         end
+        object MenuItem191: TMenuItem
+          Action = cmdCalculixPreFlagV
+          GroupIndex = 7
+          RadioItem = True
+          Visible = False
+        end
         object MenuItem169: TMenuItem
           Action = cmdCalculixPreFlagDuns2d
           GroupIndex = 7
@@ -1424,70 +1430,6 @@ object FrmMain: TFrmMain
       Hint = 'Run CGX program with -b flag'
       OnExecute = cmdCalculixPreFlagCExecute
     end
-    object cmdCalculixPreFlagDuns2d: TAction
-      Tag = 2
-      Category = 'Calculix'
-      Caption = '-duns2d'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -duns2d flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagDuns3d: TAction
-      Tag = 3
-      Category = 'Calculix'
-      Caption = '-duns3d'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -duns3d flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagIsaac2d: TAction
-      Tag = 4
-      Category = 'Calculix'
-      Caption = '-isaac2d'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -isaac2d flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagIsaac3d: TAction
-      Tag = 5
-      Category = 'Calculix'
-      Caption = '-isaac3d'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -isaac3d flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagFoam: TAction
-      Tag = 6
-      Category = 'Calculix'
-      Caption = '-foam'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -foam flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagNg: TAction
-      Tag = 7
-      Category = 'Calculix'
-      Caption = '-ng'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -ng flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagStep: TAction
-      Tag = 8
-      Category = 'Calculix'
-      Caption = '-step'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -step flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
-    object cmdCalculixPreFlagStl: TAction
-      Tag = 9
-      Category = 'Calculix'
-      Caption = '-stl'
-      GroupIndex = 7
-      Hint = 'Run CGX program with -stl flag'
-      OnExecute = cmdCalculixPreFlagCExecute
-    end
     object cmdViewTbCalculix: TAction
       Tag = 4
       Category = 'View'
@@ -1862,6 +1804,78 @@ object FrmMain: TFrmMain
       Caption = 'Close Button On Tab'
       Hint = 'Close button on tab'
       OnExecute = cmdViewTabCloseBtnVisibleExecute
+    end
+    object cmdCalculixPreFlagV: TAction
+      Tag = 10
+      Category = 'Calculix'
+      Caption = '-v'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -v flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagDuns2d: TAction
+      Tag = 2
+      Category = 'Calculix'
+      Caption = '-duns2d'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -duns2d flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagDuns3d: TAction
+      Tag = 3
+      Category = 'Calculix'
+      Caption = '-duns3d'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -duns3d flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagIsaac2d: TAction
+      Tag = 4
+      Category = 'Calculix'
+      Caption = '-isaac2d'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -isaac2d flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagIsaac3d: TAction
+      Tag = 5
+      Category = 'Calculix'
+      Caption = '-isaac3d'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -isaac3d flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagFoam: TAction
+      Tag = 6
+      Category = 'Calculix'
+      Caption = '-foam'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -foam flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagNg: TAction
+      Tag = 7
+      Category = 'Calculix'
+      Caption = '-ng'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -ng flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagStep: TAction
+      Tag = 8
+      Category = 'Calculix'
+      Caption = '-step'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -step flag'
+      OnExecute = cmdCalculixPreFlagCExecute
+    end
+    object cmdCalculixPreFlagStl: TAction
+      Tag = 9
+      Category = 'Calculix'
+      Caption = '-stl'
+      GroupIndex = 7
+      Hint = 'Run CGX program with -stl flag'
+      OnExecute = cmdCalculixPreFlagCExecute
     end
   end
   object IlMain: TImageList
@@ -4080,6 +4094,12 @@ object FrmMain: TFrmMain
       Action = cmdCalculixPreFlagB
       GroupIndex = 7
       RadioItem = True
+    end
+    object MenuItem192: TMenuItem
+      Action = cmdCalculixPreFlagV
+      GroupIndex = 7
+      RadioItem = True
+      Visible = False
     end
     object MenuItem142: TMenuItem
       Action = cmdCalculixPreFlagDuns2d

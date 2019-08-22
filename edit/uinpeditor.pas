@@ -1129,7 +1129,7 @@ var
 begin
   inherited MouseDown(Button, Shift, X, Y);
   if fTabCloseBtnVisible and (Button=mbLeft) then begin
-    i:=IndexOfTabAt(Point(X,Y));
+    i:=IndexOfTabAt(X,Y);
     if not InRange(i,0,PageCount-1) then
       Exit;
     Editor:=EditorFromIndex(i);

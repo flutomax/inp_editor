@@ -36,6 +36,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdCalculixPreFlagV: TAction;
     cmdViewTabCloseBtnVisible: TAction;
     cmdToolsMonitor: TAction;
     cmdFileShowLocation: TAction;
@@ -251,6 +252,8 @@ type
     MenuItem188: TMenuItem;
     MenuItem189: TMenuItem;
     MenuItem190: TMenuItem;
+    MenuItem191: TMenuItem;
+    MenuItem192: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -1820,6 +1823,7 @@ begin
   x:=StrToCGXPreFlag(Config.CGXPreFlag);
   cmdCalculixPreFlagC.Checked:=x=pfC;
   cmdCalculixPreFlagB.Checked:=x=pfB;
+  cmdCalculixPreFlagV.Checked:=x=pfV;
   cmdCalculixPreFlagDuns2d.Checked:=x=pfDuns2d;
   cmdCalculixPreFlagDuns3d.Checked:=x=pfDuns3d;
   cmdCalculixPreFlagIsaac2d.Checked:=x=pfIsaac2d;

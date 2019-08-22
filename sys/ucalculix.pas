@@ -28,7 +28,7 @@ uses
 type
 
   TCGXPreFlags = (pfC, pfB, pfDuns2d, pfDuns3d, pfIsaac2d, pfIsaac3d, pfFoam,
-    pfNg, pfStep, pfStl);
+    pfNg, pfStep, pfStl, pfV);
 
   TCalculixOper = (coCCX, coCGXPre, coCGXPost);
 
@@ -46,7 +46,7 @@ uses
 const
   sPreFlags: array[TCGXPreFlags] of string = (
     '-c','-b','-duns2d','-duns3d','-isaac2d','-isaac3d','-foam',
-    '-ng','-step','-stl');
+    '-ng','-step','-stl','-v');
 
 
 function StrToCGXPreFlag(const s: string): TCGXPreFlags;

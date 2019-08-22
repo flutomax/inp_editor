@@ -45,6 +45,7 @@ type
     gbSearchOptions: TGroupBox;
     procedure ckSearchFromCursorClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormShow(Sender: TObject);
   private
     fSearchHistory: TStrings;
     procedure LoadIni;
@@ -201,6 +202,12 @@ begin
     CanClose:=false;
     edSearchText.SetFocus;
   end;
+end;
+
+procedure TFrmTextSearch.FormShow(Sender: TObject);
+begin
+  if edSearchText.CanFocus then
+    edSearchText.SetFocus;
 end;
 
 end.

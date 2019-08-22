@@ -226,7 +226,7 @@ end;
 
 procedure TStringStreamEx.WriteLn(const aFmt: string; const Args: array of const);
 begin
-  Write(Format(aFmt,Args));
+  WriteLn(Format(aFmt,Args));
 end;
 
 { TStringListEx }
