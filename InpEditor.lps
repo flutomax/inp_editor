@@ -2,7 +2,7 @@
 <CONFIG>
   <ProjectSession>
     <PathDelim Value="\"/>
-    <Version Value="10"/>
+    <Version Value="9"/>
     <BuildModes Active="Debug"/>
     <Units Count="59">
       <Unit0>
@@ -11,7 +11,7 @@
         <EditorIndex Value="7"/>
         <TopLine Value="39"/>
         <CursorPos Y="58"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -21,9 +21,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmMain"/>
-        <TopLine Value="1752"/>
+        <TopLine Value="1764"/>
         <CursorPos X="14" Y="1768"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Bookmarks Count="1">
           <Item0 X="3" Y="1650"/>
         </Bookmarks>
@@ -37,7 +37,7 @@
         <EditorIndex Value="13"/>
         <TopLine Value="1123"/>
         <CursorPos X="24" Y="1132"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -47,7 +47,7 @@
         <EditorIndex Value="9"/>
         <TopLine Value="28"/>
         <CursorPos X="3" Y="38"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
@@ -57,7 +57,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmGoToLine"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit4>
       <Unit5>
         <Filename Value="sys\uconfig.pas"/>
@@ -66,7 +66,7 @@
         <EditorIndex Value="18"/>
         <TopLine Value="165"/>
         <CursorPos X="41" Y="176"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -79,7 +79,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="604"/>
         <CursorPos X="10" Y="596"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit6>
       <Unit7>
         <Filename Value="forms\ufrmtextsearch.pas"/>
@@ -88,11 +88,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmTextSearch"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="194"/>
         <CursorPos X="26" Y="210"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit7>
@@ -105,7 +104,7 @@
         <UnitName Value="uFrmTextReplace"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="89"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit8>
       <Unit9>
         <Filename Value="edit\ueditormisc.pas"/>
@@ -114,14 +113,14 @@
         <EditorIndex Value="12"/>
         <TopLine Value="112"/>
         <CursorPos X="21" Y="121"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="edit\synexportrtf.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SynExportRTF"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit10>
       <Unit11>
         <Filename Value="forms\ufrmexporttext.pas"/>
@@ -133,7 +132,7 @@
         <EditorIndex Value="27"/>
         <TopLine Value="167"/>
         <CursorPos X="7" Y="177"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -146,7 +145,7 @@
         <EditorIndex Value="16"/>
         <TopLine Value="132"/>
         <CursorPos X="3" Y="139"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit12>
@@ -154,13 +153,13 @@
         <Filename Value="sys\usysinfo.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uSysInfo"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit13>
       <Unit14>
         <Filename Value="sys\uanimatebackgound.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAnimateBackgound"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit14>
       <Unit15>
         <Filename Value="forms\ufrmeditorkeystrokes.pas"/>
@@ -169,13 +168,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmEditorKeystrokes"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit15>
       <Unit16>
         <Filename Value="edit\usyneditoroptions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uSynEditorOptions"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit16>
       <Unit17>
         <Filename Value="sys\uderivedclasses.pas"/>
@@ -184,26 +183,26 @@
         <EditorIndex Value="5"/>
         <TopLine Value="218"/>
         <CursorPos X="53" Y="227"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="edit\uhighliter.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uHighliter"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit18>
       <Unit19>
         <Filename Value="sys\ufileutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uFileUtils"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit19>
       <Unit20>
         <Filename Value="sys\umrulist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uMRUList"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit20>
       <Unit21>
         <Filename Value="sys\uencodingfunc.pas"/>
@@ -212,7 +211,7 @@
         <EditorIndex Value="14"/>
         <TopLine Value="133"/>
         <CursorPos X="18" Y="145"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit21>
       <Unit22>
@@ -222,7 +221,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmNodesTransform"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit22>
       <Unit23>
         <Filename Value="forms\ufrmmodelviewer.pas"/>
@@ -231,7 +230,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmModelViewer"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit23>
       <Unit24>
         <Filename Value="sys\ucalculix.pas"/>
@@ -240,7 +239,7 @@
         <EditorIndex Value="8"/>
         <TopLine Value="49"/>
         <CursorPos X="9" Y="57"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit24>
       <Unit25>
@@ -250,13 +249,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmViewGroup"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit25>
       <Unit26>
         <Filename Value="math\uinptranslator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uInpTranslator"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit26>
       <Unit27>
         <Filename Value="forms\ufrmgroupselector.pas"/>
@@ -265,13 +264,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFrmGroupSelector"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit27>
       <Unit28>
         <Filename Value="math\uaddbcfunctions.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uAddBCFunctions"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit28>
       <Unit29>
         <Filename Value="sys\udialogs.pas"/>
@@ -280,16 +279,17 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
         <CursorPos X="10" Y="28"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit29>
       <Unit30>
         <Filename Value="math\uunicalconv.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uUnicalConv"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="771"/>
-        <CursorPos Y="781"/>
-        <UsageCount Value="176"/>
+        <TopLine Value="940"/>
+        <CursorPos X="18" Y="948"/>
+        <UsageCount Value="178"/>
         <Bookmarks Count="2">
           <Item0 Y="738" ID="1"/>
           <Item1 X="17" Y="802" ID="2"/>
@@ -306,14 +306,14 @@
         <EditorIndex Value="28"/>
         <TopLine Value="75"/>
         <CursorPos X="38" Y="112"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
         <Loaded Value="True"/>
       </Unit31>
       <Unit32>
         <Filename Value="sys\ucursors.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uCursors"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit32>
       <Unit33>
         <Filename Value="forms\ufrmmonitor.pas"/>
@@ -325,7 +325,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="267"/>
         <CursorPos X="28" Y="281"/>
-        <UsageCount Value="176"/>
+        <UsageCount Value="178"/>
       </Unit33>
       <Unit34>
         <Filename Value="general.inc"/>
@@ -367,7 +367,7 @@
         <EditorIndex Value="32"/>
         <TopLine Value="767"/>
         <CursorPos Y="764"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
       </Unit39>
       <Unit40>
@@ -376,7 +376,7 @@
         <EditorIndex Value="33"/>
         <TopLine Value="375"/>
         <CursorPos X="78" Y="385"/>
-        <UsageCount Value="73"/>
+        <UsageCount Value="74"/>
         <Loaded Value="True"/>
       </Unit40>
       <Unit41>
@@ -385,7 +385,7 @@
         <EditorIndex Value="29"/>
         <TopLine Value="467"/>
         <CursorPos X="14" Y="476"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
       </Unit41>
       <Unit42>
@@ -394,7 +394,7 @@
         <EditorIndex Value="1"/>
         <TopLine Value="7366"/>
         <CursorPos Y="7376"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="61"/>
         <Loaded Value="True"/>
       </Unit42>
       <Unit43>
@@ -403,7 +403,7 @@
         <EditorIndex Value="22"/>
         <TopLine Value="62"/>
         <CursorPos X="5" Y="75"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="72"/>
         <Loaded Value="True"/>
       </Unit43>
       <Unit44>
@@ -411,7 +411,7 @@
         <EditorIndex Value="19"/>
         <TopLine Value="330"/>
         <CursorPos X="18" Y="340"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit44>
       <Unit45>
@@ -419,7 +419,7 @@
         <EditorIndex Value="30"/>
         <TopLine Value="80"/>
         <CursorPos Y="88"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit45>
       <Unit46>
@@ -427,7 +427,7 @@
         <EditorIndex Value="23"/>
         <TopLine Value="6815"/>
         <CursorPos Y="6825"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit46>
       <Unit47>
@@ -436,7 +436,7 @@
         <EditorIndex Value="24"/>
         <TopLine Value="253"/>
         <CursorPos Y="264"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit47>
       <Unit48>
@@ -444,7 +444,7 @@
         <EditorIndex Value="25"/>
         <TopLine Value="249"/>
         <CursorPos Y="259"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit48>
       <Unit49>
@@ -452,7 +452,7 @@
         <EditorIndex Value="26"/>
         <TopLine Value="95"/>
         <CursorPos Y="105"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit49>
       <Unit50>
@@ -460,7 +460,7 @@
         <EditorIndex Value="31"/>
         <TopLine Value="640"/>
         <CursorPos X="10" Y="657"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit50>
       <Unit51>
@@ -468,7 +468,7 @@
         <EditorIndex Value="20"/>
         <TopLine Value="360"/>
         <CursorPos X="10" Y="379"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit51>
       <Unit52>
@@ -476,7 +476,7 @@
         <EditorIndex Value="21"/>
         <TopLine Value="199"/>
         <CursorPos Y="215"/>
-        <UsageCount Value="69"/>
+        <UsageCount Value="70"/>
         <Loaded Value="True"/>
       </Unit52>
       <Unit53>
@@ -485,7 +485,7 @@
         <EditorIndex Value="15"/>
         <TopLine Value="72"/>
         <CursorPos X="10" Y="82"/>
-        <UsageCount Value="65"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit53>
       <Unit54>
@@ -494,7 +494,7 @@
         <EditorIndex Value="17"/>
         <TopLine Value="882"/>
         <CursorPos X="7" Y="925"/>
-        <UsageCount Value="65"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit54>
       <Unit55>
@@ -503,7 +503,7 @@
         <EditorIndex Value="10"/>
         <TopLine Value="272"/>
         <CursorPos X="53" Y="277"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit55>
       <Unit56>
@@ -512,7 +512,7 @@
         <EditorIndex Value="11"/>
         <TopLine Value="39"/>
         <CursorPos X="65" Y="46"/>
-        <UsageCount Value="64"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit56>
       <Unit57>
@@ -520,7 +520,7 @@
         <EditorIndex Value="6"/>
         <TopLine Value="160"/>
         <CursorPos X="3" Y="170"/>
-        <UsageCount Value="57"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit57>
       <Unit58>
@@ -529,131 +529,127 @@
         <EditorIndex Value="4"/>
         <TopLine Value="23"/>
         <CursorPos X="3" Y="33"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit58>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="783" TopLine="775"/>
+        <Caret Line="784" TopLine="775"/>
       </Position1>
       <Position2>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="784" TopLine="775"/>
+        <Caret Line="785" TopLine="775"/>
       </Position2>
       <Position3>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="785" TopLine="775"/>
+        <Caret Line="786" TopLine="775"/>
       </Position3>
       <Position4>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="786" TopLine="775"/>
+        <Caret Line="787" TopLine="775"/>
       </Position4>
       <Position5>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="787" TopLine="775"/>
+        <Caret Line="788" TopLine="775"/>
       </Position5>
       <Position6>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="788" TopLine="775"/>
+        <Caret Line="790" TopLine="775"/>
       </Position6>
       <Position7>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="790" TopLine="775"/>
+        <Caret Line="794" TopLine="778"/>
       </Position7>
       <Position8>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="794" TopLine="778"/>
+        <Caret Line="795" TopLine="779"/>
       </Position8>
       <Position9>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="795" TopLine="779"/>
+        <Caret Line="796" TopLine="780"/>
       </Position9>
       <Position10>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="796" TopLine="780"/>
+        <Caret Line="799" TopLine="783"/>
       </Position10>
       <Position11>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="799" TopLine="783"/>
+        <Caret Line="800" TopLine="784"/>
       </Position11>
       <Position12>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="800" TopLine="784"/>
+        <Caret Line="801" TopLine="785"/>
       </Position12>
       <Position13>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="801" TopLine="785"/>
+        <Caret Line="796" TopLine="785"/>
       </Position13>
       <Position14>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="796" TopLine="785"/>
+        <Caret Line="799" TopLine="785"/>
       </Position14>
       <Position15>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="799" TopLine="785"/>
+        <Caret Line="800" TopLine="785"/>
       </Position15>
       <Position16>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="800" TopLine="785"/>
+        <Caret Line="801" TopLine="785"/>
       </Position16>
       <Position17>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="801" TopLine="785"/>
+        <Caret Line="803" TopLine="787"/>
       </Position17>
       <Position18>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="803" TopLine="787"/>
+        <Caret Line="783" TopLine="773"/>
       </Position18>
       <Position19>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="783" TopLine="773"/>
+        <Caret Line="784" TopLine="773"/>
       </Position19>
       <Position20>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="784" TopLine="773"/>
+        <Caret Line="785" TopLine="773"/>
       </Position20>
       <Position21>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="785" TopLine="773"/>
+        <Caret Line="786" TopLine="773"/>
       </Position21>
       <Position22>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="786" TopLine="773"/>
+        <Caret Line="787" TopLine="773"/>
       </Position22>
       <Position23>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="787" TopLine="773"/>
+        <Caret Line="788" TopLine="773"/>
       </Position23>
       <Position24>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="788" TopLine="773"/>
+        <Caret Line="790" TopLine="774"/>
       </Position24>
       <Position25>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="790" TopLine="774"/>
+        <Caret Line="794" TopLine="784"/>
       </Position25>
       <Position26>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="794" TopLine="784"/>
+        <Caret Line="795" TopLine="784"/>
       </Position26>
       <Position27>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="795" TopLine="784"/>
+        <Caret Line="796" TopLine="784"/>
       </Position27>
       <Position28>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="796" TopLine="784"/>
+        <Caret Line="799" TopLine="787"/>
       </Position28>
       <Position29>
         <Filename Value="math\uunicalconv.pas"/>
-        <Caret Line="799" TopLine="787"/>
+        <Caret Line="175" Column="15" TopLine="167"/>
       </Position29>
-      <Position30>
-        <Filename Value="forms\ufrmtextsearch.pas"/>
-        <Caret TopLine="34"/>
-      </Position30>
     </JumpHistory>
   </ProjectSession>
 </CONFIG>
