@@ -348,7 +348,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="467"/>
         <CursorPos X="14" Y="476"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="55"/>
       </Unit36>
       <Unit37>
         <Filename Value="H:\lazarus\components\synedit\synedit.pp"/>
@@ -356,7 +356,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="7366"/>
         <CursorPos Y="7376"/>
-        <UsageCount Value="45"/>
+        <UsageCount Value="44"/>
       </Unit37>
       <Unit38>
         <Filename Value="H:\lazarus\components\lazcontrols\extendednotebook.pas"/>
@@ -364,28 +364,28 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="62"/>
         <CursorPos X="5" Y="75"/>
-        <UsageCount Value="56"/>
+        <UsageCount Value="55"/>
       </Unit38>
       <Unit39>
         <Filename Value="H:\lazarus\lcl\include\winapih.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="330"/>
         <CursorPos X="18" Y="340"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit39>
       <Unit40>
         <Filename Value="H:\lazarus\lcl\include\custompage.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="80"/>
         <CursorPos Y="88"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit40>
       <Unit41>
         <Filename Value="H:\lazarus\lcl\include\wincontrol.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="6815"/>
         <CursorPos Y="6825"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit41>
       <Unit42>
         <Filename Value="H:\lazarus\lcl\widgetset\wscontrols.pp"/>
@@ -393,21 +393,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="253"/>
         <CursorPos Y="264"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit42>
       <Unit43>
         <Filename Value="H:\lazarus\lcl\interfaces\win32\win32winapi.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="249"/>
         <CursorPos Y="259"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit43>
       <Unit44>
         <Filename Value="H:\lazarus\lcl\interfaces\win32\win32callback.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="95"/>
         <CursorPos Y="105"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit44>
       <Unit45>
         <Filename Value="H:\lazarus\lcl\include\tabcontrol.inc"/>
@@ -421,14 +421,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="360"/>
         <CursorPos X="10" Y="379"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit46>
       <Unit47>
         <Filename Value="H:\lazarus\lcl\interfaces\win32\win32pagecontrol.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="199"/>
         <CursorPos Y="215"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="53"/>
       </Unit47>
       <Unit48>
         <Filename Value="H:\lazarus\components\lazutils\lconvencoding.pas"/>
@@ -436,7 +436,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="72"/>
         <CursorPos X="10" Y="82"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="49"/>
       </Unit48>
       <Unit49>
         <Filename Value="H:\lazarus\components\lazutils\lazutf8.pas"/>
@@ -444,7 +444,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="881"/>
         <CursorPos X="7" Y="925"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="49"/>
       </Unit49>
       <Unit50>
         <Filename Value="H:\lazarus\components\lazutils\lazfileutils.pas"/>
@@ -452,7 +452,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="272"/>
         <CursorPos X="53" Y="277"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="48"/>
       </Unit50>
       <Unit51>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\win32\system.pp"/>
@@ -460,14 +460,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="39"/>
         <CursorPos X="65" Y="46"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="48"/>
       </Unit51>
       <Unit52>
         <Filename Value="math\uunicalconv.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="160"/>
         <CursorPos X="3" Y="170"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="41"/>
       </Unit52>
       <Unit53>
         <Filename Value="math\uinptypes.pas"/>
@@ -475,7 +475,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="23"/>
         <CursorPos X="3" Y="33"/>
-        <UsageCount Value="18"/>
+        <UsageCount Value="17"/>
       </Unit53>
       <Unit54>
         <Filename Value="H:\lazarus\1.6\components\PascalScript\Samples\Debug\ide_editor.pas"/>
@@ -483,70 +483,70 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="142"/>
         <CursorPos X="56" Y="15"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit54>
       <Unit55>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysutilh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="230"/>
         <CursorPos X="10" Y="243"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit55>
       <Unit56>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysutils.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="734"/>
         <CursorPos X="11" Y="749"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit56>
       <Unit57>
         <Filename Value="H:\lazarus\1.6\fpc\3.0.0\source\rtl\go32v2\sysutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="856"/>
         <CursorPos X="3" Y="873"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit57>
       <Unit58>
         <Filename Value="H:\lazarus\1.6\fpc\3.0.0\source\rtl\unix\sysutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1568"/>
         <CursorPos X="15" Y="1582"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit58>
       <Unit59>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\win\sysutils.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="701"/>
         <CursorPos X="11" Y="711"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit59>
       <Unit60>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\win\wininc\func.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="572"/>
         <CursorPos X="10" Y="582"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit60>
       <Unit61>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="119"/>
         <CursorPos X="37" Y="129"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit61>
       <Unit62>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysstr.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="953"/>
         <CursorPos X="12" Y="964"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit62>
       <Unit63>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysformt.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="200"/>
         <CursorPos X="13" Y="214"/>
-        <UsageCount Value="2"/>
+        <UsageCount Value="1"/>
       </Unit63>
       <Unit64>
         <Filename Value="H:\lazarus\fpc\3.0.4\source\rtl\inc\objpash.inc"/>
