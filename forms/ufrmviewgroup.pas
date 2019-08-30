@@ -128,6 +128,5 @@ end;
 
 end.
 
-comp Nall do
-send Nall abq sur
+
 

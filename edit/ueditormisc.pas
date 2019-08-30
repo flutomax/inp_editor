@@ -43,6 +43,7 @@ const
   procedure SortMenu(MenuItem: TMenuItem);
   procedure CentredLabels(aControl: TWinControl);
   procedure ShowFileLocation(const s: string);
+  function AllowValueChar(const c: Char): Boolean;
   function ParseValue(const s: string): Extended;
   function ExtendedToStr(const x: Extended): string;
   function ExtendedToStrExp(const x: Extended): string;
@@ -125,6 +126,13 @@ begin
   {$Else}
     OpenURL(ExtractFileDir(s));
   {$EndIf}
+end;
+
+function AllowValueChar(const c: Char): Boolean;
+const
+  CHRS = ['0'..'9','+','-','.','E','e',#8];
+begin
+  result:=CharInSet(c,CHRS);
 end;
 
 function ParseValue(const s: string): Extended;
@@ -385,7 +393,4 @@ initialization
 end.
 
 
-
-** Surfaces based on fixed
-*INCLUDE, INPUT=hex-ijk_OUT_fixed.sur
 

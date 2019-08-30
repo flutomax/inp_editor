@@ -16,6 +16,11 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 }
 
+// Note:
+// -> CGX comp <name> do
+// Add Pressure To Body -> CGX send <set name> abq pres <value>
+// Add Convection -> CGX send <set name> abq film <Temperature> <film koeff>
+
 unit uAddBCFunctions;
 
 {$mode objfpc}{$H+}
@@ -30,7 +35,7 @@ type
 
   EAddBC = class(Exception);
 
-  TAddBCCmd = (bcAddFaces, bcAddPressure);
+  TAddBCCmd = (bcAddFaces, bcAddPressure, bcAddConvection);
 
   { TAddBCProc }
 
@@ -39,19 +44,18 @@ type
     fInpFile: TInpFile;
     fEditor: TInpEditor;
     fCmd: TAddBCCmd;
-    fPressureValue: Double;
-
     procedure CompleteSet(const sn: Integer);
     function ExportFaces(const sn: Integer): Boolean;
     function AddFaces(const sn: Integer): Boolean;
-    function AddPressure(const sn: Integer): Boolean;
+    function AddPressure(const sn: Integer; const pressure: Double): Boolean;
+    function AddConvertion(const sn: Integer; const temp,koef: Double): Boolean;
   public
     constructor Create;
     destructor Destroy; override;
     procedure Load(aList: TStrings; const aCmd: TAddBCCmd);
-    procedure Work(const sn: Integer);
+    procedure Work(const sn: Integer; const Args: array of const);
     property Editor: TInpEditor read fEditor write fEditor;
-    property PressureValue: Double read fPressureValue write fPressureValue;
+    //property PressureValue: Double read PressureValue write PressureValue;
   end;
 
 implementation
@@ -141,7 +145,6 @@ constructor TAddBCProc.Create;
 begin
   fEditor:=nil;
   fInpFile:=TInpFile.Create;
-  fPressureValue:=0;
 end;
 
 destructor TAddBCProc.Destroy;
@@ -333,7 +336,8 @@ begin
   result:=ExportFaces(sn);
 end;
 
-function TAddBCProc.AddPressure(const sn: Integer): Boolean;
+function TAddBCProc.AddPressure(const sn: Integer;
+  const pressure: Double): Boolean;
 var
   s,fn,sb: string;
   i,j,n,m: Integer;
@@ -363,25 +367,25 @@ begin
       cat:=fInpFile.ElEnqire[m].Category;
       if cat in [ecTria3..ecQuad8,ecSeg2,ecSeg3] then begin
         if cat in [ecSeg2,ecSeg3] then
-          lst.Add('%d, P?, %g',[fInpFile.Faces[i].ElemNumber,fPressureValue])
+          lst.Add('%d, P?, %g',[fInpFile.Faces[i].ElemNumber,pressure])
         else begin
           if fInpFile.ElEnqire[m].Attr>3 then begin
             if fInpFile.Faces[i].Number=1 then
-              lst.Add('%d, PP, %g',[fInpFile.Faces[i].ElemNumber,fPressureValue])
+              lst.Add('%d, PP, %g',[fInpFile.Faces[i].ElemNumber,pressure])
             else
               lst.Add('%d, P%d, %g',[fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number-1,fPressureValue]);
+                fInpFile.Faces[i].Number-1,pressure]);
           end else begin
             if fInpFile.Faces[i].Number=1 then
-              lst.Add('%d, PPOS, %g',[fInpFile.Faces[i].ElemNumber,fPressureValue])
+              lst.Add('%d, PPOS, %g',[fInpFile.Faces[i].ElemNumber,pressure])
             else
               lst.Add('%d, P%d, %g',[fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number+1,fPressureValue]);
+                fInpFile.Faces[i].Number+1,pressure]);
           end;
         end;
       end else
         lst.Add('%d, P%d, %g',[fInpFile.Faces[i].ElemNumber,
-          fInpFile.Faces[i].Number+1,fPressureValue]);
+          fInpFile.Faces[i].Number+1,pressure]);
     end; // for
     lst.SaveToFile(fn);
   finally
@@ -389,7 +393,7 @@ begin
   end;
 
   s:=Format('** Pressure %g on group %s%s',
-    [fPressureValue,fInpFile.Sets[sn].Name,fEditor.Lines.LineBreak]);
+    [pressure,fInpFile.Sets[sn].Name,fEditor.Lines.LineBreak]);
   s:=Format('%s*DLOAD%s',[s,fEditor.Lines.LineBreak]);
   s:=Format('%s%s',[s,Format(sInclude,[ExtractFileName(fn)])]);
   with fEditor do
@@ -397,11 +401,77 @@ begin
   result:=true;
 end;
 
-procedure TAddBCProc.Work(const sn: Integer);
+function TAddBCProc.AddConvertion(const sn: Integer;
+  const temp,koef: Double): Boolean;
+var
+  s,fn,sb: string;
+  i,j,n,m: Integer;
+  cat: TElementCategory;
+  lst: TStringListEx;
+begin
+  if fInpFile.Sets[sn].NumFaces=0 then begin
+    result:=AddFaces(sn);
+    if not result then
+      exit;
+    fInpFile.Parse(fEditor.Lines,fEditor.FileName);
+  end;
+  CompleteSet(sn);
+  fn:=Format('%s%s.flm',[ExtractFilePath(fEditor.FileName),
+    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
+  if not ChechkFileName(fn) then
+    exit;
+  n:=fInpFile.Sets[sn].NumFaces;
+
+  sb:=Format('** Film based on %s',[fInpFile.Sets[sn].Name]);
+  lst:=TStringListEx.Create;
+  try
+    lst.Add(sb);
+    for j:=0 to n-1 do begin
+      i:=fInpFile.Sets[sn].Faces[j];
+      m:=fInpFile.Faces[i].ElemNumber;
+      cat:=fInpFile.ElEnqire[m].Category;
+      if cat in [ecTria3..ecQuad8,ecSeg2,ecSeg3] then begin
+        if cat in [ecSeg2,ecSeg3] then
+          lst.Add('%d, F?, %g, %.7e',[fInpFile.Faces[i].ElemNumber,temp,koef])
+        else begin
+          if fInpFile.ElEnqire[m].Attr>3 then begin
+            if fInpFile.Faces[i].Number=1 then
+              lst.Add('%d, FP, %g, %.7e',[fInpFile.Faces[i].ElemNumber,temp,koef])
+            else
+              lst.Add('%d, F%d, %g, %.7e',[fInpFile.Faces[i].ElemNumber,
+                fInpFile.Faces[i].Number-1,temp,koef]);
+          end else begin
+            if fInpFile.Faces[i].Number=1 then
+              lst.Add('%d, FP, %g, %6.e',[fInpFile.Faces[i].ElemNumber,temp,koef])
+            else
+              lst.Add('%d, F%d, %g, %.7e',[fInpFile.Faces[i].ElemNumber,
+                fInpFile.Faces[i].Number+1,temp,koef]);
+          end;
+        end;
+      end else
+        lst.Add('%d, F%d, %g, %.7e',[fInpFile.Faces[i].ElemNumber,
+          fInpFile.Faces[i].Number+1,temp,koef]);
+    end; // for
+    lst.SaveToFile(fn);
+  finally
+    lst.Free;
+  end;
+
+  s:=Format('** Convection %g, %.7e on group %s%s',
+    [temp,koef,fInpFile.Sets[sn].Name,fEditor.Lines.LineBreak]);
+  s:=Format('%s*FILM%s',[s,fEditor.Lines.LineBreak]);
+  s:=Format('%s%s',[s,Format(sInclude,[ExtractFileName(fn)])]);
+  with fEditor do
+    InsertLine(s,CaretY,CaretX);
+  result:=true;
+end;
+
+procedure TAddBCProc.Work(const sn: Integer; const Args: array of const);
 begin
   case fCmd of
     bcAddFaces: AddFaces(sn);
-    bcAddPressure: AddPressure(sn);
+    bcAddPressure: AddPressure(sn, Args[0].VExtended^);
+    bcAddConvection: AddConvertion(sn, Args[0].VExtended^, Args[1].VExtended^);
   end;
 end;
 

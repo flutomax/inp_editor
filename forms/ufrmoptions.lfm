@@ -19,9 +19,9 @@ object FrmOptions: TFrmOptions
     Height = 403
     Top = 0
     Width = 637
-    ActivePage = tsGeneral
+    ActivePage = TabSheet1
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object tsGeneral: TTabSheet
       Caption = 'General Settings'
@@ -726,275 +726,275 @@ object FrmOptions: TFrmOptions
     end
     object TabSheet1: TTabSheet
       Caption = 'Editor Options'
-      ClientHeight = 368
-      ClientWidth = 633
+      ClientHeight = 375
+      ClientWidth = 629
       object ckEditOptionsGroupUndo: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'When undoing/redoing actions, handle all continous changes of the same kind in one call instead undoing/redoing each command separately'
         Top = 36
-        Width = 105
+        Width = 84
         Caption = 'Group undo'
         TabOrder = 0
       end
       object ckEditOptionsAutoIndent: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Allows to indent the caret, when new line is created with <Enter>, with the same amount of leading white space as the preceding line'
         Top = 56
-        Width = 105
+        Width = 83
         Caption = 'Auto indent'
         TabOrder = 1
       end
       object ckEditOptionsDragDropEditing: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Allows to drag-and-drop text blocks within the editor'
         Top = 76
-        Width = 172
+        Width = 136
         Caption = 'Drag and drop editing'
         TabOrder = 2
       end
       object ckEditOptionsAltSetsColumnMode: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Holding down the Alt Key will put the selection mode into columnar format'
         Top = 96
-        Width = 171
+        Width = 136
         Caption = 'Alt sets column mode'
         TabOrder = 3
       end
       object ckEditOptionsKeepCaretX: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'When moving through lines the X position will always stay the same'
         Top = 116
-        Width = 175
+        Width = 140
         Caption = 'Maintain caret column'
         TabOrder = 4
       end
       object ckEditOptionsSmartTabs: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'When tabbing, the cursor will go to the next non-white space character of the previous line'
         Top = 16
-        Width = 100
+        Width = 76
         Caption = 'Smart tabs'
         TabOrder = 5
       end
       object ckEditOptionsSmartTabDelete: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Similar to Smart Tabs, but when you delete characters'
         Top = 36
-        Width = 139
+        Width = 106
         Caption = 'Smart tab delete'
         TabOrder = 6
       end
       object ckEditOptionsRightMouseMovesCursor: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'When clicking with the right mouse for a popup menu, move the cursor to that location'
         Top = 136
-        Width = 202
+        Width = 161
         Caption = 'Right mouse moves cursor'
         TabOrder = 7
       end
       object ckEditOptionsEnhanceHomeKey: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Enhances home key positioning, similar to visual studio'
         Top = 156
-        Width = 148
+        Width = 120
         Caption = 'Enhance home key'
         TabOrder = 8
       end
       object ckEditOptionsHideShowScrollbars: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'If enabled, then the scrollbars will only show when necessary.'
         Top = 196
-        Width = 161
+        Width = 125
         Caption = 'Auto hide scrollbars'
         TabOrder = 10
       end
       object ckEditOptionsHalfPageScroll: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'When scrolling with page-up and page-down commands, only scroll a half page at a time'
         Top = 236
-        Width = 130
+        Width = 102
         Caption = 'Half page scroll'
         TabOrder = 12
       end
       object ckEditOptionsScrollByOneLess: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Forces scrolling to be one less'
         Top = 256
-        Width = 140
+        Width = 110
         Caption = 'Scroll by one less'
         TabOrder = 13
       end
       object ckEditOptionsScrollPastEOF: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Allows the cursor to go past the end of file marker'
         Top = 276
-        Width = 167
+        Width = 130
         Caption = 'Scroll past end of file'
         TabOrder = 14
       end
       object ckEditOptionsScrollPastEOL: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Allows the cursor to go past the last character into the white space at the end of a line'
         Top = 296
-        Width = 170
+        Width = 133
         Caption = 'Scroll past end of line'
         TabOrder = 15
       end
       object ckEditOptionsShowScrollHint: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Shows a hint of the visible line numbers when scrolling vertically'
         Top = 316
-        Width = 131
+        Width = 104
         Caption = 'Show scroll hint'
         TabOrder = 16
       end
       object ckEditOptionsTabsToSpaces: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Converts a tab character to the number of spaces in Tab Width'
         Top = 76
-        Width = 124
+        Width = 97
         Caption = 'Tabs to spaces'
         TabOrder = 18
       end
       object ckEditOptionsTrimTrailingSpaces: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Spaces at the end of lines will be trimmed and not saved'
         Top = 96
-        Width = 156
+        Width = 123
         Caption = 'Trim trailing spaces'
         TabOrder = 19
       end
       object ckEditOptions2CaretSkipsSelection: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Allows <Left> and <Right> keys to move caret to selected block edges, without deselecting the block'
         Top = 116
-        Width = 165
+        Width = 127
         Caption = 'Caret skips selection'
         TabOrder = 20
       end
       object ckEditOptions2CaretSkipTab: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Disables caret positioning inside tab-characters internal area'
         Top = 136
-        Width = 120
+        Width = 92
         Caption = 'Caret skip tab'
         TabOrder = 21
       end
       object ckEditOptions2AlwaysVisibleCaret: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Keeps caret on currently visible control area, when scrolling control'
         Top = 156
-        Width = 157
+        Width = 122
         Caption = 'Always visible caret'
         TabOrder = 22
       end
       object ckEditOptions2EnhanceEndKey: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Toggles behaviour of <End> key on line with trailing spaces. If turned on, key will jump to last non-spacing char, if it''s nearer to caret position.'
         Top = 176
-        Width = 135
+        Width = 109
         Caption = 'Enhance end key'
         TabOrder = 9
       end
       object ckEditOptions2FoldedCopyPaste: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Remember folding states of blocks, on Copy/Paste operations '
         Top = 176
-        Width = 154
+        Width = 120
         Caption = 'Folded Copy/Paste'
         TabOrder = 23
       end
       object ckEditOptions2PersistentBlock: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Keeps selection, even if caret moves away or text is edited'
         Top = 196
-        Width = 135
+        Width = 103
         Caption = 'Persistent block'
         TabOrder = 24
       end
       object ckEditOptions2OverwriteBlock: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Allows to overwrite currently selected block, when pasting or typing new text'
         Top = 216
-        Width = 133
+        Width = 103
         Caption = 'Overwrite block'
         TabOrder = 25
       end
       object ckEditOptions2AutoHideCursor: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Hide mouse cursor, when new text is typed'
         Top = 236
-        Width = 134
+        Width = 105
         Caption = 'Autohide cursor'
         TabOrder = 26
       end
       object ckEditOptions2ColorSelectionTillEol: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Colorize selection background only till EOL of each line, not till edge of control'
         Top = 256
-        Width = 172
+        Width = 134
         Caption = 'Color selection till eol'
         TabOrder = 27
       end
       object ckEditMouseOptionsAltSetsColumnMode: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Allows to activate "column" selection mode, if <Alt> key is pressed and text is being selected with mouse'
         Top = 276
-        Width = 140
+        Width = 113
         Caption = 'Alt column mode'
         TabOrder = 28
       end
       object ckEditMouseOptionsDoubleClickSelectsLine: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Selects entire line with double-click, otherwise double-click selects only current word'
         Top = 296
-        Width = 187
+        Width = 148
         Caption = 'Double click selects line '
         TabOrder = 29
       end
       object ckEditMouseOptionsCtrlWheelZoom: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Allows to zoom editor by <Ctrl+MouseWheel> commands'
         Top = 316
-        Width = 177
+        Width = 141
         Caption = 'Zoom editor by mouse'
         TabOrder = 30
       end
       object ckCompletionOnAsterick: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Execute completion on press <*> key '
         Top = 16
-        Width = 189
+        Width = 149
         Caption = 'Execute completion on *'
         TabOrder = 31
       end
@@ -1092,7 +1092,7 @@ object FrmOptions: TFrmOptions
         end
         object edUndoLimit: TSpinEdit
           Left = 103
-          Height = 27
+          Height = 23
           Top = 16
           Width = 87
           Alignment = taRightJustify
@@ -1101,7 +1101,7 @@ object FrmOptions: TFrmOptions
         end
         object edTabWidth: TSpinEdit
           Left = 103
-          Height = 27
+          Height = 23
           Top = 46
           Width = 87
           Alignment = taRightJustify
@@ -1110,7 +1110,7 @@ object FrmOptions: TFrmOptions
         end
         object edExtraLineSpacing: TSpinEdit
           Left = 103
-          Height = 27
+          Height = 23
           Top = 76
           Width = 87
           Alignment = taRightJustify
@@ -1131,7 +1131,7 @@ object FrmOptions: TFrmOptions
         end
         object edExtraCharSpacing: TSpinEdit
           Left = 103
-          Height = 27
+          Height = 23
           Top = 106
           Width = 87
           Alignment = taRightJustify
@@ -1142,19 +1142,19 @@ object FrmOptions: TFrmOptions
       end
       object ckHideSelection: TCheckBox
         Left = 224
-        Height = 24
+        Height = 19
         Hint = 'Determines whether the visual indication of the selected text remains when focus shifts to another control'
         Top = 216
-        Width = 122
+        Width = 96
         Caption = 'Hide Selection'
         TabOrder = 11
       end
       object ckWantTabs: TCheckBox
         Left = 432
-        Height = 24
+        Height = 19
         Hint = 'Allows to insert tab characters within the editor'
         Top = 56
-        Width = 95
+        Width = 73
         Caption = 'Want tabs'
         TabOrder = 17
       end

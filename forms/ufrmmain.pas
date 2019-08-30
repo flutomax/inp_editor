@@ -36,6 +36,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdAddBCConvection: TAction;
     cmdCalculixPreFlagV: TAction;
     cmdViewTabCloseBtnVisible: TAction;
     cmdToolsMonitor: TAction;
@@ -254,6 +255,7 @@ type
     MenuItem190: TMenuItem;
     MenuItem191: TMenuItem;
     MenuItem192: TMenuItem;
+    MenuItem193: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -695,6 +697,7 @@ begin
   cmdToolsGroupView.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCFaces.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCPressure.Enabled:=cmdEditSelectAll.Enabled;
+  cmdAddBCConvection.Enabled:=cmdEditSelectAll.Enabled;
   cmdCalculixSolver.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPreCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPostCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
@@ -1774,6 +1777,7 @@ begin
 
   ShowGroupSelector(Editor,TAddBCCmd(TAction(Sender).Tag));
 end;
+
 
 // Calculix
 
