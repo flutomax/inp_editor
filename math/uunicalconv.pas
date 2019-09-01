@@ -96,7 +96,7 @@ type
 implementation
 
 uses
-  uInpTypes;
+  uInpTypes, uEditorMisc;
 
 {$I uunicalconv.inc}
 
@@ -855,7 +855,7 @@ begin
       Message('writemesh: writing node %d', [i]);
     fText.WriteLn;
     with fCoords[i] do
-      fText.Write('%d, %.7e, %.7e, %.7e', [fNodeNumbers[i], X, Y, Z]);
+      fText.Write('%d, %s, %s, %s', [fNodeNumbers[i], Sf(X), Sf(Y), Sf(Z)]);
   end;
 
   // writing groups of nodes.

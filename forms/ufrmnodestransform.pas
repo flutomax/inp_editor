@@ -277,8 +277,7 @@ begin
       for i:=0 to fNodes.Count-1 do begin
         a.Transform(fNodes[i],n);
         s:=Format('%s%d, %s, %s, %s%s',
-          [s,n.N,ExtendedToStrExp(n.X),ExtendedToStrExp(n.Y),
-          ExtendedToStrExp(n.Z),nl]);
+          [s,n.N,Sf(n.X),Sf(n.Y),Sf(n.Z),nl]);
       end;
     finally
       a.Free;

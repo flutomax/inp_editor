@@ -36,6 +36,8 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdAddBCRadiation: TAction;
+    cmdAddBCFluxOnFace: TAction;
     cmdAddBCConvection: TAction;
     cmdCalculixPreFlagV: TAction;
     cmdViewTabCloseBtnVisible: TAction;
@@ -256,6 +258,8 @@ type
     MenuItem191: TMenuItem;
     MenuItem192: TMenuItem;
     MenuItem193: TMenuItem;
+    MenuItem194: TMenuItem;
+    MenuItem195: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -698,6 +702,8 @@ begin
   cmdAddBCFaces.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCPressure.Enabled:=cmdEditSelectAll.Enabled;
   cmdAddBCConvection.Enabled:=cmdEditSelectAll.Enabled;
+  cmdAddBCFluxOnFace.Enabled:=cmdEditSelectAll.Enabled;
+  cmdAddBCRadiation.Enabled:=cmdEditSelectAll.Enabled;
   cmdCalculixSolver.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPreCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;
   cmdCalculixPostCGX.Enabled:=cmdEditSelectAll.Enabled and Config.TerminalExists;

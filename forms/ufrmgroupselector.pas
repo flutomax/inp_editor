@@ -32,17 +32,26 @@ type
 
   TFrmGroupSelector = class(TForm)
     cbGroups: TComboBox;
+    ckCavityRadiation: TCheckBox;
+    edEmissivity: TEdit;
     edPressure: TEdit;
     edFilmCoefficient: TEdit;
+    edFlux: TEdit;
     edSinkTemperature: TEdit;
+    edSinkTemperatureR: TEdit;
+    lbEmissivity: TLabel;
     lbGroups: TLabel;
     lbPressure: TLabel;
     lbFilmCoefficient: TLabel;
+    lbFlux: TLabel;
     lbSinkTemperature: TLabel;
+    lbSinkTemperatureR: TLabel;
     nbPager: TNotebook;
     pgAddConvection: TPage;
     pgAddFaces: TPage;
+    pgAddFluxOnFace: TPage;
     pgAddPressureToBody: TPage;
+    pgAddRadiation: TPage;
     pnGroups: TPanel;
     pnBottom: TButtonPanel;
     procedure edPressureKeyPress(Sender: TObject; var Key: char);
@@ -72,7 +81,8 @@ uses
 
 const
   TITLES: array[TAddBCCmd] of string = (
-    'Add Faces', 'Add Pressure To Body', 'Add Convection');
+    'Add Faces', 'Add Pressure To Body', 'Add Convection', 'Add Flux On Face',
+    'Add Radiation');
 
 procedure ShowGroupSelector(aEditor: TInpEditor; const aCmd: TAddBCCmd);
 begin
@@ -104,7 +114,7 @@ end;
 
 procedure TFrmGroupSelector.FormShow(Sender: TObject);
 const
-  NFIELD: array[TAddBCCmd] of integer = (0, 1, 2);
+  NFIELD: array[TAddBCCmd] of integer = (0, 1, 2, 1, 3);
 var
   a, h, n: integer;
 begin
@@ -152,6 +162,7 @@ end;
 procedure TFrmGroupSelector.OKButtonClick(Sender: TObject);
 var
   a1, a2: double;
+  b1: boolean;
   sn: integer;
 begin
   a1 := 0;
@@ -171,8 +182,25 @@ begin
         Exit;
       if not CheckEdit(edSinkTemperature) then
         Exit;
-      a1 := ParseValue(edPressure.Text);
-      a2 := ParseValue(edSinkTemperature.Text);
+      a1 := ParseValue(edSinkTemperature.Text);
+      a2 := ParseValue(edFilmCoefficient.Text);
+    end;
+    bcAddFluxOnFace:
+    begin
+      if not CheckEdit(edFlux) then
+        Exit;
+      a1 := ParseValue(edFlux.Text);
+    end;
+    bcAddRadiation:
+    begin
+      // check Emissivity & Sink Temperature
+      if not CheckEdit(edEmissivity) then
+        Exit;
+      if not CheckEdit(edSinkTemperatureR) then
+        Exit;
+      a1 := ParseValue(edSinkTemperatureR.Text);
+      a2 := ParseValue(edEmissivity.Text);
+      b1 := ckCavityRadiation.Checked;
     end;
   end;
 
@@ -186,6 +214,8 @@ begin
       bcAddFaces: fAddBCProc.Work(sn, []);
       bcAddPressure: fAddBCProc.Work(sn, [a1]);
       bcAddConvection: fAddBCProc.Work(sn, [a1, a2]);
+      bcAddFluxOnFace: fAddBCProc.Work(sn, [a1]);
+      bcAddRadiation: fAddBCProc.Work(sn, [a1, a2, b1]);
     end;
   finally
     Screen.Cursor := crDefault;
