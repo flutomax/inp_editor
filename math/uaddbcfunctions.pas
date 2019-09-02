@@ -640,7 +640,7 @@ begin
         end;
       end
       else
-        lst.Add('%d, F%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
+        lst.Add('%d, R%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
           fInpFile.Faces[i].Number + 1, CV[cavity], sink, Sf(emissivity)]);
     end; // for
     lst.SaveToFile(fn);
