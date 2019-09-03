@@ -36,11 +36,11 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cbMain: TCoolBar;
     cmdAddBCRadiation: TAction;
     cmdAddBCFluxOnFace: TAction;
     cmdAddBCConvection: TAction;
     cmdCalculixPreFlagV: TAction;
-    cmdViewTabCloseBtnVisible: TAction;
     cmdToolsMonitor: TAction;
     cmdFileShowLocation: TAction;
     cmdAddBCPressure: TAction;
@@ -97,8 +97,6 @@ type
     cmdViewTbSearch: TAction;
     cmdViewTbEdit: TAction;
     cmdViewTbFile: TAction;
-    btFileClose: TSpeedButton;
-    cbMain: TCoolBar;
     cmdViewZoomDefault: TAction;
     cmdViewZoomOut: TAction;
     cmdViewZoomIn: TAction;
@@ -254,7 +252,6 @@ type
     MenuItem187: TMenuItem;
     MenuItem188: TMenuItem;
     MenuItem189: TMenuItem;
-    MenuItem190: TMenuItem;
     MenuItem191: TMenuItem;
     MenuItem192: TMenuItem;
     MenuItem193: TMenuItem;
@@ -378,20 +375,17 @@ type
     MnMain: TMainMenu;
     msRfBot: TMenuItem;
     msRfTop: TMenuItem;
-    pnTbConteiner: TPanel;
-    pnBtnFileClose: TPanel;
-    pnToolbar: TPanel;
     pnClose: TPanel;
     PmEditor: TPopupMenu;
     PmPager: TPopupMenu;
     pmPreFlags: TPopupMenu;
     sbEditor: TStatusBar;
+    tbCalculix: TToolBar;
     tbEdit: TToolBar;
     tbFile: TToolBar;
     tbSearch: TToolBar;
     tbTools: TToolBar;
     tbView: TToolBar;
-    tbCalculix: TToolBar;
     ToolButton1: TToolButton;
     ToolButton100: TToolButton;
     ToolButton101: TToolButton;
@@ -487,7 +481,6 @@ type
     procedure cmdToolsOptionsExecute(Sender: TObject);
     procedure cmdViewSpecialCharsExecute(Sender: TObject);
     procedure cmdViewStatusbarExecute(Sender: TObject);
-    procedure cmdViewTabCloseBtnVisibleExecute(Sender: TObject);
     procedure cmdViewTbFileExecute(Sender: TObject);
     procedure cmdViewTbResetExecute(Sender: TObject);
     procedure cmdViewUnfoldCurrentExecute(Sender: TObject);
@@ -505,7 +498,6 @@ type
     procedure miTabsClick(Sender: TObject);
     procedure PmEditorPopup(Sender: TObject);
     procedure pmPreFlagsPopup(Sender: TObject);
-    procedure pnBtnFileClosePaint(Sender: TObject);
     procedure pnToolbarPaint(Sender: TObject);
     procedure sbEditorDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
       const Rect: TRect);
@@ -532,15 +524,11 @@ type
     procedure PagerStatusChange(Sender: TObject; Changes: TSynStatusChanges);
     procedure UpdateActiveTab(Data: PtrInt);
     procedure UpdateStatusHint(const aHint: string);
-    procedure UpdateCloseBtn;
     procedure PasteFromFile(const aFileName: TFileName);
     procedure MakeTemplatesMenu;
     procedure TemplatesSearch(const Path: TFileName; MenuItem: TMenuItem);
     procedure TemplateMenuClick(Sender: TObject);
     procedure PagerShowTabs(Sender: TObject);
-    procedure cbMainPaint(Sender: TObject);
-    procedure cbMainPostPaint(Data: PtrInt);
-    procedure ThemeServicesThemeChange(Sender: TObject);
   public
     procedure Open(const aFileName: string = '');
     property Pager: TInpEditPager read fPager;
@@ -596,11 +584,7 @@ begin
   fPrint.Colors:=true;
   cmdViewStatusbar.Checked:=fConfig.StatusbarVisible;
   sbEditor.Visible:=cmdViewStatusbar.Checked;
-  cmdViewTabCloseBtnVisible.Checked:=fConfig.TabCloseBtnVisible;
-  UpdateCloseBtn;
   DrawDisabledImagelist(IlMain,IlDMain);
-  cbMain.OnPaint:=@cbMainPaint;
-  ThemeServices.OnThemeChange:=@ThemeServicesThemeChange;
   SetupBookmark;
   MakeTemplatesMenu;
 end;
@@ -636,7 +620,6 @@ begin
       Open(ParamStr(i))
   else
     Open;
-  ThemeServicesThemeChange(nil);
 end;
 
 
@@ -1620,12 +1603,6 @@ begin
   DrawMainToolbar(TPanel(Sender));
 end;
 
-procedure TFrmMain.pnBtnFileClosePaint(Sender: TObject);
-begin
-  if ThemeServices.ThemesEnabled then
-    DrawThemedControl(TPanel(Sender));
-end;
-
 procedure TFrmMain.cmdViewTbFileExecute(Sender: TObject);
 begin
   TCoolBand(cbMain.Bands.FindItemID(TAction(Sender).Tag)).Visible:=TAction(Sender).Checked;
@@ -1660,53 +1637,6 @@ begin
   fConfig.StatusbarVisible:=cmdViewStatusbar.Checked;
   sbEditor.Visible:=cmdViewStatusbar.Checked;
 end;
-
-
-procedure TFrmMain.UpdateCloseBtn;
-begin
-  fPager.TabCloseBtnVisible:=fConfig.TabCloseBtnVisible;
-  pnBtnFileClose.Visible:=not fConfig.TabCloseBtnVisible;
-  cbMain.AutosizeBands;
-end;
-
-procedure TFrmMain.cmdViewTabCloseBtnVisibleExecute(Sender: TObject);
-begin
-  fConfig.TabCloseBtnVisible:=cmdViewTabCloseBtnVisible.Checked;
-  UpdateCloseBtn;
-end;
-
-procedure TFrmMain.cbMainPostPaint(Data: PtrInt);
-var
-  x: Integer;
-  r1,r2: TRect;
-begin
-  r1:=cbMain.ClientRect;
-  r1.Left:=r1.Right-1;
-  r2:=pnBtnFileClose.ClientRect;
-  r2.Right:=r2.Left+1;
-  cbMain.Canvas.CopyRect(r1,pnBtnFileClose.Canvas,r2);
-end;
-
-procedure TFrmMain.cbMainPaint(Sender: TObject);
-begin
-  // hack method for paint toolbar
-  // remove white border line in Windows Themes
-  if ThemeServices.ThemesEnabled then
-    Application.QueueAsyncCall(@cbMainPostPaint,0);
-end;
-
-procedure TFrmMain.ThemeServicesThemeChange(Sender: TObject);
-begin
-  // draw horisontal edges in panel if not enabled ThemeServices
-  if ThemeServices.ThemesEnabled then begin
-    pnToolbar.BevelInner:=bvNone;
-    pnToolbar.BevelOuter:=bvNone;
-  end else begin
-    pnToolbar.BevelInner:=bvSpace;
-    pnToolbar.BevelOuter:=bvSpace;
-  end;
-end;
-
 
 // Options
 

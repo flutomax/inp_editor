@@ -40,419 +40,369 @@ object FrmMain: TFrmMain
     SimplePanel = False
     OnDrawPanel = sbEditorDrawPanel
   end
-  object pnToolbar: TPanel
+  object cbMain: TCoolBar
     Left = 0
     Height = 30
     Top = 0
     Width = 873
-    Align = alTop
     AutoSize = True
-    BevelOuter = bvNone
-    ClientHeight = 30
-    ClientWidth = 873
-    TabOrder = 1
-    OnPaint = pnToolbarPaint
-    object pnBtnFileClose: TPanel
-      Left = 845
-      Height = 30
-      Top = 0
-      Width = 28
-      Align = alRight
-      BevelOuter = bvNone
-      ClientHeight = 30
-      ClientWidth = 28
+    BandBorderStyle = bsNone
+    BandMaximize = bmDblClick
+    Bands = <    
+      item
+        Break = False
+        Control = tbFile
+        FixedSize = True
+        HorizontalOnly = True
+        MinWidth = 144
+        Width = 158
+      end    
+      item
+        Break = False
+        Control = tbEdit
+        FixedSize = True
+        HorizontalOnly = True
+        MinWidth = 251
+        Width = 264
+      end    
+      item
+        Break = False
+        Control = tbSearch
+        FixedSize = True
+        HorizontalOnly = True
+        MinWidth = 120
+        Width = 130
+      end    
+      item
+        Break = False
+        Control = tbView
+        MinWidth = 70
+        Width = 83
+      end    
+      item
+        Break = False
+        Control = tbCalculix
+        MinWidth = 82
+        Width = 96
+      end    
+      item
+        Break = False
+        Control = tbTools
+        MinWidth = 88
+        Width = 88
+      end>
+    EdgeBorders = []
+    EdgeInner = esNone
+    EdgeOuter = esNone
+    GrabStyle = gsGripper
+    GrabWidth = 6
+    HorizontalSpacing = 1
+    VerticalSpacing = 4
+    object tbFile: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 10
+      Height = 22
+      Top = 4
+      Width = 144
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 10
+      BorderSpacing.Top = 4
+      Caption = 'File'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
       TabOrder = 0
-      OnPaint = pnBtnFileClosePaint
-      object btFileClose: TSpeedButton
-        Left = 2
+      Transparent = True
+      object ToolButton67: TToolButton
+        Left = 24
+        Top = 0
+        Action = cmdFileOpen
+      end
+      object ToolButton68: TToolButton
+        Left = 47
+        Top = 0
+        Action = cmdFileSave
+      end
+      object ToolButton83: TToolButton
+        Left = 70
+        Top = 0
+        Action = cmdFileSaveAs
+      end
+      object ToolButton84: TToolButton
+        Left = 93
+        Top = 0
+        Action = cmdFileSaveAll
+      end
+      object ToolButton93: TToolButton
+        Left = 116
         Height = 22
-        Top = 4
-        Width = 23
-        Action = cmdFileClose
-        Constraints.MaxHeight = 22
-        Constraints.MaxWidth = 23
-        Constraints.MinHeight = 22
-        Constraints.MinWidth = 23
-        Color = clDefault
-        Flat = True
-        ShowCaption = False
+        Top = 0
+        Caption = 'ToolButton28'
+        Style = tbsDivider
+      end
+      object ToolButton94: TToolButton
+        Left = 121
+        Top = 0
+        Action = cmdFilePrint
+      end
+      object ToolButton99: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdFileNew
       end
     end
-    object pnTbConteiner: TPanel
-      Left = 0
-      Height = 30
-      Top = 0
-      Width = 845
-      Align = alClient
-      BevelOuter = bvNone
-      ClientHeight = 30
-      ClientWidth = 845
+    object tbEdit: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 168
+      Height = 22
+      Top = 4
+      Width = 251
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 168
+      BorderSpacing.Top = 4
+      Caption = 'Edit'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
       TabOrder = 1
-      object cbMain: TCoolBar
-        Left = 0
-        Height = 30
+      Transparent = True
+      object ToolButton73: TToolButton
+        Left = 24
         Top = 0
-        Width = 845
-        AutoSize = True
-        BandBorderStyle = bsNone
-        BandMaximize = bmDblClick
-        Bands = <        
-          item
-            Break = False
-            Control = tbFile
-            FixedSize = True
-            HorizontalOnly = True
-            MinWidth = 144
-            Width = 158
-          end        
-          item
-            Break = False
-            Control = tbEdit
-            FixedSize = True
-            HorizontalOnly = True
-            MinWidth = 251
-            Width = 264
-          end        
-          item
-            Break = False
-            Control = tbSearch
-            FixedSize = True
-            HorizontalOnly = True
-            MinWidth = 120
-            Width = 130
-          end        
-          item
-            Break = False
-            Control = tbView
-            MinWidth = 70
-            Width = 83
-          end        
-          item
-            Break = False
-            Control = tbCalculix
-            MinWidth = 82
-            Width = 96
-          end        
-          item
-            Break = False
-            Control = tbTools
-            MinWidth = 88
-            Width = 88
-          end>
-        EdgeBorders = []
-        EdgeInner = esNone
-        EdgeOuter = esNone
-        GrabStyle = gsGripper
-        GrabWidth = 6
-        HorizontalSpacing = 1
-        VerticalSpacing = 4
-        object tbFile: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 10
-          Height = 22
-          Top = 4
-          Width = 144
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 10
-          BorderSpacing.Top = 4
-          Caption = 'File'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 0
-          Transparent = True
-          object ToolButton67: TToolButton
-            Left = 24
-            Top = 0
-            Action = cmdFileOpen
-          end
-          object ToolButton68: TToolButton
-            Left = 47
-            Top = 0
-            Action = cmdFileSave
-          end
-          object ToolButton83: TToolButton
-            Left = 70
-            Top = 0
-            Action = cmdFileSaveAs
-          end
-          object ToolButton84: TToolButton
-            Left = 93
-            Top = 0
-            Action = cmdFileSaveAll
-          end
-          object ToolButton93: TToolButton
-            Left = 116
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton28'
-            Style = tbsDivider
-          end
-          object ToolButton94: TToolButton
-            Left = 121
-            Top = 0
-            Action = cmdFilePrint
-          end
-          object ToolButton99: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdFileNew
-          end
-        end
-        object tbEdit: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 168
-          Height = 22
-          Top = 4
-          Width = 251
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 168
-          BorderSpacing.Top = 4
-          Caption = 'Edit'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 1
-          Transparent = True
-          object ToolButton73: TToolButton
-            Left = 24
-            Top = 0
-            Action = cmdEditRedo
-          end
-          object ToolButton74: TToolButton
-            Left = 52
-            Top = 0
-            Action = cmdEditCut
-          end
-          object ToolButton75: TToolButton
-            Left = 47
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton8'
-            Style = tbsDivider
-          end
-          object ToolButton76: TToolButton
-            Left = 75
-            Top = 0
-            Action = cmdEditCopy
-          end
-          object ToolButton77: TToolButton
-            Left = 98
-            Top = 0
-            Action = cmdEditPaste
-          end
-          object ToolButton78: TToolButton
-            Left = 121
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton11'
-            Style = tbsDivider
-          end
-          object ToolButton79: TToolButton
-            Left = 126
-            Top = 0
-            Action = cmdEditDelete
-          end
-          object ToolButton80: TToolButton
-            Left = 149
-            Top = 0
-            Action = cmdEditSelectAll
-          end
-          object ToolButton95: TToolButton
-            Left = 172
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton24'
-            Style = tbsDivider
-          end
-          object ToolButton96: TToolButton
-            Left = 200
-            Top = 0
-            Action = cmdEditUncommentSelected
-          end
-          object ToolButton97: TToolButton
-            Left = 177
-            Top = 0
-            Action = cmdEditCommentSelected
-          end
-          object ToolButton98: TToolButton
-            Left = 223
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton27'
-            Style = tbsDivider
-          end
-          object ToolButton1: TToolButton
-            Left = 228
-            Top = 0
-            Action = cmdEditIncludeFile
-          end
-          object ToolButton2: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdEditUndo
-          end
-        end
-        object tbSearch: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 432
-          Height = 22
-          Top = 4
-          Width = 116
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 432
-          BorderSpacing.Top = 4
-          Caption = 'Search'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 2
-          Transparent = True
-          object ToolButton92: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdFindSearch
-          end
-          object ToolButton100: TToolButton
-            Left = 70
-            Top = 0
-            Action = cmdFindReplace
-          end
-          object ToolButton101: TToolButton
-            Left = 93
-            Top = 0
-            Action = cmdFindGotoLine
-          end
-          object ToolButton105: TToolButton
-            Left = 24
-            Top = 0
-            Action = cmdFindNext
-          end
-          object ToolButton106: TToolButton
-            Left = 47
-            Top = 0
-            Action = cmdFindPrevious
-          end
-        end
-        object tbView: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 562
-          Height = 22
-          Top = 4
-          Width = 70
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 562
-          BorderSpacing.Top = 4
-          Caption = 'View'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 3
-          Transparent = True
-          object ToolButton62: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdViewZoomIn
-          end
-          object ToolButton64: TToolButton
-            Left = 24
-            Top = 0
-            Action = cmdViewZoomOut
-          end
-          object ToolButton65: TToolButton
-            Left = 47
-            Top = 0
-            Action = cmdViewZoomDefault
-          end
-        end
-        object tbCalculix: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 645
-          Height = 22
-          Top = 4
-          Width = 82
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 645
-          BorderSpacing.Top = 4
-          Caption = 'Calculix'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 4
-          Transparent = True
-          object ToolButton63: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdCalculixSolver
-          end
-          object ToolButton66: TToolButton
-            Left = 24
-            Top = 0
-            Action = cmdCalculixPreCGX
-            DropdownMenu = pmPreFlags
-            Style = tbsDropDown
-          end
-          object ToolButton3: TToolButton
-            Left = 59
-            Top = 0
-            Action = cmdCalculixPostCGX
-          end
-        end
-        object tbTools: TToolBar
-          AnchorSideLeft.Control = cbMain
-          AnchorSideTop.Control = cbMain
-          Left = 741
-          Height = 22
-          Top = 4
-          Width = 98
-          Align = alNone
-          AutoSize = True
-          BorderSpacing.Left = 741
-          BorderSpacing.Top = 4
-          Caption = 'Tools'
-          DisabledImages = IlDMain
-          EdgeBorders = []
-          Images = IlMain
-          TabOrder = 5
-          Transparent = True
-          object ToolButton69: TToolButton
-            Left = 1
-            Top = 0
-            Action = cmdToolsOptions
-          end
-          object ToolButton70: TToolButton
-            Left = 52
-            Top = 0
-            Action = cmdToolsModelViewer
-          end
-          object ToolButton103: TToolButton
-            Left = 24
-            Height = 22
-            Top = 0
-            Caption = 'ToolButton27'
-            Style = tbsDivider
-          end
-          object ToolButton4: TToolButton
-            Left = 75
-            Top = 0
-            Action = cmdToolsNodesTransform
-          end
-          object ToolButton5: TToolButton
-            Left = 29
-            Top = 0
-            Action = cmdToolsGroupView
-          end
-        end
+        Action = cmdEditRedo
+      end
+      object ToolButton74: TToolButton
+        Left = 52
+        Top = 0
+        Action = cmdEditCut
+      end
+      object ToolButton75: TToolButton
+        Left = 47
+        Height = 22
+        Top = 0
+        Caption = 'ToolButton8'
+        Style = tbsDivider
+      end
+      object ToolButton76: TToolButton
+        Left = 75
+        Top = 0
+        Action = cmdEditCopy
+      end
+      object ToolButton77: TToolButton
+        Left = 98
+        Top = 0
+        Action = cmdEditPaste
+      end
+      object ToolButton78: TToolButton
+        Left = 121
+        Height = 22
+        Top = 0
+        Caption = 'ToolButton11'
+        Style = tbsDivider
+      end
+      object ToolButton79: TToolButton
+        Left = 126
+        Top = 0
+        Action = cmdEditDelete
+      end
+      object ToolButton80: TToolButton
+        Left = 149
+        Top = 0
+        Action = cmdEditSelectAll
+      end
+      object ToolButton95: TToolButton
+        Left = 172
+        Height = 22
+        Top = 0
+        Caption = 'ToolButton24'
+        Style = tbsDivider
+      end
+      object ToolButton96: TToolButton
+        Left = 200
+        Top = 0
+        Action = cmdEditUncommentSelected
+      end
+      object ToolButton97: TToolButton
+        Left = 177
+        Top = 0
+        Action = cmdEditCommentSelected
+      end
+      object ToolButton98: TToolButton
+        Left = 223
+        Height = 22
+        Top = 0
+        Caption = 'ToolButton27'
+        Style = tbsDivider
+      end
+      object ToolButton1: TToolButton
+        Left = 228
+        Top = 0
+        Action = cmdEditIncludeFile
+      end
+      object ToolButton2: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdEditUndo
+      end
+    end
+    object tbSearch: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 432
+      Height = 22
+      Top = 4
+      Width = 116
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 432
+      BorderSpacing.Top = 4
+      Caption = 'Search'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
+      TabOrder = 2
+      Transparent = True
+      object ToolButton92: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdFindSearch
+      end
+      object ToolButton100: TToolButton
+        Left = 70
+        Top = 0
+        Action = cmdFindReplace
+      end
+      object ToolButton101: TToolButton
+        Left = 93
+        Top = 0
+        Action = cmdFindGotoLine
+      end
+      object ToolButton105: TToolButton
+        Left = 24
+        Top = 0
+        Action = cmdFindNext
+      end
+      object ToolButton106: TToolButton
+        Left = 47
+        Top = 0
+        Action = cmdFindPrevious
+      end
+    end
+    object tbView: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 562
+      Height = 22
+      Top = 4
+      Width = 70
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 562
+      BorderSpacing.Top = 4
+      Caption = 'View'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
+      TabOrder = 3
+      Transparent = True
+      object ToolButton62: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdViewZoomIn
+      end
+      object ToolButton64: TToolButton
+        Left = 24
+        Top = 0
+        Action = cmdViewZoomOut
+      end
+      object ToolButton65: TToolButton
+        Left = 47
+        Top = 0
+        Action = cmdViewZoomDefault
+      end
+    end
+    object tbCalculix: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 645
+      Height = 22
+      Top = 4
+      Width = 82
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 645
+      BorderSpacing.Top = 4
+      Caption = 'Calculix'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
+      TabOrder = 4
+      Transparent = True
+      object ToolButton63: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdCalculixSolver
+      end
+      object ToolButton66: TToolButton
+        Left = 24
+        Top = 0
+        Action = cmdCalculixPreCGX
+        DropdownMenu = pmPreFlags
+        Style = tbsDropDown
+      end
+      object ToolButton3: TToolButton
+        Left = 59
+        Top = 0
+        Action = cmdCalculixPostCGX
+      end
+    end
+    object tbTools: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 741
+      Height = 22
+      Top = 4
+      Width = 98
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 741
+      BorderSpacing.Top = 4
+      Caption = 'Tools'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
+      TabOrder = 5
+      Transparent = True
+      object ToolButton69: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdToolsOptions
+      end
+      object ToolButton70: TToolButton
+        Left = 52
+        Top = 0
+        Action = cmdToolsModelViewer
+      end
+      object ToolButton103: TToolButton
+        Left = 24
+        Height = 22
+        Top = 0
+        Caption = 'ToolButton27'
+        Style = tbsDivider
+      end
+      object ToolButton4: TToolButton
+        Left = 75
+        Top = 0
+        Action = cmdToolsNodesTransform
+      end
+      object ToolButton5: TToolButton
+        Left = 29
+        Top = 0
+        Action = cmdToolsGroupView
       end
     end
   end
@@ -801,10 +751,6 @@ object FrmMain: TFrmMain
       end
       object MenuItem166: TMenuItem
         Action = cmdViewStatusbar
-        AutoCheck = True
-      end
-      object MenuItem190: TMenuItem
-        Action = cmdViewTabCloseBtnVisible
         AutoCheck = True
       end
       object MenuItem33: TMenuItem
@@ -1806,13 +1752,6 @@ object FrmMain: TFrmMain
       ImageIndex = 57
       OnExecute = cmdToolsMonitorExecute
       ShortCut = 121
-    end
-    object cmdViewTabCloseBtnVisible: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Close Button On Tab'
-      Hint = 'Close button on tab'
-      OnExecute = cmdViewTabCloseBtnVisibleExecute
     end
     object cmdCalculixPreFlagV: TAction
       Tag = 10
