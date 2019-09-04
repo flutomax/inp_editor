@@ -46,6 +46,7 @@ type
     fEditor: TInpEditor;
     fCmd: TAddBCCmd;
     procedure CompleteSet(const sn: integer);
+    procedure PrepareSet(const sn: integer);
     function ExportFaces(const sn: integer): boolean;
     function AddFaces(const sn: integer): boolean;
     function AddFlux(const sn: integer; const flux: double): boolean;
@@ -320,6 +321,19 @@ begin
   end;
 end;
 
+procedure TAddBCProc.PrepareSet(const sn: integer);
+begin
+  CompleteSet(sn);
+  // delete first element if needed
+  with fInpFile.Sets[sn] do
+    if (NumFaces > 0) and (Faces[0] = 0) then
+    begin
+      Dec(NumFaces);
+      Move(Faces[1], Faces[0], NumFaces * SizeOf(integer));
+      SetLength(Faces, NumFaces);
+    end;
+end;
+
 function TAddBCProc.AddFaces(const sn: integer): boolean;
 var
   m: integer;
@@ -380,7 +394,7 @@ begin
       exit;
     fInpFile.Parse(fEditor.Lines, fEditor.FileName);
   end;
-  CompleteSet(sn);
+  PrepareSet(sn);
   fn := Format('%s%s.dfl', [ExtractFilePath(fEditor.FileName),
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
@@ -451,7 +465,7 @@ begin
       exit;
     fInpFile.Parse(fEditor.Lines, fEditor.FileName);
   end;
-  CompleteSet(sn);
+  PrepareSet(sn);
   fn := Format('%s%s.dlo', [ExtractFilePath(fEditor.FileName),
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
@@ -522,7 +536,7 @@ begin
       exit;
     fInpFile.Parse(fEditor.Lines, fEditor.FileName);
   end;
-  CompleteSet(sn);
+  PrepareSet(sn);
   fn := Format('%s%s.flm', [ExtractFilePath(fEditor.FileName),
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
@@ -596,7 +610,7 @@ begin
       exit;
     fInpFile.Parse(fEditor.Lines, fEditor.FileName);
   end;
-  CompleteSet(sn);
+  PrepareSet(sn);
   fn := Format('%s%s.rad', [ExtractFilePath(fEditor.FileName),
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
@@ -615,8 +629,8 @@ begin
       if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
       begin
         if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, R?%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber, CV[cavity],
-            sink, Sf(emissivity)])
+          lst.Add('%d, R?%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
+            CV[cavity], sink, Sf(emissivity)])
         else
         begin
           if fInpFile.ElEnqire[m].Attr > 3 then
@@ -631,8 +645,8 @@ begin
           else
           begin
             if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, RPOS%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                CV[cavity], sink, Sf(emissivity)])
+              lst.Add('%d, RPOS%s, %.6f, %s',
+                [fInpFile.Faces[i].ElemNumber, CV[cavity], sink, Sf(emissivity)])
             else
               lst.Add('%d, R%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
                 fInpFile.Faces[i].Number + 1, CV[cavity], sink, Sf(emissivity)]);

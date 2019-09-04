@@ -747,6 +747,7 @@ end;
 procedure TInpEditor.CaretToEOF;
 begin
   ExecuteCommand(ecEditorBottom, #0, nil);
+  ExecuteCommand(ecLineTextStart, #0, nil);
 end;
 
 
