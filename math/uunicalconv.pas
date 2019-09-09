@@ -734,8 +734,10 @@ begin
 end;
 
 procedure TUnv.ReadGroups;
+const
+  pg = 'PERMANENT GROUP';
 var
-  key, ret, dummy, i, k, l, n: integer;
+  key, ret, dummy, i, k, l, n, p: integer;
   line: string;
 label
   exitloop;
@@ -776,7 +778,11 @@ begin
           SetLength(fGroups[fNumGroup].Entities, fNumEnt);
 
           // read group data.
-          fGroups[fNumGroup].Name := fReader.ReadLine;
+          line := fReader.ReadLine;
+          // fix GMSH namespace "PERMANENT GROUP"
+          if Pos(pg,UpperCase(line)) = 1 then
+            line := StringReplace(line, pg, 'gr', [rfIgnoreCase]);
+          fGroups[fNumGroup].Name := line;
           n := 0;
           while n < fNumEnt do
           begin
