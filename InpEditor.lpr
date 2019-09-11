@@ -34,7 +34,7 @@ uses
   uDerivedClasses, uFrmEditorKeystrokes, ufileutils, uMRUList, uencodingFunc,
   uFrmNodesTransform, uFrmModelViewer, uCalculix, uFrmViewGroup, uInpTranslator,
   uFrmGroupSelector, uAddBCFunctions, uDialogs, uUnicalConv, ufrmFileImport,
-  uFrmMonitor, uCursors;
+  uFrmMonitor, uFrmGraph, uCursors;
 
 {$R *.res}
 

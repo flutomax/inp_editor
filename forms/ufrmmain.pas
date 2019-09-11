@@ -36,6 +36,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdToolsPlotGraph: TAction;
     cbMain: TCoolBar;
     cmdAddBCRadiation: TAction;
     cmdAddBCFluxOnFace: TAction;
@@ -252,6 +253,7 @@ type
     MenuItem187: TMenuItem;
     MenuItem188: TMenuItem;
     MenuItem189: TMenuItem;
+    MenuItem190: TMenuItem;
     MenuItem191: TMenuItem;
     MenuItem192: TMenuItem;
     MenuItem193: TMenuItem;
@@ -479,6 +481,7 @@ type
     procedure cmdToolsMonitorExecute(Sender: TObject);
     procedure cmdToolsNodesTransformExecute(Sender: TObject);
     procedure cmdToolsOptionsExecute(Sender: TObject);
+    procedure cmdToolsPlotGraphExecute(Sender: TObject);
     procedure cmdViewSpecialCharsExecute(Sender: TObject);
     procedure cmdViewStatusbarExecute(Sender: TObject);
     procedure cmdViewTbFileExecute(Sender: TObject);
@@ -550,8 +553,8 @@ uses
   InterfaceBase, LazUTF8, Math, StrUtils, LCLIntf, Themes, SynEditKeyCmds,
   uFrmGotoLine, uFrmOptions, uFrmTextSearch, uFrmTextReplace, uFrmExportText,
   uFrmAbout, uFrmEditorKeystrokes, uFrmNodesTransform, uFrmViewGroup,
-  uFrmGroupSelector, ufrmFileImport, uFrmMonitor, uHighliter, uFileUtils,
-  uCalculix, uDialogs, uAddBCFunctions, SynEditMouseCmds;
+  uFrmGroupSelector, ufrmFileImport, uFrmMonitor, uFrmGraph, uHighliter,
+  uFileUtils, uCalculix, uDialogs, uAddBCFunctions, SynEditMouseCmds;
 
 { TFrmMain }
 
@@ -1690,6 +1693,12 @@ begin
   if IsActiveEditor then
     ShowGroupViewer(ActiveEditor);
 end;
+
+procedure TFrmMain.cmdToolsPlotGraphExecute(Sender: TObject);
+begin
+  ShowPlotGraph;
+end;
+
 
 // Add BC
 

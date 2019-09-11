@@ -95,6 +95,22 @@ resourcestring
   sWarnBeforeRunAddBC = 'Required to save changes before running Add BC.';
   sWarnEmptyValue = 'The requested value should not be empty.';
 
+  sVLEDuplicateKey = 'A value of time "%s" already exists!';
+  sVLEIllegalValue = 'A value "%s" is not a valid floating point value!';
+  sVLETimeNotAsc = 'The times must be arranged in ascending order!';
+  sVLEEmptyField = 'The field is empty!';
+  sCheckListSucc = 'Check the list is done. No errors were found.';
+  sInvalidXML = 'Invalid format of XML file';
+  sHelp = 'Math expression formatting.'+
+    LineEnding+''+
+    LineEnding+'Use syntax of basic.'+
+    LineEnding+'"t" is variable.'+
+    LineEnding+'Supported elementary functions: arccos, arcctan, arcsin, '+
+    'arctan, cos, cosh, ctan, sum, exp, ln, log10, log2, max, min, power, '+
+    'sin, sinh, sqr, sqrt, tan, tanh, round, abs, pi.';
+  sUnknownGraphFileExt = 'Unknown graphics file extension "%s"!'+
+    LineEnding+'Can''t saved graph.';
+
 implementation
 
 end.
