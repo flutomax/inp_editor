@@ -19,6 +19,7 @@
 unit uDerivedClasses;
 
 {$mode objfpc}{$H+}
+{$DEFINE SKIP_EMPTY_LINES} // skip empty lines from source code
 
 interface
 
@@ -324,10 +325,16 @@ end;
 
 function TFileReader.ReadLine: string;
 begin
-  if Eof then
-    Exit('');
-  result:=Trim(fList[fCurr]);
-  inc(fCurr);
+  {$IFDEF SKIP_EMPTY_LINES}
+  repeat
+  {$ENDIF}
+    if Eof then
+      Exit('');
+    result:=Trim(fList[fCurr]);
+    inc(fCurr);
+  {$IFDEF SKIP_EMPTY_LINES}
+  until Length(result)>0;
+  {$ENDIF}
 end;
 
 { TIniFileEx }

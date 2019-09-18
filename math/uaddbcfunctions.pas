@@ -17,7 +17,8 @@
 }
 
 // Note:
-// -> CGX comp <name> do
+// Add Faces -> CGX comp <name> do
+// Export Faces -> CGX send <set name> abq sur
 // Add Pressure To Body -> CGX send <set name> abq pres <value>
 // Add Convection -> CGX send <set name> abq film <Temperature> <film koeff>
 
@@ -195,7 +196,7 @@ function TAddBCProc.ExportFaces(const sn: integer): boolean;
 var
   lst: TStringListEx;
   s, fn, sb: string;
-  i, j, e, n: integer;
+  i, j, e: integer;
   cat: TElementCategory;
 begin
   Result := False;
@@ -204,7 +205,6 @@ begin
   try
     lst.Add(sb);
     lst.Add('*SURFACE, NAME=%s', [fInpFile.Sets[sn].Name]);
-
     for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
     begin
       i := fInpFile.Sets[sn].Faces[j];
@@ -217,19 +217,17 @@ begin
           lst.Add('%d, S?', [fInpFile.Faces[i].ElemNumber])
         else if fInpFile.ElEnqire[e].Attr > 3 then
         begin
-          n := fInpFile.Faces[i].Number;
-          if n = 1 then
+          if fInpFile.Faces[i].Number = 1 then
             lst.Add('%d, SP ', [e])
           else
-            lst.Add('%d, S%d', [e, n - 1]);
+            lst.Add('%d, S%d', [e, fInpFile.Faces[i].Number - 1]);
         end
         else
         begin
-          n := fInpFile.Faces[i].Number;
-          if n = 1 then
+          if fInpFile.Faces[i].Number = 1 then
             lst.Add('%d, SPOS ', [e])
           else
-            lst.Add('%d, S%d', [e, n + 1]);
+            lst.Add('%d, S%d', [e, fInpFile.Faces[i].Number + 1]);
         end;
       end
       else
@@ -324,7 +322,7 @@ end;
 procedure TAddBCProc.PrepareSet(const sn: integer);
 begin
   CompleteSet(sn);
-  // delete first element if needed
+  {
   with fInpFile.Sets[sn] do
     if (NumFaces > 0) and (Faces[0] = 0) then
     begin
@@ -332,6 +330,7 @@ begin
       Move(Faces[1], Faces[0], NumFaces * SizeOf(integer));
       SetLength(Faces, NumFaces);
     end;
+  }
 end;
 
 function TAddBCProc.AddFaces(const sn: integer): boolean;
@@ -378,12 +377,14 @@ begin
   end;
   EraseMultipleEntities;
   Result := ExportFaces(sn);
+  if Result then
+    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
 end;
 
 function TAddBCProc.AddFlux(const sn: integer; const flux: double): boolean;
 var
   s, fn, sb: string;
-  i, j, n, m: integer;
+  i, j, m: integer;
   cat: TElementCategory;
   lst: TStringListEx;
 begin
@@ -399,13 +400,12 @@ begin
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
     exit;
-  n := fInpFile.Sets[sn].NumFaces;
 
   sb := Format('** DFlux based on %s', [fInpFile.Sets[sn].Name]);
   lst := TStringListEx.Create;
   try
     lst.Add(sb);
-    for j := 0 to n - 1 do
+    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
     begin
       i := fInpFile.Sets[sn].Faces[j];
       m := fInpFile.Faces[i].ElemNumber;
@@ -443,7 +443,7 @@ begin
     lst.Free;
   end;
 
-  s := Format('** DFlux %s based on group %s%s',
+  s := Format('** DFlux (flux=%s) based on group %s%s',
     [Sf(flux), fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
   s := Format('%s*DFLUX%s', [s, fEditor.Lines.LineBreak]);
   s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
@@ -454,7 +454,7 @@ end;
 function TAddBCProc.AddPressure(const sn: integer; const pressure: double): boolean;
 var
   s, fn, sb: string;
-  i, j, n, m: integer;
+  i, j, m: integer;
   cat: TElementCategory;
   lst: TStringListEx;
 begin
@@ -470,13 +470,12 @@ begin
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
     exit;
-  n := fInpFile.Sets[sn].NumFaces;
 
   sb := Format('** Pressure based on %s', [fInpFile.Sets[sn].Name]);
   lst := TStringListEx.Create;
   try
     lst.Add(sb);
-    for j := 0 to n - 1 do
+    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
     begin
       i := fInpFile.Sets[sn].Faces[j];
       m := fInpFile.Faces[i].ElemNumber;
@@ -514,7 +513,7 @@ begin
     lst.Free;
   end;
 
-  s := Format('** Pressure %g based on group %s%s',
+  s := Format('** Pressure (pressure=%g) based on group %s%s',
     [pressure, fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
   s := Format('%s*DLOAD%s', [s, fEditor.Lines.LineBreak]);
   s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
@@ -525,7 +524,7 @@ end;
 function TAddBCProc.AddConvertion(const sn: integer; const sink, koef: double): boolean;
 var
   s, fn, sb: string;
-  i, j, n, m: integer;
+  i, j, m: integer;
   cat: TElementCategory;
   lst: TStringListEx;
 begin
@@ -541,13 +540,12 @@ begin
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
     exit;
-  n := fInpFile.Sets[sn].NumFaces;
 
   sb := Format('** Film based on %s', [fInpFile.Sets[sn].Name]);
   lst := TStringListEx.Create;
   try
     lst.Add(sb);
-    for j := 0 to n - 1 do
+    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
     begin
       i := fInpFile.Sets[sn].Faces[j];
       m := fInpFile.Faces[i].ElemNumber;
@@ -585,7 +583,7 @@ begin
     lst.Free;
   end;
 
-  s := Format('** Convection %.6f, %s based on group %s%s',
+  s := Format('** Convection (sink=%.6f; koef=%s) based on group %s%s',
     [sink, Sf(koef), fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
   s := Format('%s*FILM%s', [s, fEditor.Lines.LineBreak]);
   s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
@@ -599,7 +597,7 @@ const
   CV: array[boolean] of string = ('', 'CR');
 var
   s, fn, sb: string;
-  i, j, n, m: integer;
+  i, j, m: integer;
   cat: TElementCategory;
   lst: TStringListEx;
 begin
@@ -615,13 +613,12 @@ begin
     ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
   if not ChechkFileName(fn) then
     exit;
-  n := fInpFile.Sets[sn].NumFaces;
 
   sb := Format('** Film based on %s', [fInpFile.Sets[sn].Name]);
   lst := TStringListEx.Create;
   try
     lst.Add(sb);
-    for j := 0 to n - 1 do
+    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
     begin
       i := fInpFile.Sets[sn].Faces[j];
       m := fInpFile.Faces[i].ElemNumber;
@@ -662,8 +659,9 @@ begin
     lst.Free;
   end;
 
-  s := Format('** Radiate %.6f, %s based on group %s%s',
-    [sink, Sf(emissivity), fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
+  s := Format('** Radiate (sink=%.6f; emissivity=%s; cavity=%s) based on group %s%s',
+    [sink, Sf(emissivity), BoolToStr(cavity,true), fInpFile.Sets[sn].Name,
+    fEditor.Lines.LineBreak]);
   s := Format('%s*RADIATE%s', [s, fEditor.Lines.LineBreak]);
   s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
   fEditor.InsertLineHere(s);

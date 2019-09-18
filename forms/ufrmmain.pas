@@ -17,6 +17,7 @@
 }
 
 {%RunCommand $MakeExe($(EdFile)) -m H:\Work\calculix\CL32-win32\hlp\examples\nl\nl-buckl\_nlb.inp}
+
 unit uFrmMain;
 
 {$mode objfpc}{$H+}
@@ -32,6 +33,7 @@ uses
   uSynEditorOptions, uConfig, uMRUList, uDerivedClasses, uFrmModelViewer;
 
 type
+
 
   { TFrmMain }
 

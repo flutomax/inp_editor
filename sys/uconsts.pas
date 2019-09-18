@@ -28,6 +28,8 @@ const
 
   AllowEditNumChars: TSysCharSet = ['0'..'9','+','-',#8,'.','e','E'];
 
+  ID_OTHER_INSTANCE = $DEAD;
+
 resourcestring
   sAppTitle = 'Inp Editor';
   sDescription = 'Abaqus and CCX Inp Files Editor';
