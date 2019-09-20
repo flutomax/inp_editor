@@ -38,6 +38,7 @@ type
     btFont: TButton;
     btReset: TButton;
     btClearMRU: TButton;
+    ckScrollToEnd: TCheckBox;
     edPathCGX: TComboBox;
     edPathTerminal: TComboBox;
     edPathTemplates: TComboBox;
@@ -231,6 +232,7 @@ begin
   cbInsertCaret.AddItem('Half Block',nil);
   cbInsertCaret.AddItem('Block',nil);
   cbOverwriteCaret.Items.Assign(cbInsertCaret.Items);
+  ckScrollToEnd.Checked:=true;
   CentredLabels(self);
   dlgOpenProgram.Filter:=sFilterProgram;
   dlgOpenProgram.DefaultExt:=sDefExtProgram;
@@ -314,6 +316,7 @@ begin
 
     cbInsertCaret.ItemIndex:=Ord(InsertCaret);
     cbOverwriteCaret.ItemIndex:=Ord(OverwriteCaret);
+    ckScrollToEnd.Checked:=ScrollToEnd;
     edUndoLimit.Value:=MaxUndo;
     edTabWidth.Value:=TabWidth;
     edExtraLineSpacing.Value:=ExtraLineSpacing;
@@ -439,6 +442,7 @@ begin
     WantTabs:=ckWantTabs.Checked;
     InsertCaret:=TSynEditCaretType(cbInsertCaret.ItemIndex);
     OverwriteCaret:=TSynEditCaretType(cbOverwriteCaret.ItemIndex);
+    ScrollToEnd:=ckScrollToEnd.Checked;
     MaxUndo:=edUndoLimit.Value;
     TabWidth:=edTabWidth.Value;
     ExtraLineSpacing:=edExtraLineSpacing.Value;
@@ -719,6 +723,7 @@ begin
   edExtraCharSpacing.Value:=0;
   cbInsertCaret.ItemIndex:=Ord(ctVerticalLine);
   cbOverwriteCaret.ItemIndex:=Ord(ctBlock);
+  ckScrollToEnd.Checked:=true;
 
   ckEditOptionsGroupUndo.Checked:=false;
   ckEditOptionsAutoIndent.Checked:=true;

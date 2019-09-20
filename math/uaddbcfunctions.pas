@@ -1,16 +1,16 @@
-{ 
+{
     Copyright (c) 2016-2019 by Vasily Makarov
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as
     published by the Free Software Foundation(version 2);
-    
-    
+
+
     This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of 
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License version 2 for more details.
-    
+
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -47,14 +47,9 @@ type
     fEditor: TInpEditor;
     fCmd: TAddBCCmd;
     procedure CompleteSet(const sn: integer);
-    procedure PrepareSet(const sn: integer);
-    function ExportFaces(const sn: integer): boolean;
+    function ExportData(const sn: integer; lst: TStrings;
+      const aCmd: TAddBCCmd; const Args: array of const): boolean;
     function AddFaces(const sn: integer): boolean;
-    function AddFlux(const sn: integer; const flux: double): boolean;
-    function AddPressure(const sn: integer; const pressure: double): boolean;
-    function AddConvertion(const sn: integer; const sink, koef: double): boolean;
-    function AddRadiation(const sn: integer; const sink, emissivity: double;
-      const cavity: boolean): boolean;
   public
     constructor Create;
     destructor Destroy; override;
@@ -68,6 +63,19 @@ implementation
 uses
   Math, uInpFunctions, uDerivedClasses, uFileUtils, uConsts, uDialogs,
   uEditorMisc;
+
+const
+  INCL_EXT: array[TAddBCCmd] of string = (
+    '.sur', '.dlo', '.flm', '.dfl', '.rad'
+    );
+
+  CMD_DESCR: array[TAddBCCmd] of string = (
+    'Surfaces', 'Pressure', 'Convection', 'DFlux', 'Radiate'
+    );
+
+  CMD_TITLE: array[TAddBCCmd] of string = (
+    'SURFACE', 'DLOAD', 'FILM', 'DFLUX', 'RADIATE'
+    );
 
 function IFind(ipnt: TIntegerDynArray; const n, x0: integer): integer;
 var
@@ -192,60 +200,106 @@ begin
 
 end;
 
-function TAddBCProc.ExportFaces(const sn: integer): boolean;
+function TAddBCProc.ExportData(const sn: integer; lst: TStrings;
+  const aCmd: TAddBCCmd; const Args: array of const): boolean;
+const
+  CV: array[boolean] of string = ('', 'CR');
 var
-  lst: TStringListEx;
-  s, fn, sb: string;
-  i, j, e: integer;
+  i, j, n, e, f: integer;
   cat: TElementCategory;
 begin
   Result := False;
-  sb := Format('** Surfaces based on %s', [fInpFile.Sets[sn].Name]);
-  lst := TStringListEx.Create;
-  try
-    lst.Add(sb);
-    lst.Add('*SURFACE, NAME=%s', [fInpFile.Sets[sn].Name]);
-    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
+  with fInpFile.Sets[sn] do
+    n := IfThen(aCmd = bcAddFaces, NumFaces, NumElfaces);
+  for j := 0 to n - 1 do
+  begin
+    if aCmd = bcAddFaces then
     begin
       i := fInpFile.Sets[sn].Faces[j];
-      cat := fInpFile.ElEnqire[fInpFile.Faces[i].ElemNumber].Category;
       e := fInpFile.Faces[i].ElemNumber;
+      f := fInpFile.Faces[i].Number;
+    end
+    else
+    begin
+      i := j;
+      e := fInpFile.Sets[sn].Elfaces[i].e;
+      f := fInpFile.Sets[sn].Elfaces[i].f;
+    end;
 
-      if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
-      begin
-        if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, S?', [fInpFile.Faces[i].ElemNumber])
-        else if fInpFile.ElEnqire[e].Attr > 3 then
-        begin
-          if fInpFile.Faces[i].Number = 1 then
-            lst.Add('%d, SP ', [e])
-          else
-            lst.Add('%d, S%d', [e, fInpFile.Faces[i].Number - 1]);
+    cat := fInpFile.ElEnqire[e].Category;
+    if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
+    begin
+      if cat in [ecSeg2, ecSeg3] then
+        case aCmd of
+          bcAddFaces: lst.Add('%d, S?', [e]);
+          bcAddPressure: lst.Add('%d, P?, %s', [e, Sf(Args[0].VExtended^)]);
+          bcAddConvection: lst.Add('%d, F?, %.6f, %s',
+              [e, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+          bcAddFluxOnFace: lst.Add('%d, S?, %s', [e, Sf(Args[0].VExtended^)]);
+          bcAddRadiation: lst.Add('%d, R?%s, %.6f, %s',
+              [e, CV[Args[2].VBoolean], Args[0].VExtended^, Sf(Args[1].VExtended^)]);
         end
+      else if fInpFile.ElEnqire[e].Attr > 3 then
+      begin
+        if fInpFile.Faces[i].Number = 1 then
+          case aCmd of
+            bcAddFaces: lst.Add('%d, SP ', [e]);
+            bcAddPressure: lst.Add('%d, PP, %s', [e, Sf(Args[0].VExtended^)]);
+            bcAddConvection: lst.Add('%d, FP, %.6f, %s',
+                [e, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+            bcAddFluxOnFace: lst.Add('%d, SP, %s', [e, Sf(Args[0].VExtended^)]);
+            bcAddRadiation: lst.Add('%d, RP%s, %.6f, %s',
+                [e, CV[Args[2].VBoolean], Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+          end
         else
-        begin
-          if fInpFile.Faces[i].Number = 1 then
-            lst.Add('%d, SPOS ', [e])
-          else
-            lst.Add('%d, S%d', [e, fInpFile.Faces[i].Number + 1]);
-        end;
+          case aCmd of
+            bcAddFaces: lst.Add('%d, S%d', [e, f - 1]);
+            bcAddPressure: lst.Add('%d, P%d, %s', [e, f - 1, Sf(Args[0].VExtended^)]);
+            bcAddConvection: lst.Add('%d, F%d, %.6f, %s',
+                [e, f - 1, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+            bcAddFluxOnFace: lst.Add('%d, S%d, %s', [e, f - 1, Sf(Args[0].VExtended^)]);
+            bcAddRadiation: lst.Add('%d, R%d%s, %.6f, %s',
+                [e, f - 1, CV[Args[2].VBoolean], Args[0].VExtended^,
+                Sf(Args[1].VExtended^)]);
+          end;
       end
       else
-        lst.Add('%d, S%d', [e, fInpFile.Faces[i].Number + 1]);
-    end;
-    fn := Format('%s%s.sur', [ExtractFilePath(fEditor.FileName),
-      ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
-    if not ChechkFileName(fn) then
-      exit;
-    lst.SaveToFile(fn);
-  finally
-    lst.Free;
+      begin
+        if fInpFile.Faces[i].Number = 1 then
+          case aCmd of
+            bcAddFaces: lst.Add('%d, SPOS ', [e]);
+            bcAddPressure: lst.Add('%d, PPOS, %s', [e, Sf(Args[0].VExtended^)]);
+            bcAddConvection: lst.Add('%d, FP, %.6f, %s',
+                [e, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+            bcAddFluxOnFace: lst.Add('%d, SP, %s', [e, Sf(Args[0].VExtended^)]);
+            bcAddRadiation: lst.Add('%d, RPOS%s, %.6f, %s',
+                [e, CV[Args[2].VBoolean], Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+          end
+        else
+          case aCmd of
+            bcAddFaces: lst.Add('%d, S%d', [e, f + 1]);
+            bcAddPressure: lst.Add('%d, P%d, %s', [e, f + 1, Sf(Args[0].VExtended^)]);
+            bcAddConvection: lst.Add('%d, F%d, %.6f, %s',
+                [e, f + 1, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+            bcAddFluxOnFace: lst.Add('%d, S%d, %s', [e, f + 1, Sf(Args[0].VExtended^)]);
+            bcAddRadiation: lst.Add('%d, R%d%s, %.6f, %s',
+                [e, f + 1, CV[Args[2].VBoolean], Args[0].VExtended^,
+                Sf(Args[1].VExtended^)]);
+          end;
+      end;
+    end
+    else
+      case aCmd of
+        bcAddFaces: lst.Add('%d, S%d', [e, f + 1]);
+        bcAddPressure: lst.Add('%d, P%d, %s', [e, f + 1, Sf(Args[0].VExtended^)]);
+        bcAddConvection: lst.Add('%d, F%d, %.6f, %s',
+            [e, f + 1, Args[0].VExtended^, Sf(Args[1].VExtended^)]);
+        bcAddFluxOnFace: lst.Add('%d, S%d, %s', [e, f + 1, Sf(Args[0].VExtended^)]);
+        bcAddRadiation: lst.Add('%d, R%d%s, %.6f, %s',
+            [e, f + 1, CV[Args[2].VBoolean], Args[0].VExtended^,
+            Sf(Args[1].VExtended^)]);
+      end;
   end;
-
-
-  s := Format('%s%s%s', [sb, fEditor.Lines.LineBreak, Format(
-    sInclude, [ExtractFileName(fn)])]);
-  fEditor.InsertLineHere(s);
   Result := True;
 end;
 
@@ -319,20 +373,6 @@ begin
   end;
 end;
 
-procedure TAddBCProc.PrepareSet(const sn: integer);
-begin
-  CompleteSet(sn);
-  {
-  with fInpFile.Sets[sn] do
-    if (NumFaces > 0) and (Faces[0] = 0) then
-    begin
-      Dec(NumFaces);
-      Move(Faces[1], Faces[0], NumFaces * SizeOf(integer));
-      SetLength(Faces, NumFaces);
-    end;
-  }
-end;
-
 function TAddBCProc.AddFaces(const sn: integer): boolean;
 var
   m: integer;
@@ -360,6 +400,8 @@ var
 var
 
   i, j, k, n: integer;
+  lst: TStringListEx;
+  s, fn, sb: string;
 begin
   CompleteSet(sn);
   m := fInpFile.Sets[sn].NumNodes;
@@ -376,308 +418,74 @@ begin
       end;
   end;
   EraseMultipleEntities;
-  Result := ExportFaces(sn);
-  if Result then
-    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
-end;
-
-function TAddBCProc.AddFlux(const sn: integer; const flux: double): boolean;
-var
-  s, fn, sb: string;
-  i, j, m: integer;
-  cat: TElementCategory;
-  lst: TStringListEx;
-begin
-  if fInpFile.Sets[sn].NumFaces = 0 then
-  begin
-    Result := AddFaces(sn);
-    if not Result then
-      exit;
-    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
-  end;
-  PrepareSet(sn);
-  fn := Format('%s%s.dfl', [ExtractFilePath(fEditor.FileName),
-    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
-  if not ChechkFileName(fn) then
-    exit;
-
-  sb := Format('** DFlux based on %s', [fInpFile.Sets[sn].Name]);
+  sb := Format('** Surfaces based on %s', [fInpFile.Sets[sn].Name]);
   lst := TStringListEx.Create;
   try
     lst.Add(sb);
-    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
-    begin
-      i := fInpFile.Sets[sn].Faces[j];
-      m := fInpFile.Faces[i].ElemNumber;
-      cat := fInpFile.ElEnqire[m].Category;
-      if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
-      begin
-        if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, S?, %s', [fInpFile.Faces[i].ElemNumber, Sf(flux)])
-        else
-        begin
-          if fInpFile.ElEnqire[m].Attr > 3 then
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, SP, %s', [fInpFile.Faces[i].ElemNumber, Sf(flux)])
-            else
-              lst.Add('%d, S%d, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number - 1, Sf(flux)]);
-          end
-          else
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, SP, %s', [fInpFile.Faces[i].ElemNumber, Sf(flux)])
-            else
-              lst.Add('%d, S%d, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number + 1, Sf(flux)]);
-          end;
-        end;
-      end
-      else
-        lst.Add('%d, S%d, %s', [fInpFile.Faces[i].ElemNumber,
-          fInpFile.Faces[i].Number + 1, Sf(flux)]);
-    end; // for
+    lst.Add('*SURFACE, NAME=%s', [fInpFile.Sets[sn].Name]);
+    ExportData(sn, lst, bcAddFaces, []);
+    fn := Format('%s%s%s', [ExtractFilePath(fEditor.FileName),
+      ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name), INCL_EXT[bcAddFaces]]);
+    if not ChechkFileName(fn) then
+      exit;
     lst.SaveToFile(fn);
   finally
     lst.Free;
   end;
-
-  s := Format('** DFlux (flux=%s) based on group %s%s',
-    [Sf(flux), fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
-  s := Format('%s*DFLUX%s', [s, fEditor.Lines.LineBreak]);
-  s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
-  fEditor.InsertLineHere(s);
-  Result := True;
-end;
-
-function TAddBCProc.AddPressure(const sn: integer; const pressure: double): boolean;
-var
-  s, fn, sb: string;
-  i, j, m: integer;
-  cat: TElementCategory;
-  lst: TStringListEx;
-begin
-  if fInpFile.Sets[sn].NumFaces = 0 then
-  begin
-    Result := AddFaces(sn);
-    if not Result then
-      exit;
-    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
-  end;
-  PrepareSet(sn);
-  fn := Format('%s%s.dlo', [ExtractFilePath(fEditor.FileName),
-    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
-  if not ChechkFileName(fn) then
-    exit;
-
-  sb := Format('** Pressure based on %s', [fInpFile.Sets[sn].Name]);
-  lst := TStringListEx.Create;
-  try
-    lst.Add(sb);
-    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
-    begin
-      i := fInpFile.Sets[sn].Faces[j];
-      m := fInpFile.Faces[i].ElemNumber;
-      cat := fInpFile.ElEnqire[m].Category;
-      if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
-      begin
-        if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, P?, %s', [fInpFile.Faces[i].ElemNumber, Sf(pressure)])
-        else
-        begin
-          if fInpFile.ElEnqire[m].Attr > 3 then
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, PP, %s', [fInpFile.Faces[i].ElemNumber, Sf(pressure)])
-            else
-              lst.Add('%d, P%d, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number - 1, Sf(pressure)]);
-          end
-          else
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, PPOS, %s', [fInpFile.Faces[i].ElemNumber, Sf(pressure)])
-            else
-              lst.Add('%d, P%d, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number + 1, Sf(pressure)]);
-          end;
-        end;
-      end
-      else
-        lst.Add('%d, P%d, %s', [fInpFile.Faces[i].ElemNumber,
-          fInpFile.Faces[i].Number + 1, Sf(pressure)]);
-    end; // for
-    lst.SaveToFile(fn);
-  finally
-    lst.Free;
-  end;
-
-  s := Format('** Pressure (pressure=%g) based on group %s%s',
-    [pressure, fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
-  s := Format('%s*DLOAD%s', [s, fEditor.Lines.LineBreak]);
-  s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
-  fEditor.InsertLineHere(s);
-  Result := True;
-end;
-
-function TAddBCProc.AddConvertion(const sn: integer; const sink, koef: double): boolean;
-var
-  s, fn, sb: string;
-  i, j, m: integer;
-  cat: TElementCategory;
-  lst: TStringListEx;
-begin
-  if fInpFile.Sets[sn].NumFaces = 0 then
-  begin
-    Result := AddFaces(sn);
-    if not Result then
-      exit;
-    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
-  end;
-  PrepareSet(sn);
-  fn := Format('%s%s.flm', [ExtractFilePath(fEditor.FileName),
-    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
-  if not ChechkFileName(fn) then
-    exit;
-
-  sb := Format('** Film based on %s', [fInpFile.Sets[sn].Name]);
-  lst := TStringListEx.Create;
-  try
-    lst.Add(sb);
-    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
-    begin
-      i := fInpFile.Sets[sn].Faces[j];
-      m := fInpFile.Faces[i].ElemNumber;
-      cat := fInpFile.ElEnqire[m].Category;
-      if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
-      begin
-        if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, F?, %.6f, %s', [fInpFile.Faces[i].ElemNumber, sink, Sf(koef)])
-        else
-        begin
-          if fInpFile.ElEnqire[m].Attr > 3 then
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, FP, %.6f, %s', [fInpFile.Faces[i].ElemNumber, sink, Sf(koef)])
-            else
-              lst.Add('%d, F%d, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number - 1, sink, Sf(koef)]);
-          end
-          else
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, FP, %.6f, %s', [fInpFile.Faces[i].ElemNumber, sink, Sf(koef)])
-            else
-              lst.Add('%d, F%d, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number + 1, sink, Sf(koef)]);
-          end;
-        end;
-      end
-      else
-        lst.Add('%d, F%d, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-          fInpFile.Faces[i].Number + 1, sink, Sf(koef)]);
-    end; // for
-    lst.SaveToFile(fn);
-  finally
-    lst.Free;
-  end;
-
-  s := Format('** Convection (sink=%.6f; koef=%s) based on group %s%s',
-    [sink, Sf(koef), fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
-  s := Format('%s*FILM%s', [s, fEditor.Lines.LineBreak]);
-  s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
-  fEditor.InsertLineHere(s);
-  Result := True;
-end;
-
-function TAddBCProc.AddRadiation(const sn: integer; const sink, emissivity: double;
-  const cavity: boolean): boolean;
-const
-  CV: array[boolean] of string = ('', 'CR');
-var
-  s, fn, sb: string;
-  i, j, m: integer;
-  cat: TElementCategory;
-  lst: TStringListEx;
-begin
-  if fInpFile.Sets[sn].NumFaces = 0 then
-  begin
-    Result := AddFaces(sn);
-    if not Result then
-      exit;
-    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
-  end;
-  PrepareSet(sn);
-  fn := Format('%s%s.rad', [ExtractFilePath(fEditor.FileName),
-    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name)]);
-  if not ChechkFileName(fn) then
-    exit;
-
-  sb := Format('** Film based on %s', [fInpFile.Sets[sn].Name]);
-  lst := TStringListEx.Create;
-  try
-    lst.Add(sb);
-    for j := 0 to fInpFile.Sets[sn].NumFaces - 1 do
-    begin
-      i := fInpFile.Sets[sn].Faces[j];
-      m := fInpFile.Faces[i].ElemNumber;
-      cat := fInpFile.ElEnqire[m].Category;
-      if cat in [ecTria3..ecQuad8, ecSeg2, ecSeg3] then
-      begin
-        if cat in [ecSeg2, ecSeg3] then
-          lst.Add('%d, R?%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-            CV[cavity], sink, Sf(emissivity)])
-        else
-        begin
-          if fInpFile.ElEnqire[m].Attr > 3 then
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, RP%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                CV[cavity], sink, Sf(emissivity)])
-            else
-              lst.Add('%d, R%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number - 1, CV[cavity], sink, Sf(emissivity)]);
-          end
-          else
-          begin
-            if fInpFile.Faces[i].Number = 1 then
-              lst.Add('%d, RPOS%s, %.6f, %s',
-                [fInpFile.Faces[i].ElemNumber, CV[cavity], sink, Sf(emissivity)])
-            else
-              lst.Add('%d, R%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-                fInpFile.Faces[i].Number + 1, CV[cavity], sink, Sf(emissivity)]);
-          end;
-        end;
-      end
-      else
-        lst.Add('%d, R%d%s, %.6f, %s', [fInpFile.Faces[i].ElemNumber,
-          fInpFile.Faces[i].Number + 1, CV[cavity], sink, Sf(emissivity)]);
-    end; // for
-    lst.SaveToFile(fn);
-  finally
-    lst.Free;
-  end;
-
-  s := Format('** Radiate (sink=%.6f; emissivity=%s; cavity=%s) based on group %s%s',
-    [sink, Sf(emissivity), BoolToStr(cavity,true), fInpFile.Sets[sn].Name,
-    fEditor.Lines.LineBreak]);
-  s := Format('%s*RADIATE%s', [s, fEditor.Lines.LineBreak]);
-  s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
+  s := Format('%s%s%s', [sb, fEditor.Lines.LineBreak, Format(
+    sInclude, [ExtractFileName(fn)])]);
   fEditor.InsertLineHere(s);
   Result := True;
 end;
 
 procedure TAddBCProc.Work(const sn: integer; const Args: array of const);
+var
+  s, fn, sb: string;
+  lst: TStringListEx;
 begin
-  case fCmd of
-    bcAddFaces: AddFaces(sn);
-    bcAddPressure: AddPressure(sn, Args[0].VExtended^);
-    bcAddConvection: AddConvertion(sn, Args[0].VExtended^, Args[1].VExtended^);
-    bcAddFluxOnFace: AddFlux(sn, Args[0].VExtended^);
-    bcAddRadiation: AddRadiation(sn, Args[0].VExtended^, Args[1].VExtended^,
-        Args[2].VBoolean);
+  if fCmd = bcAddFaces then
+  begin
+    AddFaces(sn);
+    exit;
   end;
+  // check NumFaces of group and add it if needed
+  if fInpFile.Sets[sn].NumFaces = 0 then
+  begin
+    if not AddFaces(sn) then
+      exit;
+    fInpFile.Parse(fEditor.Lines, fEditor.FileName);
+  end;
+  // format include filename
+  fn := Format('%s%s%s', [ExtractFilePath(fEditor.FileName),
+    ZReplaceInvalidFileNameChars(fInpFile.Sets[sn].Name), INCL_EXT[fCmd]]);
+  if not ChechkFileName(fn) then
+    exit;
+  // format comment string on base file
+  sb := Format('** %s based on %s', [CMD_DESCR[fCmd], fInpFile.Sets[sn].Name]);
+  lst := TStringListEx.Create;
+  try
+    lst.Add(sb);
+    ExportData(sn, lst, fCmd, Args);
+    lst.SaveToFile(fn);
+  finally
+    lst.Free;
+  end;
+  // format comment string on include file
+  s := '';
+  case fCmd of
+    bcAddPressure: s := Format('pressure=%s', [Sf(Args[0].VExtended^)]);
+    bcAddConvection: s := Format('sink=%.6f; koef=%s', [Args[0].VExtended^,
+        Sf(Args[1].VExtended^)]);
+    bcAddFluxOnFace: s := Format('flux=%s', [Sf(Args[0].VExtended^)]);
+    bcAddRadiation: s := Format('sink=%.6f; emissivity=%s; cavity=%s',
+        [Args[0].VExtended^, Sf(Args[1].VExtended^), BoolToStr(Args[2].VBoolean, True)]);
+  end;
+
+  s := Format('** %s (%s) based on group %s%s', [CMD_DESCR[fCmd],
+    s, fInpFile.Sets[sn].Name, fEditor.Lines.LineBreak]);
+  s := Format('%s*%s%s', [s, CMD_TITLE[fCmd], fEditor.Lines.LineBreak]);
+  s := Format('%s%s', [s, Format(sInclude, [ExtractFileName(fn)])]);
+  fEditor.InsertLineHere(s);
 end;
 
 end.

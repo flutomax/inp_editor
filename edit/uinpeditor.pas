@@ -62,6 +62,7 @@ type
     fHighlightMatches: boolean;
     fHighlightMatchesColor: TColor;
     fEncoding: TStreamEncoding;
+    fScrollToEnd: Boolean;
     function GetLastPt: TPoint;
     function GetCharCursor: char;
     function GetLineBreakStyle: TTextLineBreakStyle;
@@ -134,6 +135,7 @@ type
     property HighlightMatches: boolean read fHighlightMatches write SetHighlightMatches;
     property HighlightMatchesColor: TColor read fHighlightMatchesColor
       write SetHighlightMatchesColor;
+    property ScrollToEnd: Boolean read fScrollToEnd write fScrollToEnd;
   end;
 
   { TInpEditTabSheet }
@@ -258,7 +260,7 @@ begin
   fHighlightMatches := True;
   fHighlightActiveLine := True;
   fCompletionOnAsterick := True;
-
+  fScrollToEnd := True;
   fMultiCaret := TSynPluginMultiCaret.Create(Self);
   fMultiCaret.EnableWithColumnSelection := True;
   fMultiCaret.DefaultMode := mcmMoveAllCarets;
@@ -511,7 +513,8 @@ begin
     fs.Free;
   end;
   SetFileName(aFileName);
-  CaretToEOF;
+  if fScrollToEnd then
+    CaretToEOF;
 end;
 
 procedure TInpEditor.OpenFileAtCursor;

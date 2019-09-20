@@ -1001,7 +1001,7 @@ object FrmOptions: TFrmOptions
       object gbCaret: TGroupBox
         Left = 8
         Height = 114
-        Top = 181
+        Top = 208
         Width = 206
         Caption = 'Caret:'
         ClientHeight = 94
@@ -1050,11 +1050,11 @@ object FrmOptions: TFrmOptions
       end
       object GroupBox1: TGroupBox
         Left = 8
-        Height = 171
+        Height = 190
         Top = 8
         Width = 206
         Caption = 'Settings:'
-        ClientHeight = 151
+        ClientHeight = 170
         ClientWidth = 202
         TabOrder = 33
         object lbUndoLimit: TLabel
@@ -1138,6 +1138,15 @@ object FrmOptions: TFrmOptions
           MaxValue = 20
           MinValue = -20
           TabOrder = 3
+        end
+        object ckScrollToEnd: TCheckBox
+          Left = 8
+          Height = 19
+          Hint = 'Scroll to end on file load'
+          Top = 144
+          Width = 148
+          Caption = 'Scroll to end on file load'
+          TabOrder = 4
         end
       end
       object ckHideSelection: TCheckBox

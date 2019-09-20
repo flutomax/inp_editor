@@ -51,6 +51,7 @@ type
     fBookmarks: TSynBookMarkOpt;
     fOverwriteCaret: TSynEditCaretType;
     fInsertCaret: TSynEditCaretType;
+    fScrollToEnd: Boolean;
     fOptions: TSynEditorOptions;
     fDefOptions: TSynEditorOptions;
     fOptions2: TSynEditorOptions2;
@@ -100,6 +101,7 @@ type
     property WantTabs: Boolean read fWantTabs write fWantTabs;
     property InsertCaret: TSynEditCaretType read fInsertCaret write fInsertCaret;
     property OverwriteCaret: TSynEditCaretType read fOverwriteCaret write fOverwriteCaret;
+    property ScrollToEnd: Boolean read fScrollToEnd write fScrollToEnd;
     property HideSelection: Boolean read fHideSelection write fHideSelection;
     property MaxUndo: Integer read fMaxUndo write fMaxUndo;
     property SelectedColor: TSynSelectedColor read fSelectedColor write fSelectedColor;
@@ -164,6 +166,7 @@ begin
   fHideSelection:=false;
   fInsertCaret:=ctVerticalLine;
   fOverwriteCaret:=ctBlock;
+  fScrollToEnd:=true;
   fMaxUndo:=32768;
   fShowGutter:=true;
   fGutterColor:=clBtnFace;
@@ -214,6 +217,7 @@ begin
     Self.HideSelection:=TInpEditor(Source).HideSelection;
     Self.InsertCaret:=TInpEditor(Source).InsertCaret;
     Self.OverwriteCaret:=TInpEditor(Source).OverwriteCaret;
+    Self.ScrollToEnd:=TInpEditor(Source).ScrollToEnd;
     //Self.MaxLineWidth:=TInpEditor(Source).MaxLineWidth;
     Self.MaxUndo:=TInpEditor(Source).MaxUndo;
     Self.RightEdge:=TInpEditor(Source).RightEdge;
@@ -250,6 +254,7 @@ begin
     TInpEditor(Dest).HideSelection:=Self.HideSelection;
     TInpEditor(Dest).InsertCaret:=Self.InsertCaret;
     TInpEditor(Dest).OverwriteCaret:=Self.OverwriteCaret;
+    TInpEditor(Dest).ScrollToEnd:=Self.ScrollToEnd;
 
     TInpEditor(Dest).MaxUndo:=Self.MaxUndo;
     TInpEditor(Dest).RightEdge:=Self.RightEdge;
@@ -320,6 +325,7 @@ begin
       Ord(fInsertCaret)));
     fOverwriteCaret:=TSynEditCaretType(ReadInteger(SectionName,'OverwriteCaret',
       Ord(fOverwriteCaret)));
+    fScrollToEnd:=ReadBool(SectionName,'ScrollToEnd',fScrollToEnd);
     fTabWidth:=ReadInteger(SectionName,'TabWidth',fTabWidth);
     fMaxUndo:=ReadInteger(SectionName,'MaxUndo',fMaxUndo);
 
@@ -380,6 +386,7 @@ begin
     WriteColor(SectionName,'RightEdgeColor',fRightEdgeColor);
     WriteInteger(SectionName,'InsertCaret',Ord(fInsertCaret));
     WriteInteger(SectionName,'OverwriteCaret',Ord(fOverwriteCaret));
+    WriteBool(SectionName,'ScrollToEnd',fScrollToEnd);
     WriteInteger(SectionName,'TabWidth',fTabWidth);
     WriteInteger(SectionName,'MaxUndo',fMaxUndo);
 

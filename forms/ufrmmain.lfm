@@ -2,11 +2,11 @@ object FrmMain: TFrmMain
   Left = 326
   Height = 451
   Top = 84
-  Width = 873
+  Width = 988
   AllowDropFiles = True
   Caption = 'Inp Editor'
   ClientHeight = 431
-  ClientWidth = 873
+  ClientWidth = 988
   Menu = MnMain
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -19,7 +19,7 @@ object FrmMain: TFrmMain
     Left = 0
     Height = 23
     Top = 408
-    Width = 873
+    Width = 988
     Panels = <    
       item
         Style = psOwnerDraw
@@ -44,7 +44,7 @@ object FrmMain: TFrmMain
     Left = 0
     Height = 30
     Top = 0
-    Width = 873
+    Width = 988
     AutoSize = True
     BandBorderStyle = bsNone
     BandMaximize = bmDblClick
@@ -84,6 +84,12 @@ object FrmMain: TFrmMain
         Control = tbCalculix
         MinWidth = 82
         Width = 96
+      end    
+      item
+        Break = False
+        Control = tbAddBC
+        MinWidth = 120
+        Width = 130
       end    
       item
         Break = False
@@ -360,18 +366,18 @@ object FrmMain: TFrmMain
         Action = cmdCalculixPostCGX
       end
     end
-    object tbTools: TToolBar
+    object tbAddBC: TToolBar
       AnchorSideLeft.Control = cbMain
       AnchorSideTop.Control = cbMain
       Left = 741
       Height = 22
       Top = 4
-      Width = 98
+      Width = 116
       Align = alNone
       AutoSize = True
       BorderSpacing.Left = 741
       BorderSpacing.Top = 4
-      Caption = 'Tools'
+      Caption = 'Add BC'
       DisabledImages = IlDMain
       EdgeBorders = []
       Images = IlMain
@@ -380,26 +386,69 @@ object FrmMain: TFrmMain
       object ToolButton69: TToolButton
         Left = 1
         Top = 0
-        Action = cmdToolsOptions
+        Action = cmdAddBCFaces
       end
       object ToolButton70: TToolButton
+        Left = 47
+        Top = 0
+        Action = cmdAddBCConvection
+      end
+      object ToolButton4: TToolButton
+        Left = 70
+        Top = 0
+        Action = cmdAddBCFluxOnFace
+      end
+      object ToolButton5: TToolButton
+        Left = 24
+        Top = 0
+        Action = cmdAddBCPressure
+      end
+      object ToolButton8: TToolButton
+        Left = 93
+        Top = 0
+        Action = cmdAddBCRadiation
+      end
+    end
+    object tbTools: TToolBar
+      AnchorSideLeft.Control = cbMain
+      AnchorSideTop.Control = cbMain
+      Left = 871
+      Height = 22
+      Top = 4
+      Width = 98
+      Align = alNone
+      AutoSize = True
+      BorderSpacing.Left = 871
+      BorderSpacing.Top = 4
+      Caption = 'Tools'
+      DisabledImages = IlDMain
+      EdgeBorders = []
+      Images = IlMain
+      TabOrder = 6
+      Transparent = True
+      object ToolButton71: TToolButton
+        Left = 1
+        Top = 0
+        Action = cmdToolsOptions
+      end
+      object ToolButton72: TToolButton
         Left = 52
         Top = 0
         Action = cmdToolsModelViewer
       end
-      object ToolButton103: TToolButton
+      object ToolButton104: TToolButton
         Left = 24
         Height = 22
         Top = 0
         Caption = 'ToolButton27'
         Style = tbsDivider
       end
-      object ToolButton4: TToolButton
+      object ToolButton6: TToolButton
         Left = 75
         Top = 0
         Action = cmdToolsNodesTransform
       end
-      object ToolButton5: TToolButton
+      object ToolButton7: TToolButton
         Left = 29
         Top = 0
         Action = cmdToolsGroupView
@@ -736,6 +785,10 @@ object FrmMain: TFrmMain
         end
         object MenuItem151: TMenuItem
           Action = cmdViewTbCalculix
+          AutoCheck = True
+        end
+        object MenuItem196: TMenuItem
+          Action = cmdViewTbAddBC
           AutoCheck = True
         end
         object MenuItem163: TMenuItem
@@ -1396,27 +1449,6 @@ object FrmMain: TFrmMain
       Hint = 'Show/hide toolbar "Calculix"'
       OnExecute = cmdViewTbFileExecute
     end
-    object cmdViewTbTools: TAction
-      Tag = 5
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Tools'
-      Hint = 'Show/hide toolbar "Tools"'
-      OnExecute = cmdViewTbFileExecute
-    end
-    object cmdViewTbReset: TAction
-      Category = 'View'
-      Caption = 'Reset To Default'
-      Hint = 'Reset toolbars to default settings'
-      OnExecute = cmdViewTbResetExecute
-    end
-    object cmdViewStatusbar: TAction
-      Category = 'View'
-      AutoCheck = True
-      Caption = 'Statusbar'
-      Hint = 'Show/hide statusbar'
-      OnExecute = cmdViewStatusbarExecute
-    end
     object cmdToolsGroupView: TAction
       Category = 'Tools'
       Caption = 'View Groups...'
@@ -1858,6 +1890,35 @@ object FrmMain: TFrmMain
       Hint = 'Plot a graph'
       ImageIndex = 61
       OnExecute = cmdToolsPlotGraphExecute
+    end
+    object cmdViewTbAddBC: TAction
+      Tag = 5
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Add BC'
+      Hint = 'Show/hide toolbar "Add BC"'
+      OnExecute = cmdViewTbFileExecute
+    end
+    object cmdViewTbTools: TAction
+      Tag = 6
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Tools'
+      Hint = 'Show/hide toolbar "Tools"'
+      OnExecute = cmdViewTbFileExecute
+    end
+    object cmdViewTbReset: TAction
+      Category = 'View'
+      Caption = 'Reset To Default'
+      Hint = 'Reset toolbars to default settings'
+      OnExecute = cmdViewTbResetExecute
+    end
+    object cmdViewStatusbar: TAction
+      Category = 'View'
+      AutoCheck = True
+      Caption = 'Statusbar'
+      Hint = 'Show/hide statusbar'
+      OnExecute = cmdViewStatusbarExecute
     end
   end
   object IlMain: TImageList

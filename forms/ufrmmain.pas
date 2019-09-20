@@ -38,6 +38,7 @@ type
   { TFrmMain }
 
   TFrmMain = class(TForm)
+    cmdViewTbAddBC: TAction;
     cmdToolsPlotGraph: TAction;
     cbMain: TCoolBar;
     cmdAddBCRadiation: TAction;
@@ -261,6 +262,7 @@ type
     MenuItem193: TMenuItem;
     MenuItem194: TMenuItem;
     MenuItem195: TMenuItem;
+    MenuItem196: TMenuItem;
     MenuItem53: TMenuItem;
     MenuItem81: TMenuItem;
     msOpenFileAtCursor: TMenuItem;
@@ -388,18 +390,20 @@ type
     tbEdit: TToolBar;
     tbFile: TToolBar;
     tbSearch: TToolBar;
+    tbAddBC: TToolBar;
     tbTools: TToolBar;
     tbView: TToolBar;
     ToolButton1: TToolButton;
     ToolButton100: TToolButton;
     ToolButton101: TToolButton;
-    ToolButton103: TToolButton;
+    ToolButton104: TToolButton;
     ToolButton105: TToolButton;
     ToolButton106: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
     ToolButton62: TToolButton;
     ToolButton63: TToolButton;
     ToolButton64: TToolButton;
@@ -408,7 +412,10 @@ type
     ToolButton67: TToolButton;
     ToolButton68: TToolButton;
     ToolButton69: TToolButton;
+    ToolButton7: TToolButton;
     ToolButton70: TToolButton;
+    ToolButton71: TToolButton;
+    ToolButton72: TToolButton;
     ToolButton73: TToolButton;
     ToolButton74: TToolButton;
     ToolButton75: TToolButton;
@@ -416,6 +423,7 @@ type
     ToolButton77: TToolButton;
     ToolButton78: TToolButton;
     ToolButton79: TToolButton;
+    ToolButton8: TToolButton;
     ToolButton80: TToolButton;
     ToolButton83: TToolButton;
     ToolButton84: TToolButton;
@@ -592,6 +600,7 @@ begin
   DrawDisabledImagelist(IlMain,IlDMain);
   SetupBookmark;
   MakeTemplatesMenu;
+  fUI.Loaded;
 end;
 
 procedure TFrmMain.FormDestroy(Sender: TObject);
@@ -619,7 +628,6 @@ var
 begin
   SetupToolbar;
   fMRUList.UpdateRecentFiles;
-  fUI.Loaded;
   if ParamCount>0 then
     for i:=1 to ParamCount do
       Open(ParamStr(i))
@@ -1599,7 +1607,8 @@ begin
       2: cmdViewTbSearch.Checked:=cbMain.Bands[i].Visible;
       3: cmdViewTbView.Checked:=cbMain.Bands[i].Visible;
       4: cmdViewTbCalculix.Checked:=cbMain.Bands[i].Visible;
-      5: cmdViewTbTools.Checked:=cbMain.Bands[i].Visible;
+      5: cmdViewTbAddBC.Checked:=cbMain.Bands[i].Visible;
+      6: cmdViewTbTools.Checked:=cbMain.Bands[i].Visible;
     end;
 end;
 
