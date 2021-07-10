@@ -22,6 +22,8 @@ unit uUiBase;
 
 interface
 
+{$IFDEF UNIX}
+
 uses
   Classes, SysUtils, simpleipc;
 
@@ -37,7 +39,11 @@ function GetFormattedParams: String;
 
 function GetServerId(const Identifier: String): String;
 
+{$ENDIF}
+
 implementation
+
+{$IFDEF UNIX}
 
 uses
   LazUTF8;
@@ -76,6 +82,8 @@ end;
 
 finalization
   FIPCServer.Free;
+
+{$ENDIF}
 
 end.
 

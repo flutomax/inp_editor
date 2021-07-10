@@ -143,6 +143,23 @@ end;
 
 { TFileAssociation }
 
+constructor TFileAssociation.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FRegistry := TRegistry.Create;
+  AddApplicationToDefaultPrograms := True;
+  AddExtensionToDefaultPrograms := True;
+  RegisterFileAssociation := True;
+  UnReg := False;
+  RegisterForAllUsers := True;
+end;
+
+destructor TFileAssociation.Destroy;
+begin
+  FRegistry.Free;
+  inherited Destroy;
+end;
+
 procedure TFileAssociation.SetRoot;
 begin
   if RegisterForAllUsers then
@@ -241,23 +258,6 @@ begin
   FRegisterFileAssociation := AValue;
 end;
 
-constructor TFileAssociation.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  FRegistry := TRegistry.Create;
-  AddApplicationToDefaultPrograms := True;
-  AddExtensionToDefaultPrograms := True;
-  RegisterFileAssociation := True;
-  UnReg := False;
-  RegisterForAllUsers := True;
-end;
-
-destructor TFileAssociation.Destroy;
-begin
-  FRegistry.Free;
-  inherited Destroy;
-end;
-
 function TFileAssociation.Execute: boolean;
 var
   b1, b2, b3, b4, b5: boolean;
@@ -276,9 +276,7 @@ begin
       b5 := WriteDefaultProgramsAddExt;
   end;
 
-  Result := False;
-  if b1 and b2 and b3 and b4 and b5 then
-    Result := True;
+  Result := b1 and b2 and b3 and b4 and b5;
 end;
 
 function TFileAssociation.WriteStringValue(SubKey: string; ValueName: string;
@@ -341,9 +339,7 @@ begin
   b1 := WriteString(sub, '', ExtensionName);
   b2 := WriteString(sub + '\DefaultIcon', '', ExtensionIcon);
 
-  Result := False;
-  if b1 and b2 then
-    Result := True;
+  Result := b1 and b2;
 end;
 
 function TFileAssociation.WriteFileAssociationClassCommand: boolean;
@@ -358,9 +354,7 @@ begin
   b2 := WriteString(sub, 'Icon', ActionIcon);
   b3 := WriteString(sub + '\Command', '', Action);
 
-  Result := False;
-  if b1 and b2 and b3 then
-    Result := True;
+  Result := b1 and b2 and b3;
 end;
 
 function TFileAssociation.WriteFileAssociation: boolean;
@@ -382,9 +376,7 @@ begin
   b4 := WriteString('Software\RegisteredApplications',
     StrNoSpaces(ApplicationName), sub);
 
-  Result := False;
-  if b1 and b2 and b3 and b4 then
-    Result := True;
+  Result := b1 and b2 and b3 and b4;
 end;
 
 function TFileAssociation.WriteDefaultProgramsAddExt: boolean;
