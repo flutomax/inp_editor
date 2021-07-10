@@ -3,7 +3,7 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
+    <BuildModes Active="Win64Release"/>
     <Units Count="68">
       <Unit0>
         <Filename Value="InpEditor.lpr"/>
@@ -360,7 +360,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="403"/>
         <CursorPos X="40" Y="432"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit42>
       <Unit43>
         <Filename Value="H:\ZEF\Progs\ArtOfChaos\theory_docs\Fractal\Minibrot\NanoMB_Pascal\uPrintPreview.pas"/>
@@ -375,14 +375,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="899"/>
         <CursorPos X="5" Y="918"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit44>
       <Unit45>
         <Filename Value="H:\ZEF\Progs\ArtOfChaos\theory_docs\Fractal\Minibrot\NanoMB_Pascal\uFrmPrint.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="426"/>
         <CursorPos X="50" Y="445"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit45>
       <Unit46>
         <Filename Value="H:\ZEF\SingleProjects\PolyGAS\art\Controls\FrameGen\uMain.pas"/>
